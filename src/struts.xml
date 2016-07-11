@@ -33,7 +33,8 @@
 
     <!-- ===== Include Web Module Configuration ===== -->
     <include file="struts/config/struts-authentication.xml" />
-    <include file="struts/config/struts-courseadmin.xml" />
-    <include file="struts/config/struts-courseuser.xml" />
-    <include file="struts/config/struts-accountadmin.xml" />
+    <include file="struts/config/struts-course.xml" />
+    <include file="struts/config/struts-account.xml" />
+    <include file="struts/config/struts-subject.xml" />
+
 </struts>

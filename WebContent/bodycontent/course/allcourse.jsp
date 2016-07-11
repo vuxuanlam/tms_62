@@ -25,7 +25,6 @@
                     </tr>
                 </s:iterator>
             </s:if>
-
         </tbody>
     </table>
 </div>

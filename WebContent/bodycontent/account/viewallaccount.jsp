@@ -15,11 +15,11 @@
                 <tr>
                     <td>${name }</td>
                     <td>${email }</td>
-                    <td><s:if test="role">
+                    <s:if test="role">
                             <td class="text-danger">Supervior</td>
                         </s:if> <s:else>
                             <td>Member</td>
-                        </s:else></td>
+                        </s:else>
                     <td>${createAt }</td>
                 </tr>
             </s:iterator>

@@ -6,7 +6,7 @@
     <class name="tms62.model.entity.UsersCourses" table="USERSCOURSES">
         <id name="userId" type="int">
             <column name="USERID" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="courseId" type="int">
             <column name="COURSEID" />

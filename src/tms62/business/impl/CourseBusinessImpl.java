@@ -3,31 +3,19 @@ package tms62.business.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import tms62.business.UserBusiness;
+import tms62.business.CourseBusiness;
 import tms62.constant.value.DatabaseValue;
 import tms62.dao.CourseDAO;
 import tms62.dao.UserCourseDAO;
-import tms62.dao.UserDAO;
 import tms62.model.entity.Courses;
 import tms62.model.entity.Users;
 import tms62.model.entity.UsersCourses;
 import tms62.util.Helpers;
 
-public class UserBusinessImpl implements UserBusiness {
+public class CourseBusinessImpl implements CourseBusiness {
 
-  private UserDAO       userDAO;
   private CourseDAO     courseDAO;
   private UserCourseDAO userCourseDAO;
-
-  public UserDAO getUserDAO() {
-
-    return userDAO;
-  }
-
-  public void setUserDAO(UserDAO userDAO) {
-
-    this.userDAO = userDAO;
-  }
 
   public CourseDAO getCourseDAO() {
 
@@ -47,20 +35,6 @@ public class UserBusinessImpl implements UserBusiness {
   public void setUserCourseDAO(UserCourseDAO userCourseDAO) {
 
     this.userCourseDAO = userCourseDAO;
-  }
-
-  @Override
-  public Users checkUserSignin(Users user) {
-
-    Users tempUser;
-    try {
-      tempUser = userDAO.findUserByEmailPassword(user);
-      if (Helpers.isExist(tempUser))
-        return tempUser;
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 
   @Override
@@ -98,6 +72,28 @@ public class UserBusinessImpl implements UserBusiness {
       if (Helpers.isExist(myUserCourse)) {
         return courseDAO.findById(myUserCourse.getCourseId());
       }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public List<Courses> getAllCourses() {
+
+    try {
+      return courseDAO.listAll();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public Courses getCourseById(Courses course) {
+
+    try {
+      return courseDAO.findById(course.getCourseId());
     } catch (Exception e) {
       e.printStackTrace();
     }

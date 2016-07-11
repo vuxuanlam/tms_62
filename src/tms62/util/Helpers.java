@@ -6,8 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -281,7 +283,7 @@ public final class Helpers {
     }
   }
 
-  public static Date getCurrentDate() {
+  public static Date getCurrentTime() {
 
     return new Date();
   }
@@ -293,5 +295,11 @@ public final class Helpers {
       return null;
     else
       return (Users) session.get(SessionValue.CURRENT_USER);
+  }
+
+  public static String formatTime(Date date) {
+
+    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    return dateFormat.format(date);
   }
 }

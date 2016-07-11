@@ -10,22 +10,27 @@
 
     <bean id="Authentication" class="tms62.action.authentication.SigninAction"
         scope="prototype">
-        <property name="userBusiness" ref="UserBusiness"></property>
+        <property name="authenticationBusiness" ref="AuthenticationBusiness"></property>
     </bean>
 
     <bean id="CourseAdmin" class="tms62.action.admin.course.CourseAction"
         scope="prototype">
-        <property name="adminBusiness" ref="AdminBusiness"></property>
+        <property name="courseBusiness" ref="CourseBusiness"></property>
     </bean>
 
     <bean id="CourseUser" class="tms62.action.user.course.CourseAction"
         scope="prototype">
-        <property name="userBusiness" ref="UserBusiness"></property>
+        <property name="courseBusiness" ref="CourseBusiness"></property>
     </bean>
 
     <bean id="AccountAdmin" class="tms62.action.admin.account.AccountAction"
         scope="prototype">
-        <property name="adminBusiness" ref="AdminBusiness"></property>
+        <property name="accountBusiness" ref="AccountBusiness"></property>
+    </bean>
+    
+    <bean id="SubjectAdmin" class="tms62.action.admin.subject.SubjectAction"
+        scope="prototype">
+        <property name="subjectBusiness" ref="SubjectBusiness"></property>
     </bean>
 
 </beans>

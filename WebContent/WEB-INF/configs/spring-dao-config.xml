@@ -20,5 +20,17 @@
             <ref bean="sessionFactory"></ref>
         </property>
     </bean>
-    
+
+    <bean id="SubjectDAO" class="tms62.dao.impl.SubjectDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"></ref>
+        </property>
+    </bean>
+
+    <bean id="TaskDAO" class="tms62.dao.impl.TaskDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"></ref>
+        </property>
+    </bean>
+
 </beans>
