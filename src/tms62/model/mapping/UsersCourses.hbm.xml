@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/07/14 13:05:23 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="tms62.model.entity.UsersCourses" table="USERSCOURSES">
+        <id name="userId" type="int">
+            <column name="USERID" />
+            <generator class="assigned" />
+        </id>
+        <property name="courseId" type="int">
+            <column name="COURSEID" />
+        </property>
+        <property name="status" type="boolean">
+            <column name="STATUS" />
+        </property>
+    </class>
+    <query name="IsMyCourse">
+        select usercourse
+        from UsersCourses usercourse
+        where usercourse.userId =
+        :userId and usercourse.courseId =
+        :courseId
+    </query>
+</hibernate-mapping>

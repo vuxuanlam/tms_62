@@ -102,8 +102,7 @@ public class GenericDAOImpl<E, Id extends Serializable> extends
 
     try {
       String queryString = "from " + persistentClass.getName()
-          + " model where model." + propertyName
-          + "= ?";
+          + " model where model." + propertyName + "= ?";
       return getHibernateTemplate().find(queryString, value);
     } catch (RuntimeException re) {
       throw re;

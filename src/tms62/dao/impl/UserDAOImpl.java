@@ -27,7 +27,6 @@ public class UserDAOImpl extends GenericDAOImpl<Users, Integer> implements
       query.setParameter(DatabaseValue.PASSWORD, user.getPassword());
       return (Users) query.uniqueResult();
     } catch (RuntimeException re) {
-      re.printStackTrace();
       throw re;
     }
   }

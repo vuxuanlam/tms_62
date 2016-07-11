@@ -13,4 +13,19 @@
         <property name="userBusiness" ref="UserBusiness"></property>
     </bean>
 
+    <bean id="CourseAdmin" class="tms62.action.admin.course.CourseAction"
+        scope="prototype">
+        <property name="adminBusiness" ref="AdminBusiness"></property>
+    </bean>
+
+    <bean id="CourseUser" class="tms62.action.user.course.CourseAction"
+        scope="prototype">
+        <property name="userBusiness" ref="UserBusiness"></property>
+    </bean>
+
+    <bean id="AccountAdmin" class="tms62.action.admin.account.AccountAction"
+        scope="prototype">
+        <property name="adminBusiness" ref="AdminBusiness"></property>
+    </bean>
+
 </beans>

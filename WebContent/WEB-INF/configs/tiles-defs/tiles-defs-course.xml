@@ -5,13 +5,21 @@
 
 <tiles-definitions>
 
-    <definition name="Authentication.SigninPage" extends="Default.Web">
+    <definition name="Course.ViewAllCourse" extends="Default.Web">
         <put-attribute name="body"
-            value="/bodycontent/authentication/signin.jsp" />
+            value="/bodycontent/course/allcourse.jsp" />
         <put-list-attribute name="js">
         </put-list-attribute>
         <put-list-attribute name="css">
         </put-list-attribute>
     </definition>
 
+    <definition name="Course.ViewCourseDetails" extends="Default.Web">
+        <put-attribute name="body"
+            value="/bodycontent/course/coursedetails.jsp" />
+        <put-list-attribute name="js">
+        </put-list-attribute>
+        <put-list-attribute name="css">
+        </put-list-attribute>
+    </definition>
 </tiles-definitions>

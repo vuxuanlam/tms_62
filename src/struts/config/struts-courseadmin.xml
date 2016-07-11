@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configure NameSpace for action web -->
+    <package name="courseadmin" namespace="/courseadmin"
+        extends="default-web">
+
+        <action name="viewallcourse" class="CourseAdmin" method="viewAllCourse">
+            <result name="success">Course.ViewAllCourse</result>
+            <result name="error">HomePage</result>
+        </action>
+
+        <action name="viewcoursedetails*" class="CourseAdmin"
+            method="viewCourseDetails">
+            <param name="currentCourse.courseId">{1}</param>
+            <result name="success">Course.ViewCourseDetails</result>
+            <result name="error">HomePage</result>
+        </action>
+    </package>
+</struts>

@@ -5,9 +5,9 @@
 
 <tiles-definitions>
 
-    <definition name="Authentication.SigninPage" extends="Default.Web">
+    <definition name="Account.ViewAllAccount" extends="Default.Web">
         <put-attribute name="body"
-            value="/bodycontent/authentication/signin.jsp" />
+            value="/bodycontent/account/viewallaccount.jsp" />
         <put-list-attribute name="js">
         </put-list-attribute>
         <put-list-attribute name="css">

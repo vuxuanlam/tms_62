@@ -36,6 +36,7 @@
         <param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
         <param-value>
         	/WEB-INF/configs/tiles-defs/tiles-defs-default.xml,/WEB-INF/configs/tiles-defs/tiles-defs-authentication.xml
+            ,  /WEB-INF/configs/tiles-defs/tiles-defs-course.xml, /WEB-INF/configs/tiles-defs/tiles-defs-account.xml
         </param-value>
     </context-param>
     <listener>
