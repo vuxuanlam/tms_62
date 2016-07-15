@@ -11,8 +11,7 @@ public class HomepageAction extends ActionSupport {
 
   public String homePage() {
 
-    System.out.println("Homepage page");
+    System.out.println("HOME PAGE");
     return SUCCESS;
   }
-
 }
