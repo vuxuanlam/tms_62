@@ -39,6 +39,8 @@
         </property>
         <property name="mappingResources">
             <list>
+                <value>tms62/model/mapping/Users.hbm.xml
+                </value>
             </list>
         </property>
     </bean>

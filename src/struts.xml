@@ -26,8 +26,10 @@
                 exception="java.lang.RuntimeException" />
         </global-exception-mappings>
 
-    <action name="" class="HomepageAction" method="homePage">
-        <result>HomePage</result>
-    </action>
+        <action name="" class="HomepageAction" method="homePage">
+            <result>HomePage</result>
+        </action>
     </package>
+    <!-- ===== Include Web Module Configuration ===== -->
+    <include file="struts/config/struts-authentication.xml" />
 </struts>

@@ -3,7 +3,7 @@
     xmlns="http://java.sun.com/xml/ns/javaee"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     id="WebApp_ID" version="3.0">
-    <display-name>test</display-name>
+    <display-name>TMS</display-name>
     <filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -35,7 +35,7 @@
     <context-param>
         <param-name>org.apache.tiles.impl.BasicTilesContainer.DEFINITIONS_CONFIG</param-name>
         <param-value>
-        	/WEB-INF/configs/tiles-defs-default.xml
+        	/WEB-INF/configs/tiles-defs/tiles-defs-default.xml,/WEB-INF/configs/tiles-defs/tiles-defs-authentication.xml
         </param-value>
     </context-param>
     <listener>

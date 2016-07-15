@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configure NameSpace for action web -->
+    <package name="authentication" namespace="/sign" extends="default-web">
+
+        <action name="signinpage" class="Authentication" method="signinPage">
+            <result name="success">Authentication.SigninPage</result>
+            <result name="error">HomePage</result>
+        </action>
+
+        <action name="signin" class="Authentication" method="signin">
+            <result name="success">HomePage</result>
+            <result name="error">Authentication.SigninPage</result>
+            <result name="none">HomePage</result>
+        </action>
+
+        <action name="signout" class="Authentication" method="signout">
+            <result>HomePage</result>
+        </action>
+    </package>
+</struts>
