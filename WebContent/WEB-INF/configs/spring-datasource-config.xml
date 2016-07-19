@@ -41,6 +41,8 @@
             <list>
                 <value>tms62/model/mapping/Users.hbm.xml
                 </value>
+                <value>tms62/model/mapping/Courses.hbm.xml</value>
+                <value>tms62/model/mapping/UsersCourses.hbm.xml</value>
             </list>
         </property>
     </bean>

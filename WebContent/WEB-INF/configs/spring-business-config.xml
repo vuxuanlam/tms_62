@@ -9,10 +9,21 @@
 
     <bean id="UserBusiness" parent="transactionProxyTemplate">
         <property name="target">
-            <bean
-                class="tms62.business.impl.UserBusinessImpl">
+            <bean class="tms62.business.impl.UserBusinessImpl">
                 <property name="userDAO" ref="UserDAO" />
+                <property name="courseDAO" ref="CourseDAO" />
+                <property name="userCourseDAO" ref="UserCourseDAO" />
             </bean>
         </property>
     </bean>
+
+    <bean id="AdminBusiness" parent="transactionProxyTemplate">
+        <property name="target">
+            <bean class="tms62.business.impl.AdminBusinessImpl">
+                <property name="userDAO" ref="UserDAO" />
+                <property name="courseDAO" ref="CourseDAO" />
+            </bean>
+        </property>
+    </bean>
+
 </beans>

@@ -30,6 +30,10 @@
             <result>HomePage</result>
         </action>
     </package>
+
     <!-- ===== Include Web Module Configuration ===== -->
     <include file="struts/config/struts-authentication.xml" />
+    <include file="struts/config/struts-courseadmin.xml" />
+    <include file="struts/config/struts-courseuser.xml" />
+    <include file="struts/config/struts-accountadmin.xml" />
 </struts>

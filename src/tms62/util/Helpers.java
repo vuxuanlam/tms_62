@@ -16,6 +16,11 @@ import java.util.Properties;
 import java.util.Queue;
 import java.util.Set;
 
+import tms62.constant.value.SessionValue;
+import tms62.model.entity.Users;
+
+import com.opensymphony.xwork2.ActionContext;
+
 /**
  * Helpers class, which contains static methods helper methods like loading the
  * given property file etc.
@@ -279,5 +284,14 @@ public final class Helpers {
   public static Date getCurrentDate() {
 
     return new Date();
+  }
+
+  public static Users getCurrentUserFromSession() {
+
+    Map session = ActionContext.getContext().getSession();
+    if (Helpers.isEmpty(session))
+      return null;
+    else
+      return (Users) session.get(SessionValue.CURRENT_USER);
   }
 }

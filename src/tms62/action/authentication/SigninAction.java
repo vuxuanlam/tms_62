@@ -64,8 +64,8 @@ public class SigninAction extends ActionSupport implements SessionAware {
     if (!Helpers.isEmpty(session))
       return NONE;
     if (Helpers.isExist(user)) {
-      currentUser = userBusiness.findUserByEmailPassword(user);
-      if (!Helpers.isNull(currentUser)) {
+      currentUser = userBusiness.checkUserSignin(user);
+      if (Helpers.isExist(currentUser)) {
         addActionMessage(AuthenticationMessage.SIGNIN_SUCCESS);
         session.put(SessionValue.CURRENT_USER, currentUser);
         return SUCCESS;
