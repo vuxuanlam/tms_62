@@ -5,36 +5,34 @@
 
 <struts>
 
-    <!-- Define default-web package: struts-default -->
-    <package name="default-web" namespace="/" extends="json-default">
+	<!-- Define default-web package: struts-default -->
+	<package name="default-web" namespace="/" extends="json-default">
 
-        <result-types>
-            <result-type name="tiles"
-                class="org.apache.struts2.views.tiles.TilesResult"
-                default="true" />
-        </result-types>
+		<result-types>
+			<result-type name="tiles"
+				class="org.apache.struts2.views.tiles.TilesResult" default="true" />
+		</result-types>
 
-        <global-results>
-            <!-- Define Exception Forward -->
-            <result name="sys_exception">Default.SystemException</result>
-        </global-results>
+		<global-results>
+			<!-- Define Exception Forward -->
+			<result name="sys_exception">Default.SystemException</result>
+		</global-results>
 
-        <global-exception-mappings>
-            <exception-mapping result="sys_exception"
-                exception="java.lang.Exception" />
-            <exception-mapping result="sys_exception"
-                exception="java.lang.RuntimeException" />
-        </global-exception-mappings>
+		<global-exception-mappings>
+			<exception-mapping result="sys_exception"
+				exception="java.lang.Exception" />
+			<exception-mapping result="sys_exception"
+				exception="java.lang.RuntimeException" />
+		</global-exception-mappings>
 
-        <action name="" class="HomepageAction" method="homePage">
-            <result>HomePage</result>
-        </action>
-    </package>
+		<action name="" class="HomepageAction" method="homePage">
+			<result>HomePage</result>
+		</action>
+	</package>
 
-    <!-- ===== Include Web Module Configuration ===== -->
-    <include file="struts/config/struts-authentication.xml" />
-    <include file="struts/config/struts-course.xml" />
-    <include file="struts/config/struts-account.xml" />
-    <include file="struts/config/struts-subject.xml" />
-
+	<!-- ===== Include Web Module Configuration ===== -->
+	<include file="struts/config/struts-authentication.xml" />
+	<include file="struts/config/struts-course.xml" />
+	<include file="struts/config/struts-account.xml" />
+	<include file="struts/config/struts-subject.xml" />
 </struts>
