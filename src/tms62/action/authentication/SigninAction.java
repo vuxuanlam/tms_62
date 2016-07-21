@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
-import tms62.business.UserBusiness;
+import tms62.business.AuthenticationBusiness;
 import tms62.constant.message.AuthenticationMessage;
 import tms62.constant.value.SessionValue;
 import tms62.model.entity.Users;
@@ -18,10 +18,10 @@ public class SigninAction extends ActionSupport implements SessionAware {
   /**
    * 
    */
-  private static final long serialVersionUID = 1L;
-  private Users             user;
-  private UserBusiness      userBusiness;
-  private SessionMap        session;
+  private static final long      serialVersionUID = 1L;
+  private Users                  user;
+  private AuthenticationBusiness authenticationBusiness;
+  private SessionMap             session;
 
   public Users getUser() {
 
@@ -33,14 +33,15 @@ public class SigninAction extends ActionSupport implements SessionAware {
     this.user = user;
   }
 
-  public UserBusiness getUserBusiness() {
+  public AuthenticationBusiness getAuthenticationBusiness() {
 
-    return userBusiness;
+    return authenticationBusiness;
   }
 
-  public void setUserBusiness(UserBusiness userBusiness) {
+  public void setAuthenticationBusiness(
+      AuthenticationBusiness authenticationBusiness) {
 
-    this.userBusiness = userBusiness;
+    this.authenticationBusiness = authenticationBusiness;
   }
 
   @Override
@@ -64,7 +65,7 @@ public class SigninAction extends ActionSupport implements SessionAware {
     if (!Helpers.isEmpty(session))
       return NONE;
     if (Helpers.isExist(user)) {
-      currentUser = userBusiness.checkUserSignin(user);
+      currentUser = authenticationBusiness.checkUserSignin(user);
       if (Helpers.isExist(currentUser)) {
         addActionMessage(AuthenticationMessage.SIGNIN_SUCCESS);
         session.put(SessionValue.CURRENT_USER, currentUser);

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
-import tms62.business.UserBusiness;
+import tms62.business.CourseBusiness;
 import tms62.constant.message.WrongAccess;
 import tms62.constant.value.DatabaseValue;
 import tms62.model.entity.Courses;
@@ -21,19 +21,19 @@ public class CourseAction extends ActionSupport implements SessionAware {
    * 
    */
   private static final long serialVersionUID = 1L;
-  private UserBusiness      userBusiness;
+  private CourseBusiness    courseBusiness;
   private SessionMap        session;
   private List<Courses>     listCourses;
   private Courses           currentCourse;
 
-  public UserBusiness getUserBusiness() {
+  public CourseBusiness getCourseBusiness() {
 
-    return userBusiness;
+    return courseBusiness;
   }
 
-  public void setUserBusiness(UserBusiness userBusiness) {
+  public void setCourseBusiness(CourseBusiness courseBusiness) {
 
-    this.userBusiness = userBusiness;
+    this.courseBusiness = courseBusiness;
   }
 
   public List<Courses> getListCourses() {
@@ -67,7 +67,7 @@ public class CourseAction extends ActionSupport implements SessionAware {
     Users currentUser = Helpers.getCurrentUserFromSession();
     if (Helpers.isExist(currentUser)
         && currentUser.isRole() == DatabaseValue.USER) {
-      listCourses = userBusiness.getMyListCourses(currentUser);
+      listCourses = courseBusiness.getMyListCourses(currentUser);
       return SUCCESS;
     }
     addActionError(WrongAccess.DEFAULT);
@@ -79,7 +79,7 @@ public class CourseAction extends ActionSupport implements SessionAware {
     Users currentUser = Helpers.getCurrentUserFromSession();
     if (Helpers.isExist(currentUser)
         && currentUser.isRole() == DatabaseValue.USER) {
-      currentCourse = userBusiness.getMyCourseDetails(currentUser,
+      currentCourse = courseBusiness.getMyCourseDetails(currentUser,
           currentCourse);
       if (Helpers.isExist(currentCourse))
         return SUCCESS;

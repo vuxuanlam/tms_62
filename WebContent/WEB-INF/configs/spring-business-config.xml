@@ -7,21 +7,36 @@
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
-    <bean id="UserBusiness" parent="transactionProxyTemplate">
+    <bean id="AccountBusiness" parent="transactionProxyTemplate">
         <property name="target">
-            <bean class="tms62.business.impl.UserBusinessImpl">
+            <bean class="tms62.business.impl.AccountBusinessImpl">
                 <property name="userDAO" ref="UserDAO" />
-                <property name="courseDAO" ref="CourseDAO" />
-                <property name="userCourseDAO" ref="UserCourseDAO" />
             </bean>
         </property>
     </bean>
 
-    <bean id="AdminBusiness" parent="transactionProxyTemplate">
+    <bean id="CourseBusiness" parent="transactionProxyTemplate">
         <property name="target">
-            <bean class="tms62.business.impl.AdminBusinessImpl">
-                <property name="userDAO" ref="UserDAO" />
+            <bean class="tms62.business.impl.CourseBusinessImpl">
                 <property name="courseDAO" ref="CourseDAO" />
+                <property name="userCourseDAO" ref="UserCourseDAO"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="SubjectBusiness" parent="transactionProxyTemplate">
+        <property name="target">
+            <bean class="tms62.business.impl.SubjectBusinessImpl">
+                <property name="subjectDAO" ref="SubjectDAO" />
+                <property name="taskDAO" ref="TaskDAO" />
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="AuthenticationBusiness" parent="transactionProxyTemplate">
+        <property name="target">
+            <bean class="tms62.business.impl.AuthenticationBusinessImpl">
+                <property name="userDAO" ref="UserDAO" />
             </bean>
         </property>
     </bean>

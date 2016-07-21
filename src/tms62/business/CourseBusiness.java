@@ -5,9 +5,11 @@ import java.util.List;
 import tms62.model.entity.Courses;
 import tms62.model.entity.Users;
 
-public interface UserBusiness {
+public interface CourseBusiness {
 
-  public Users checkUserSignin(Users user);
+  public List<Courses> getAllCourses();
+
+  public Courses getCourseById(Courses course);
 
   public List<Courses> getMyListCourses(Users user);
 

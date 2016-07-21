@@ -1,27 +1,21 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016/07/14 8:36:05 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2016/07/20 13:40:37 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="tms62.model.entity.Courses" table="COURSES">
-        <id name="courseId" type="int">
-            <column name="COURSEID" />
-              <generator class="identity" />
+    <class name="tms62.model.entity.Tasks" table="TASKS">
+        <id name="taskId" type="int">
+            <column name="TASKID" />
+            <generator class="identity" />
         </id>
+        <property name="subjectId" type="int">
+            <column name="SUBJECTID" />
+        </property>
         <property name="name" type="java.lang.String">
             <column name="NAME" />
         </property>
         <property name="description" type="java.lang.String">
             <column name="DESCRIPTION" />
-        </property>
-        <property name="startDate" type="java.util.Date">
-            <column name="STARTDATE" />
-        </property>
-        <property name="endDate" type="java.util.Date">
-            <column name="ENDDATE" />
-        </property>
-        <property name="status" type="boolean">
-            <column name="STATUS" />
         </property>
         <property name="createAt" type="java.util.Date">
             <column name="CREATEAT" />

@@ -30,8 +30,8 @@
                 <br>
                 <br>
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-primary pull-right">Sign in</button>
+                    <div class="col-sm-offset-3 col-md-9">
+                        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                     </div>
                 </div>
             </s:form>

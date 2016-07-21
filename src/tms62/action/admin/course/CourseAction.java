@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
-import tms62.business.AdminBusiness;
+import tms62.business.CourseBusiness;
 import tms62.constant.message.PermissionMessage;
 import tms62.constant.message.WrongAccess;
 import tms62.constant.value.DatabaseValue;
@@ -23,18 +23,18 @@ public class CourseAction extends ActionSupport implements SessionAware {
    */
   private static final long serialVersionUID = 1L;
   private SessionMap        session;
-  private AdminBusiness     adminBusiness;
+  private CourseBusiness    courseBusiness;
   private List<Courses>     listCourses;
   private Courses           currentCourse;
 
-  public AdminBusiness getAdminBusiness() {
+  public CourseBusiness getCourseBusiness() {
 
-    return adminBusiness;
+    return courseBusiness;
   }
 
-  public void setAdminBusiness(AdminBusiness adminBusiness) {
+  public void setCourseBusiness(CourseBusiness courseBusiness) {
 
-    this.adminBusiness = adminBusiness;
+    this.courseBusiness = courseBusiness;
   }
 
   public List<Courses> getListCourses() {
@@ -69,7 +69,7 @@ public class CourseAction extends ActionSupport implements SessionAware {
     currentUser = Helpers.getCurrentUserFromSession();
     if (Helpers.isExist(currentUser)
         && currentUser.isRole() == DatabaseValue.ADMIN) {
-      listCourses = adminBusiness.getAllCourses();
+      listCourses = courseBusiness.getAllCourses();
       return SUCCESS;
     }
     addActionError(PermissionMessage.DEFAULT);
@@ -80,7 +80,7 @@ public class CourseAction extends ActionSupport implements SessionAware {
 
     Users currentUser = Helpers.getCurrentUserFromSession();
     if (Helpers.isExist(currentUser)) {
-      currentCourse = adminBusiness.getCourseById(currentCourse);
+      currentCourse = courseBusiness.getCourseById(currentCourse);
       if (Helpers.isExist(currentCourse))
         return SUCCESS;
       else {
