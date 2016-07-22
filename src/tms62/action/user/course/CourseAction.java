@@ -1,30 +1,31 @@
 package tms62.action.user.course;
 
 import java.util.List;
-import java.util.Map;
 
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import tms62.business.CourseBusiness;
 import tms62.constant.message.WrongAccess;
-import tms62.constant.value.DatabaseValue;
 import tms62.model.entity.Courses;
 import tms62.model.entity.Users;
+import tms62.springsecurity.AccountDetails;
 import tms62.util.Helpers;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class CourseAction extends ActionSupport implements SessionAware {
+public class CourseAction extends ActionSupport {
 
   /**
    * 
    */
   private static final long serialVersionUID = 1L;
   private CourseBusiness    courseBusiness;
-  private SessionMap        session;
   private List<Courses>     listCourses;
   private Courses           currentCourse;
+  AccountDetails            accountDetails   = (AccountDetails) SecurityContextHolder
+                                                 .getContext()
+                                                 .getAuthentication()
+                                                 .getPrincipal();
 
   public CourseBusiness getCourseBusiness() {
 
@@ -46,12 +47,6 @@ public class CourseAction extends ActionSupport implements SessionAware {
     this.listCourses = listMyCourses;
   }
 
-  @Override
-  public void setSession(Map<String, Object> session) {
-
-    this.session = (SessionMap) session;
-  }
-
   public Courses getCurrentCourse() {
 
     return currentCourse;
@@ -64,27 +59,22 @@ public class CourseAction extends ActionSupport implements SessionAware {
 
   public String viewMyCourse() {
 
-    Users currentUser = Helpers.getCurrentUserFromSession();
-    if (Helpers.isExist(currentUser)
-        && currentUser.isRole() == DatabaseValue.USER) {
-      listCourses = courseBusiness.getMyListCourses(currentUser);
-      return SUCCESS;
-    }
-    addActionError(WrongAccess.DEFAULT);
-    return ERROR;
+    Users user = new Users();
+    user.setUserId(accountDetails.getUserId());
+    listCourses = courseBusiness.getMyListCourses(user);
+    return SUCCESS;
+
   }
 
   public String viewMyCourseDetails() {
 
-    Users currentUser = Helpers.getCurrentUserFromSession();
-    if (Helpers.isExist(currentUser)
-        && currentUser.isRole() == DatabaseValue.USER) {
-      currentCourse = courseBusiness.getMyCourseDetails(currentUser,
-          currentCourse);
-      if (Helpers.isExist(currentCourse))
-        return SUCCESS;
-    }
-    addActionError(WrongAccess.NOTFOUND);
+    Users user = new Users();
+    user.setUserId(accountDetails.getUserId());
+    currentCourse = courseBusiness.getMyCourseDetails(user, currentCourse);
+    if (Helpers.isExist(currentCourse))
+      return SUCCESS;
+    else
+      addActionError(WrongAccess.NOTFOUND);
     return ERROR;
   }
 }

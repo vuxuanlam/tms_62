@@ -7,19 +7,9 @@
     <!-- Configure NameSpace for action web -->
     <package name="authentication" namespace="/sign" extends="default-web">
 
-        <action name="signinpage" class="Authentication" method="signinPage">
-            <result name="success">Authentication.SigninPage</result>
-            <result name="error">HomePage</result>
-        </action>
-
         <action name="signin" class="Authentication" method="signin">
-            <result name="success">HomePage</result>
-            <result name="error">Authentication.SigninPage</result>
-            <result name="none">HomePage</result>
-        </action>
-
-        <action name="signout" class="Authentication" method="signout">
-            <result>HomePage</result>
+            <param name="error">{1}</param>
+            <result name="success">Authentication.SigninPage</result>
         </action>
     </package>
 </struts>

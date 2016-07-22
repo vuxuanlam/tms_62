@@ -1,40 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
-	<bean id="HomepageAction" class="tms62.action.homepage.HomepageAction"
-		scope="prototype">
-	</bean>
+    <bean id="HomepageAction" class="tms62.action.homepage.HomepageAction"
+        scope="prototype">
+    </bean>
 
-	<bean id="Authentication" class="tms62.action.authentication.SigninAction"
-		scope="prototype">
-		<property name="authenticationBusiness" ref="AuthenticationBusiness"></property>
-	</bean>
+    <bean id="Authentication" class="tms62.action.authentication.SigninAction"
+        scope="prototype">
+    </bean>
 
-	<bean id="CourseAdmin" class="tms62.action.admin.course.CourseAction"
-		scope="prototype">
-		<property name="courseBusiness" ref="CourseBusiness"></property>
-	</bean>
+    <bean id="CourseAdmin" class="tms62.action.admin.course.CourseAction"
+        scope="prototype">
+        <property name="courseBusiness" ref="CourseBusiness"></property>
+    </bean>
 
-	<bean id="CourseUser" class="tms62.action.user.course.CourseAction"
-		scope="prototype">
-		<property name="courseBusiness" ref="CourseBusiness"></property>
-	</bean>
+    <bean id="CourseUser" class="tms62.action.user.course.CourseAction"
+        scope="prototype">
+        <property name="courseBusiness" ref="CourseBusiness"></property>
+    </bean>
 
-	<bean id="AccountAdmin" class="tms62.action.admin.account.AccountAction"
-		scope="prototype">
-		<property name="accountBusiness" ref="AccountBusiness"></property>
-	</bean>
+    <bean id="AccountAdmin" class="tms62.action.admin.account.AccountAction"
+        scope="prototype">
+        <property name="accountBusiness" ref="AccountBusiness"></property>
+    </bean>
 
-	<bean id="SubjectAdmin" class="tms62.action.admin.subject.SubjectAction"
-		scope="prototype">
-		<property name="subjectBusiness" ref="SubjectBusiness"></property>
-	</bean>
+    <bean id="SubjectAdmin" class="tms62.action.admin.subject.SubjectAction"
+        scope="prototype">
+        <property name="subjectBusiness" ref="SubjectBusiness"></property>
+    </bean>
 
-	<bean id="AccountUser" class="tms62.action.user.info.AccountAction"
-		scope="prototype">
-		<property name="accountBusiness" ref="AccountBusiness"></property>
-	</bean>
+    <bean id="AccountUser" class="tms62.action.user.info.AccountAction"
+        scope="prototype">
+        <property name="accountBusiness" ref="AccountBusiness"></property>
+    </bean>
+
+    <bean id="AccountDetailsService" class="tms62.springsecurity.AccountDetailsService"
+        scope="prototype">
+        <property name="accountBusiness" ref="AccountBusiness"></property>
+    </bean>
 </beans>

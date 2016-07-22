@@ -117,5 +117,4 @@ public class GenericDAOImpl<E, Id extends Serializable> extends
       throw re;
     }
   }
-
 }
