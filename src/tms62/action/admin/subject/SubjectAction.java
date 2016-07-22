@@ -67,19 +67,19 @@ public class SubjectAction extends ActionSupport {
 
     List<Tasks> listTask;
     if (Helpers.isExist(subject)) {
-      subject = subjectBusiness.createSubject(subject);
-      if (Helpers.isExist(subject)) {
-        listTask = validateTask();
-        subjectBusiness.createTask(listTask, subject);
-        addActionMessage(BusinessMessage.ADD_SUCCESS);
-        return SUCCESS;
+      listTask = validateTask(subject);
+      if (Helpers.isEmpty(subject.getListTasks())) {
+        subject.setListTasks(listTask);
+      } else {
+        subject.getListTasks().addAll(listTask);
       }
-      addActionError(BusinessMessage.ADD_ERROR);
+      subjectBusiness.createSubject(subject);
+      addActionMessage(BusinessMessage.ADD_SUCCESS);
     }
     return SUCCESS;
   }
 
-  public List<Tasks> validateTask() {
+  public List<Tasks> validateTask(Subjects subject) {
 
     List<Tasks> listTask = new ArrayList<Tasks>();
     Tasks task;
@@ -89,6 +89,7 @@ public class SubjectAction extends ActionSupport {
           && !taskDescription.get(i).trim().equals("")) {
         task.setName(taskName.get(i).trim());
         task.setDescription(taskDescription.get(i).trim());
+        task.setSubject(subject);
         listTask.add(task);
       }
     }

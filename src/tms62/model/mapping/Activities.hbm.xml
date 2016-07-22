@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/07/26 8:57:55 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="tms62.model.entity.Activities" table="ACTIVITIES">
+        <id name="activityId" type="int">
+            <column name="ACTIVITYID" />
+            <generator class="identity" />
+        </id>
+        <property name="targetType" type="java.lang.String">
+            <column name="TARGETTYPE" />
+        </property>
+        <property name="targetId" type="int">
+            <column name="TARGETID" />
+        </property>
+        <property name="description" type="java.lang.String">
+            <column name="DESCRIPTION" />
+        </property>
+        <property name="createAt" type="java.util.Date">
+            <column name="CREATEAT" />
+        </property>
+        <many-to-one name="user" class="tms62.model.entity.Users"
+            fetch="select">
+            <column name="userId" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

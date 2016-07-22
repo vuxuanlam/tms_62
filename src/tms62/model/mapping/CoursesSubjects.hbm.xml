@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016/07/14 13:05:23 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2016/07/26 8:59:00 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="tms62.model.entity.UsersCourses" table="USERSCOURSES">
-        <id name="userCourseId" type="int">
-            <column name="USERCOURSEID" />
+    <class name="tms62.model.entity.CoursesSubjects" table="COURSESSUBJECTS">
+        <id name="courseSubjectId" type="int">
+            <column name="COURSESUBJECTID" />
             <generator class="identity" />
         </id>
         <property name="status" type="boolean">
@@ -15,9 +15,9 @@
             fetch="select">
             <column name="courseId" not-null="true" />
         </many-to-one>
-        <many-to-one name="user" class="tms62.model.entity.Users"
+        <many-to-one name="subject" class="tms62.model.entity.Subjects"
             fetch="select">
-            <column name="userId" not-null="true" />
+            <column name="subjectId" not-null="true" />
         </many-to-one>
     </class>
 </hibernate-mapping>

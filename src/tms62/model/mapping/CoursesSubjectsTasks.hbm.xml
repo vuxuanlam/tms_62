@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/07/26 8:57:55 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="tms62.model.entity.CoursesSubjectsTasks" table="COURSESSUBJECTSTASKS">
+        <id name="userTaskId" type="int">
+            <column name="USERTASKID" />
+            <generator class="assigned" />
+        </id>
+        <property name="courseSubjectTaskId" type="int">
+            <column name="COURSESUBJECTTASKID" />
+        </property>
+        <property name="userSubjectId" type="int">
+            <column name="USERSUBJECTID" />
+        </property>
+        <property name="courseSubjectId" type="int">
+            <column name="COURSESUBJECTID" />
+        </property>
+    </class>
+</hibernate-mapping>

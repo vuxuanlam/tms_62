@@ -1,17 +1,25 @@
 package tms62.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class Courses {
+public class Courses implements Serializable {
 
-  private int     courseId;
-  private String  name;
-  private String  description;
-  private Date    startDate;
-  private Date    endDate;
-  private boolean status;
-  private Date    createAt;
-  private Date    updateAt;
+  /**
+   * 
+   */
+  private static final long     serialVersionUID = 1L;
+  private int                   courseId;
+  private String                name;
+  private String                description;
+  private Date                  startDate;
+  private Date                  endDate;
+  private boolean               status;
+  private Date                  createAt;
+  private Date                  updateAt;
+  private List<CoursesSubjects> listCoursesSubjects;
+  private List<UsersCourses>    listUsersCourses;
 
   public int getCourseId() {
 
@@ -91,6 +99,26 @@ public class Courses {
   public void setUpdateAt(Date updateAt) {
 
     this.updateAt = updateAt;
+  }
+
+  public List<CoursesSubjects> getListCoursesSubjects() {
+
+    return listCoursesSubjects;
+  }
+
+  public void setListCoursesSubjects(List<CoursesSubjects> listCoursesSubjects) {
+
+    this.listCoursesSubjects = listCoursesSubjects;
+  }
+
+  public List<UsersCourses> getListUsersCourses() {
+
+    return listUsersCourses;
+  }
+
+  public void setListUsersCourses(List<UsersCourses> listUsersCourses) {
+
+    this.listUsersCourses = listUsersCourses;
   }
 
 }

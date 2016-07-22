@@ -1,15 +1,22 @@
 package tms62.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class Tasks {
+public class Tasks implements Serializable {
 
-  private int    taskId;
-  private int    subjectId;
-  private String name;
-  private String description;
-  private Date   createAt;
-  private Date   updateAt;
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+  private int               taskId;
+  private String            name;
+  private String            description;
+  private Date              createAt;
+  private Date              updateAt;
+  private Subjects          subject;
+  private List<UsersTasks>  listUsersTasks;
 
   public int getTaskId() {
 
@@ -19,16 +26,6 @@ public class Tasks {
   public void setTaskId(int taskId) {
 
     this.taskId = taskId;
-  }
-
-  public int getSubjectId() {
-
-    return subjectId;
-  }
-
-  public void setSubjectId(int subjectId) {
-
-    this.subjectId = subjectId;
   }
 
   public String getName() {
@@ -69,5 +66,25 @@ public class Tasks {
   public void setUpdateAt(Date updateAt) {
 
     this.updateAt = updateAt;
+  }
+
+  public Subjects getSubject() {
+
+    return subject;
+  }
+
+  public void setSubject(Subjects subject) {
+
+    this.subject = subject;
+  }
+
+  public List<UsersTasks> getListUsersTasks() {
+
+    return listUsersTasks;
+  }
+
+  public void setListUsersTasks(List<UsersTasks> listUsersTasks) {
+
+    this.listUsersTasks = listUsersTasks;
   }
 }

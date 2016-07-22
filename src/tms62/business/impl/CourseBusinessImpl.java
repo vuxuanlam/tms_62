@@ -4,100 +4,114 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tms62.business.CourseBusiness;
-import tms62.constant.value.DatabaseValue;
 import tms62.dao.CourseDAO;
 import tms62.dao.UserCourseDAO;
+import tms62.dao.UserDAO;
 import tms62.model.entity.Courses;
 import tms62.model.entity.Users;
 import tms62.model.entity.UsersCourses;
-import tms62.util.Helpers;
 
 public class CourseBusinessImpl implements CourseBusiness {
 
-	private CourseDAO courseDAO;
-	private UserCourseDAO userCourseDAO;
+  private CourseDAO     courseDAO;
+  private UserCourseDAO userCourseDAO;
+  private UserDAO       userDAO;
 
-	public CourseDAO getCourseDAO() {
+  public UserDAO getUserDAO() {
 
-		return courseDAO;
-	}
+    return userDAO;
+  }
 
-	public void setCourseDAO(CourseDAO courseDAO) {
+  public void setUserDAO(UserDAO userDAO) {
 
-		this.courseDAO = courseDAO;
-	}
+    this.userDAO = userDAO;
+  }
 
-	public UserCourseDAO getUserCourseDAO() {
+  public CourseDAO getCourseDAO() {
 
-		return userCourseDAO;
-	}
+    return courseDAO;
+  }
 
-	public void setUserCourseDAO(UserCourseDAO userCourseDAO) {
+  public void setCourseDAO(CourseDAO courseDAO) {
 
-		this.userCourseDAO = userCourseDAO;
-	}
+    this.courseDAO = courseDAO;
+  }
 
-	@Override
-	public List<Courses> getMyListCourses(Users user) {
+  public UserCourseDAO getUserCourseDAO() {
 
-		List<UsersCourses> listUserCourse;
-		List<Courses> listCourse;
-		Courses myCourse;
-		try {
-			listUserCourse = userCourseDAO.findByProperty(DatabaseValue.USER_ID, user.getUserId());
-			if (!Helpers.isEmpty(listUserCourse)) {
-				listCourse = new ArrayList<Courses>();
-				for (UsersCourses userCourse : listUserCourse) {
-					myCourse = courseDAO.findById(userCourse.getCourseId());
-					if (Helpers.isExist(myCourse)) {
-						myCourse.setStatus(userCourse.isStatus());
-						listCourse.add(myCourse);
-					}
-				}
-				return listCourse;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+    return userCourseDAO;
+  }
 
-	@Override
-	public Courses getMyCourseDetails(Users user, Courses course) {
+  public void setUserCourseDAO(UserCourseDAO userCourseDAO) {
 
-		UsersCourses myUserCourse;
-		try {
-			myUserCourse = userCourseDAO.isMyCourse(user, course);
-			if (Helpers.isExist(myUserCourse)) {
-				return courseDAO.findById(myUserCourse.getCourseId());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+    this.userCourseDAO = userCourseDAO;
+  }
 
-	@Override
-	public List<Courses> getAllCourses() {
+  @Override
+  public List<Courses> getMyListCourses(Users user) {
 
-		try {
-			return courseDAO.listAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+    List<Courses> listCourse = new ArrayList<Courses>();
+    List<UsersCourses> listUsersCourses;
+    UsersCourses myUserCourse;
+    try {
+      user = userDAO.findById(user.getUserId());
+      listUsersCourses = user.getListUsersCourses();
+      for (UsersCourses userCourse : listUsersCourses) {
+        myUserCourse = userCourseDAO.findById(userCourse.getUserCourseId());
+        myUserCourse.getCourse().setStatus(userCourse.isStatus());
+        listCourse.add(myUserCourse.getCourse());
+      }
+      return listCourse;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
-	@Override
-	public Courses getCourseById(Courses course) {
+  @Override
+  public Courses getMyCourseDetails(Users user, Courses course) {
 
-		try {
-			return courseDAO.findById(course.getCourseId());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
+    List<UsersCourses> myListUsersCourses;
+    Courses myCourse;
+    try {
+      user = userDAO.findById(user.getUserId());
+      myListUsersCourses = user.getListUsersCourses();
+      for (UsersCourses userCourse : myListUsersCourses) {
+        myCourse = userCourse.getCourse();
+        if (myCourse.getCourseId() == course.getCourseId()) {
+          myCourse.setStatus(userCourse.isStatus());
+          return myCourse;
+        }
+      }
+
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return null;
+
+  }
+
+  @Override
+  public List<Courses> getAllCourses() {
+
+    try {
+      return courseDAO.listAll();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public Courses getCourseById(Courses course) {
+
+    try {
+      return courseDAO.findById(course.getCourseId());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 
 }

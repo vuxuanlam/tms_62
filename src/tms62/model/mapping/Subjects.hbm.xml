@@ -6,7 +6,7 @@
     <class name="tms62.model.entity.Subjects" table="SUBJECTS">
         <id name="subjectId" type="int">
             <column name="SUBJECTID" />
-              <generator class="identity" />
+            <generator class="identity" />
         </id>
         <property name="name" type="java.lang.String">
             <column name="NAME" />
@@ -20,6 +20,21 @@
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATEAT" />
         </property>
+        <bag name="listUsersSubjects" inverse="true" lazy="false"
+            cascade="save-update, delete" table="UsersSubjects" fetch="select">
+            <key column="subjectId" not-null="true" />
+            <one-to-many class="tms62.model.entity.UsersSubjects" />
+        </bag>
+        <bag name="listTasks" inverse="true" lazy="false" cascade="save-update, delete"
+            table="Tasks" fetch="select">
+            <key column="subjectId" not-null="true" />
+            <one-to-many class="tms62.model.entity.Tasks" />
+        </bag>
+        <bag name="listCoursesSubjects" inverse="true" lazy="false"
+            cascade="save-update, delete" table="CoursesSubjects" fetch="select">
+            <key column="subjectId" not-null="true" />
+            <one-to-many class="tms62.model.entity.CoursesSubjects" />
+        </bag>
     </class>
     <query name="FindSubjectByName">
         select subject

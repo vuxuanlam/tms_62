@@ -11,10 +11,11 @@
             </s:if>
             <s:form class="form-horizontal" method="POST" action="/j_spring_security_check">
                 <div class="form-group">
-                    <label for="username" class="col-md-3 control-label">Email*</label>
+                    <label for="email" class="col-md-3 control-label">Email*</label>
                     <div class="col-md-9">
                         <input type="email" class="form-control" id="email" name="email"
-                            placeholder="Email" required="required">
+                            placeholder="Email" required="required" autocomplete="on"
+                            autofocus="autofocus">
                     </div>
                 </div>
                 <br>

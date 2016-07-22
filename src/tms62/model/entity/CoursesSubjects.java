@@ -2,25 +2,25 @@ package tms62.model.entity;
 
 import java.io.Serializable;
 
-public class UsersCourses implements Serializable {
+public class CoursesSubjects implements Serializable {
 
   /**
    * 
    */
   private static final long serialVersionUID = 1L;
-  private int               userCourseId;
+  private int               courseSubjectId;
   private boolean           status;
   private Courses           course;
-  private Users             user;
+  private Subjects          subject;
 
-  public int getUserCourseId() {
+  public int getCourseSubjectId() {
 
-    return userCourseId;
+    return courseSubjectId;
   }
 
-  public void setUserCourseId(int userCourseId) {
+  public void setCourseSubjectId(int courseSubjectId) {
 
-    this.userCourseId = userCourseId;
+    this.courseSubjectId = courseSubjectId;
   }
 
   public boolean isStatus() {
@@ -43,14 +43,14 @@ public class UsersCourses implements Serializable {
     this.course = course;
   }
 
-  public Users getUser() {
+  public Subjects getSubject() {
 
-    return user;
+    return subject;
   }
 
-  public void setUser(Users user) {
+  public void setSubject(Subjects subject) {
 
-    this.user = user;
+    this.subject = subject;
   }
 
 }
