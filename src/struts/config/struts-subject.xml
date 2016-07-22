@@ -13,5 +13,32 @@
             <result name="error">HomePage</result>
         </action>
 
+        <action name="viewallsubject" class="SubjectAdmin"
+            method="viewAllSubject">
+            <result name="success">Subject.ViewAllSubjects</result>
+            <result name="error">HomePage</result>
+        </action>
+
+        <action name="deletesubject*" class="SubjectAdmin"
+            method="deleteSubject">
+            <param name="subject.subjectId">{1}</param>
+            <result name="success">Subject.ViewAllSubjects</result>
+            <result name="error">HomePage</result>
+        </action>
+
+        <action name="updatesubject*" class="SubjectAdmin"
+            method="updateSubject">
+            <param name="subject.subjectId">{1}</param>
+            <result name="success">Subject.UpdateSubject</result>
+            <result name="error">Subject.ViewAllSubjects</result>
+        </action>
+
+        <action name="viewsubjectdetails*" class="SubjectAdmin"
+            method="viewSubjectDetails">
+            <param name="subject.subjectId">{1}</param>
+            <result name="success">Subject.ViewSubjectDetails
+            </result>
+            <result name="error">HomePage</result>
+        </action>
     </package>
 </struts>

@@ -14,4 +14,31 @@
         </put-list-attribute>
     </definition>
 
+    <definition name="Subject.ViewAllSubjects" extends="Default.Web">
+        <put-attribute name="body"
+            value="/bodycontent/subject/allsubject.jsp" />
+        <put-list-attribute name="js">
+        </put-list-attribute>
+        <put-list-attribute name="css">
+        </put-list-attribute>
+    </definition>
+
+    <definition name="Subject.UpdateSubject" extends="Default.Web">
+        <put-attribute name="body"
+            value="/bodycontent/subject/updatesubject.jsp" />
+        <put-list-attribute name="js">
+        </put-list-attribute>
+        <put-list-attribute name="css">
+        </put-list-attribute>
+    </definition>
+
+    <definition name="Subject.ViewSubjectDetails" extends="Default.Web">
+        <put-attribute name="body"
+            value="/bodycontent/subject/subjectdetails.jsp" />
+        <put-list-attribute name="js">
+        </put-list-attribute>
+        <put-list-attribute name="css">
+        </put-list-attribute>
+    </definition>
+
 </tiles-definitions>

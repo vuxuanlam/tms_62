@@ -25,7 +25,7 @@
             <column name="subjectId" not-null="true" />
         </many-to-one>
         <bag name="listUsersTasks" inverse="true" lazy="false"
-            cascade="save-update, delete" table="UsersTasks" fetch="select">
+            cascade="all" table="UsersTasks" fetch="select">
             <key column="taskId" not-null="true" />
             <one-to-many class="tms62.model.entity.UsersTasks" />
         </bag>

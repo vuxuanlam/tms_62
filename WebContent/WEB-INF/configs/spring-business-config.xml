@@ -41,5 +41,13 @@
             </bean>
         </property>
     </bean>
+    <bean id="TaskBusiness" parent="transactionProxyTemplate">
+        <property name="target">
+            <bean class="tms62.business.impl.TaskBusinessImpl">
+                <property name="taskDAO" ref="TaskDAO" />
+                <property name="subjectDAO" ref="SubjectDAO"></property>
+            </bean>
+        </property>
+    </bean>
 
 </beans>
