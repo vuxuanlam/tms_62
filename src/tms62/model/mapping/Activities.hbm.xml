@@ -21,7 +21,7 @@
             <column name="CREATEAT" />
         </property>
         <many-to-one name="user" class="tms62.model.entity.Users"
-            fetch="select">
+            fetch="select" lazy="false">
             <column name="userId" not-null="true" />
         </many-to-one>
     </class>

@@ -8,10 +8,7 @@
             <column name="USERTASKID" />
             <generator class="identity" />
         </id>
-        <property name="content" type="java.lang.String">
-            <column name="CONTENT" />
-        </property>
-        <property name="status" type="boolean">
+        <property name="status" type="byte">
             <column name="STATUS" />
         </property>
         <property name="createAt" type="java.util.Date">
@@ -21,12 +18,17 @@
             <column name="UPDATEAT" />
         </property>
         <many-to-one name="task" class="tms62.model.entity.Tasks"
-            fetch="select">
+            fetch="select" lazy="false">
             <column name="taskId" not-null="true" />
         </many-to-one>
         <many-to-one name="user" class="tms62.model.entity.Users"
-            fetch="select">
+            fetch="select" lazy="false">
             <column name="userId" not-null="true" />
         </many-to-one>
+        <bag name="listCourseSubjectTask" inverse="true" lazy="false"
+            cascade="all" table="CoursesSubjectsTasks" fetch="select">
+            <key column="userSubjectId" not-null="true" />
+            <one-to-many class="tms62.model.entity.CoursesSubjectsTasks" />
+        </bag>
     </class>
 </hibernate-mapping>

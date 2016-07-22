@@ -20,7 +20,10 @@
             <bean class="tms62.business.impl.CourseBusinessImpl">
                 <property name="courseDAO" ref="CourseDAO" />
                 <property name="userCourseDAO" ref="UserCourseDAO"></property>
+                <property name="userDAO" ref="UserDAO"></property>
                 <property name="subjectDAO" ref="SubjectDAO"></property>
+                <property name="courseSubjectDAO" ref="CourseSubjectDAO"></property>
+                <property name="userSubjectDAO" ref="UserSubjectDAO"></property>
             </bean>
         </property>
     </bean>
@@ -41,8 +44,8 @@
             </bean>
         </property>
     </bean>
-    
-      <bean id="TaskBusiness" parent="transactionProxyTemplate">
+
+    <bean id="TaskBusiness" parent="transactionProxyTemplate">
         <property name="target">
             <bean class="tms62.business.impl.TaskBusinessImpl">
                 <property name="taskDAO" ref="TaskDAO" />

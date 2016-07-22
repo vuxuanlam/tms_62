@@ -4,6 +4,7 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+
     <!-- Configure NameSpace for action web -->
     <package name="subjectadmin" namespace="/subjectadmin"
         extends="default-web">
@@ -19,26 +20,23 @@
             <result name="error">HomePage</result>
         </action>
 
-        <action name="deletesubject*" class="SubjectAdmin"
-            method="deleteSubject">
-            <param name="subject.subjectId">{1}</param>
+        <action name="deletesubject" class="SubjectAdmin" method="deleteSubject">
             <result name="success">Subject.ViewAllSubjects</result>
             <result name="error">HomePage</result>
         </action>
 
-        <action name="updatesubject*" class="SubjectAdmin"
-            method="updateSubject">
-            <param name="subject.subjectId">{1}</param>
+        <action name="updatesubject" class="SubjectAdmin" method="updateSubject">
             <result name="success">Subject.UpdateSubject</result>
             <result name="error">Subject.ViewAllSubjects</result>
         </action>
 
-        <action name="viewsubjectdetails*" class="SubjectAdmin"
+        <action name="viewsubjectdetails" class="SubjectAdmin"
             method="viewSubjectDetails">
-            <param name="subject.subjectId">{1}</param>
             <result name="success">Subject.ViewSubjectDetails
             </result>
             <result name="error">HomePage</result>
         </action>
+
     </package>
+
 </struts>

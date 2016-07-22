@@ -4,18 +4,17 @@
 <!-- Generated 2016/07/26 8:57:55 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="tms62.model.entity.CoursesSubjectsTasks" table="COURSESSUBJECTSTASKS">
-        <id name="userTaskId" type="int">
-            <column name="USERTASKID" />
-            <generator class="assigned" />
-        </id>
-        <property name="courseSubjectTaskId" type="int">
+        <id name="courseSubjectTaskId" type="int">
             <column name="COURSESUBJECTTASKID" />
-        </property>
-        <property name="userSubjectId" type="int">
-            <column name="USERSUBJECTID" />
-        </property>
-        <property name="courseSubjectId" type="int">
-            <column name="COURSESUBJECTID" />
-        </property>
+            <generator class="identity" />
+        </id>
+        <many-to-one name="userSubject" class="tms62.model.entity.UsersSubjects"
+            fetch="select" lazy="false">
+            <column name="userCourseSubjectId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="userTask" class="tms62.model.entity.UsersTasks"
+            fetch="select" lazy="false">
+            <column name="userTaskId" />
+        </many-to-one>
     </class>
 </hibernate-mapping>
