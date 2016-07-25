@@ -4,13 +4,25 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <!-- Configure NameSpace for action web -->
-    <package name="accountuser" namespace="/accountadmin" extends="default-web">
+	<!-- Configure NameSpace for action web -->
+	<package name="accountadmin" namespace="/accountadmin" extends="default-web">
 
-        <action name="viewallaccount" class="AccountAdmin" method="viewAllAccount">
-            <result name="success">Account.ViewAllAccount</result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="viewallaccount" class="AccountAdmin" method="viewAllAccount">
+			<result name="success">Account.ViewAllAccount</result>
+			<result name="error">HomePage</result>
+		</action>
 
-    </package>
+	</package>
+
+	<package name="accountuser" namespace="/accountuser" extends="default-web">
+		<action name="info" class="AccountUser" method="viewAccount">
+			<result name="success">Account.ViewAccountInfo</result>
+			<result name="error">HomePage</result>
+		</action>
+		<action name="edit" class="AccountUser" method="editAccount">
+			<result name="success">Account.ViewAccountInfo</result>
+			<result name="error">HomePage</result>
+		</action>
+	</package>
+
 </struts>

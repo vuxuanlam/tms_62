@@ -42,4 +42,17 @@ bower.json
 .byebug_history
 /build/
 .settings/
+# unfollow file
+.classpath
+.project
+.tern-project
+.md
 
+
+
+
+
+
+
+
+/bin/

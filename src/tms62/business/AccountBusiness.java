@@ -6,5 +6,7 @@ import tms62.model.entity.Users;
 
 public interface AccountBusiness {
 
-  public List<Users> getAllUsers();
+	public List<Users> getAllUsers();
+
+	public Users updateUserInfo(Users user) throws Exception;
 }
