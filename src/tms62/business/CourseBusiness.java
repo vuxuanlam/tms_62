@@ -3,6 +3,7 @@ package tms62.business;
 import java.util.List;
 
 import tms62.model.entity.Courses;
+import tms62.model.entity.Subjects;
 import tms62.model.entity.Users;
 
 public interface CourseBusiness {
@@ -15,4 +16,7 @@ public interface CourseBusiness {
 
   public Courses getMyCourseDetails(Users user, Courses course);
 
+  public Courses createCourse(Courses course, int courseId, int subjectId);
+  
+  public List<Subjects> getSubjects();
 }

@@ -13,6 +13,8 @@ public class CoursesSubjects implements Serializable {
   private Courses           course;
   private Subjects          subject;
 
+  public CoursesSubjects(){}
+  public CoursesSubjects(int courseSubjectId, boolean status, Courses course, Subjects subject){}
   public int getCourseSubjectId() {
 
     return courseSubjectId;

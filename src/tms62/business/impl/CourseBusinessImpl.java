@@ -3,11 +3,15 @@ package tms62.business.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.velocity.tools.generic.ClassTool.Sub;
+
 import tms62.business.CourseBusiness;
 import tms62.dao.CourseDAO;
+import tms62.dao.SubjectDAO;
 import tms62.dao.UserCourseDAO;
 import tms62.dao.UserDAO;
 import tms62.model.entity.Courses;
+import tms62.model.entity.Subjects;
 import tms62.model.entity.Users;
 import tms62.model.entity.UsersCourses;
 
@@ -16,10 +20,22 @@ public class CourseBusinessImpl implements CourseBusiness {
   private CourseDAO     courseDAO;
   private UserCourseDAO userCourseDAO;
   private UserDAO       userDAO;
+  private SubjectDAO    subjectDAO;
+
 
   public UserDAO getUserDAO() {
 
     return userDAO;
+  }
+
+  public SubjectDAO getSubjectDAO() {
+
+    return subjectDAO;
+  }
+
+  public void setSubjectDAO(SubjectDAO subjectDAO) {
+
+    this.subjectDAO = subjectDAO;
   }
 
   public void setUserDAO(UserDAO userDAO) {
@@ -114,4 +130,27 @@ public class CourseBusinessImpl implements CourseBusiness {
     return null;
   }
 
+  @Override
+
+  public Courses createCourse(Courses course, int courseId, int subjectId) {
+
+    try {
+      courseDAO.saveCourse(course, courseId, subjectId);
+      return course;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override
+  public List<Subjects> getSubjects() {
+
+    try {
+      return subjectDAO.listAll();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
 }

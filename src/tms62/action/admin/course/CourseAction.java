@@ -1,28 +1,38 @@
 package tms62.action.admin.course;
 
 import java.util.List;
-import java.util.Map;
 
-import org.apache.struts2.dispatcher.SessionMap;
-import org.apache.struts2.interceptor.SessionAware;
+import com.opensymphony.xwork2.ActionSupport;
 
 import tms62.business.CourseBusiness;
 import tms62.constant.message.WrongAccess;
 import tms62.model.entity.Courses;
+import tms62.model.entity.CoursesSubjects;
+import tms62.model.entity.Subjects;
 import tms62.util.Helpers;
 
-import com.opensymphony.xwork2.ActionSupport;
-
-public class CourseAction extends ActionSupport implements SessionAware {
+public class CourseAction extends ActionSupport {
 
   /**
    * 
    */
   private static final long serialVersionUID = 1L;
-  private SessionMap        session;
   private CourseBusiness    courseBusiness;
   private List<Courses>     listCourses;
   private Courses           currentCourse;
+  private List<Subjects>    listSubjects;
+  private CoursesSubjects   courseSubject;
+  private Subjects          subject;
+
+  public CoursesSubjects getCourseSubject() {
+
+    return courseSubject;
+  }
+
+  public void setCourseSubject(CoursesSubjects courseSubject) {
+
+    this.courseSubject = courseSubject;
+  }
 
   public CourseBusiness getCourseBusiness() {
 
@@ -44,10 +54,24 @@ public class CourseAction extends ActionSupport implements SessionAware {
     this.listCourses = listCourses;
   }
 
-  @Override
-  public void setSession(Map<String, Object> session) {
+  public List<Subjects> getListSubjects() {
 
-    this.session = (SessionMap) session;
+    return listSubjects;
+  }
+
+  public void setListSubjects(List<Subjects> listSubjects) {
+
+    this.listSubjects = listSubjects;
+  }
+
+  public Subjects getSubject() {
+
+    return subject;
+  }
+
+  public void setSubject(Subjects subject) {
+
+    this.subject = subject;
   }
 
   public Courses getCurrentCourse() {
@@ -76,4 +100,19 @@ public class CourseAction extends ActionSupport implements SessionAware {
       return ERROR;
     }
   }
+
+  public String createCourse() {
+    if(listSubjects==null)
+      listSubjects = courseBusiness.getSubjects();
+    if (Helpers.isExist(currentCourse)) {
+      try {
+        courseBusiness.createCourse(currentCourse, currentCourse.getCourseId(), subject.getSubjectId());
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      return SUCCESS;
+    }
+    return SUCCESS;
+  }
+
 }
