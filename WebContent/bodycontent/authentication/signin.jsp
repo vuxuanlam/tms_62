@@ -9,12 +9,12 @@
                     <s:actionerror />
                 </div>
             </s:if>
-            <s:form class="form-horizontal" method="POST" action="/sign/signin">
+            <s:form class="form-horizontal" method="POST" action="/j_spring_security_check">
                 <div class="form-group">
                     <label for="username" class="col-md-3 control-label">Email*</label>
                     <div class="col-md-9">
-                        <input type="email" class="form-control" id="email" name="user.email"
-                            placeholder="Email" required="required"">
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="Email" required="required">
                     </div>
                 </div>
                 <br>
@@ -22,9 +22,10 @@
                 <div class="form-group">
                     <label for="password" class="col-md-3 control-label">Password*</label>
                     <div class="col-md-9">
-                        <input type="password" class="form-control" id="password"
-                            name="user.password" placeholder="Password" required="required"
-                            pattern=".{6,16}">
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Password" required="required" pattern=".{6,16}"> <input
+                            type="checkbox" value="yes" name="_spring_security_remember_me" />
+                        Remember me
                     </div>
                 </div>
                 <br>

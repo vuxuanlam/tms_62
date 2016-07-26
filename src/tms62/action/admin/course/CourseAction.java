@@ -7,11 +7,8 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 
 import tms62.business.CourseBusiness;
-import tms62.constant.message.PermissionMessage;
 import tms62.constant.message.WrongAccess;
-import tms62.constant.value.DatabaseValue;
 import tms62.model.entity.Courses;
-import tms62.model.entity.Users;
 import tms62.util.Helpers;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -65,32 +62,18 @@ public class CourseAction extends ActionSupport implements SessionAware {
 
   public String viewAllCourse() {
 
-    Users currentUser;
-    currentUser = Helpers.getCurrentUserFromSession();
-    if (Helpers.isExist(currentUser)
-        && currentUser.isRole() == DatabaseValue.ADMIN) {
-      listCourses = courseBusiness.getAllCourses();
-      return SUCCESS;
-    }
-    addActionError(PermissionMessage.DEFAULT);
-    return ERROR;
+    listCourses = courseBusiness.getAllCourses();
+    return SUCCESS;
   }
 
   public String viewCourseDetails() {
 
-    Users currentUser = Helpers.getCurrentUserFromSession();
-    if (Helpers.isExist(currentUser)) {
-      currentCourse = courseBusiness.getCourseById(currentCourse);
-      if (Helpers.isExist(currentCourse))
-        return SUCCESS;
-      else {
-        addActionError(WrongAccess.NOTFOUND);
-        return ERROR;
-      }
+    currentCourse = courseBusiness.getCourseById(currentCourse);
+    if (Helpers.isExist(currentCourse))
+      return SUCCESS;
+    else {
+      addActionError(WrongAccess.NOTFOUND);
+      return ERROR;
     }
-
-    addActionError(PermissionMessage.DEFAULT);
-    return ERROR;
   }
-
 }

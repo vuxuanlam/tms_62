@@ -47,12 +47,4 @@ bower.json
 .project
 .tern-project
 .md
-
-
-
-
-
-
-
-
-/bin/
+bin/

@@ -283,11 +283,6 @@ public final class Helpers {
     }
   }
 
-  public static Date getCurrentTime() {
-
-    return new Date();
-  }
-
   public static Users getCurrentUserFromSession() {
 
     Map session = ActionContext.getContext().getSession();
@@ -295,6 +290,11 @@ public final class Helpers {
       return null;
     else
       return (Users) session.get(SessionValue.CURRENT_USER);
+  }
+
+  public static Date getCurrentTime() {
+
+    return new Date();
   }
 
   public static String formatTime(Date date) {

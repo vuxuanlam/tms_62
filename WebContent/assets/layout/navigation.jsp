@@ -1,4 +1,5 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -9,19 +10,20 @@
                     class="icon-bar"></span> <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href='<s:url value="/"></s:url>'>FRAMGIA TRAINING SYSTEM</a>
-            <s:if test="#session.current_user">
+            <sec:authorize access="isAuthenticated()">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown"><a href="#" class="dropdown-toggle"
                         data-toggle="dropdown" role="button" aria-haspopup="true"
-                        aria-expanded="false">${current_user.email}<span class="caret"></span></a>
+                        aria-expanded="false"><span class="caret"></span> <sec:authentication
+                                property="principal.username" /></a>
                         <ul class="dropdown-menu">
                             <li><a href='<s:url value="#"></s:url>'><i
                                     class="glyphicon glyphicon-user"></i>&nbsp;Profile</a></li>
-                            <li><a href='<s:url value="/sign/signout"></s:url>'><i
+                            <li><a href="tms_62/j_spring_security_logout"><i
                                     class="glyphicon glyphicon-off"></i>&nbsp;Sign out</a></li>
                         </ul></li>
                 </ul>
-            </s:if>
+            </sec:authorize>
         </div>
         <!-- /.navbar-collapse -->
     </div>
