@@ -6,7 +6,7 @@
     <class name="tms62.model.entity.Courses" table="COURSES">
         <id name="courseId" type="int">
             <column name="COURSEID" />
-              <generator class="identity" />
+            <generator class="identity" />
         </id>
         <property name="name" type="java.lang.String">
             <column name="NAME" />
@@ -29,5 +29,16 @@
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATEAT" />
         </property>
+
+        <bag name="listCoursesSubjects" inverse="true" lazy="false"
+            cascade="save-update, delete" table="CoursesSubjects" fetch="select">
+            <key column="courseId" not-null="true" />
+            <one-to-many class="tms62.model.entity.CoursesSubjects" />
+        </bag>
+        <bag name="listUsersCourses" inverse="true" lazy="false"
+            cascade="save-update, delete" table="UsersCourses" fetch="select">
+            <key column="courseId" not-null="true" />
+            <one-to-many class="tms62.model.entity.UsersCourses" />
+        </bag>
     </class>
 </hibernate-mapping>

@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016/07/14 13:05:23 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 2016/07/26 8:57:55 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="tms62.model.entity.UsersCourses" table="USERSCOURSES">
-        <id name="userCourseId" type="int">
-            <column name="USERCOURSEID" />
+    <class name="tms62.model.entity.UsersSubjects" table="USERSSUBJECTS">
+        <id name="userSubjectId" type="int">
+            <column name="USERSUBJECTID" />
             <generator class="identity" />
         </id>
         <property name="status" type="boolean">
             <column name="STATUS" />
         </property>
-        <many-to-one name="course" class="tms62.model.entity.Courses"
+        <many-to-one name="subject" class="tms62.model.entity.Subjects"
             fetch="select">
-            <column name="courseId" not-null="true" />
+            <column name="subjectId" not-null="true" />
         </many-to-one>
         <many-to-one name="user" class="tms62.model.entity.Users"
             fetch="select">

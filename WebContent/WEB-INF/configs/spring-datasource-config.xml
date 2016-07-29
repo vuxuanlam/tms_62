@@ -45,6 +45,13 @@
                 <value>tms62/model/mapping/UsersCourses.hbm.xml</value>
                 <value>tms62/model/mapping/Subjects.hbm.xml</value>
                 <value>tms62/model/mapping/Tasks.hbm.xml</value>
+                <value>tms62/model/mapping/CoursesSubjects.hbm.xml
+                </value>
+                <value>tms62/model/mapping/Activities.hbm.xml</value>
+                <value>tms62/model/mapping/UsersTasks.hbm.xml</value>
+                <value>tms62/model/mapping/CoursesSubjectsTasks.hbm.xml
+                </value>
+                <value>tms62/model/mapping/UsersSubjects.hbm.xml</value>
             </list>
         </property>
     </bean>

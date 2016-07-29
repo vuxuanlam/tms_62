@@ -8,9 +8,6 @@
             <column name="TASKID" />
             <generator class="identity" />
         </id>
-        <property name="subjectId" type="int">
-            <column name="SUBJECTID" />
-        </property>
         <property name="name" type="java.lang.String">
             <column name="NAME" />
         </property>
@@ -23,5 +20,14 @@
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATEAT" />
         </property>
+        <many-to-one name="subject" class="tms62.model.entity.Subjects"
+            fetch="select">
+            <column name="subjectId" not-null="true" />
+        </many-to-one>
+        <bag name="listUsersTasks" inverse="true" lazy="false"
+            cascade="save-update, delete" table="UsersTasks" fetch="select">
+            <key column="taskId" not-null="true" />
+            <one-to-many class="tms62.model.entity.UsersTasks" />
+        </bag>
     </class>
 </hibernate-mapping>

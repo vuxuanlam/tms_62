@@ -20,6 +20,7 @@
             <bean class="tms62.business.impl.CourseBusinessImpl">
                 <property name="courseDAO" ref="CourseDAO" />
                 <property name="userCourseDAO" ref="UserCourseDAO"></property>
+                <property name="userDAO" ref="UserDAO"></property>
             </bean>
         </property>
     </bean>
