@@ -22,4 +22,15 @@
             </p>
         </div>
     </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <h3>
+            <a href="courseadmin/viewallcourse">Courses Manager</a>
+        </h3>
+        <h3>
+            <a href="subjectadmin/viewallsubject">Subject Manager</a>
+        </h3>
+        <h3>
+            <a href="accountadmin/viewallaccount">Account Manager</a>
+        </h3>
+    </sec:authorize>
 </div>

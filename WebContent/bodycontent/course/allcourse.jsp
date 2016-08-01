@@ -14,7 +14,7 @@
             <s:if test="listCourses">
                 <s:iterator value="listCourses">
                     <tr>
-                        <td>${name }</td>
+                        <td><a href="viewcoursedetails${courseId }">${name }</a></td>
                         <td>${startDate }</td>
                         <td>${endDate }</td>
                         <td><s:if test="status">

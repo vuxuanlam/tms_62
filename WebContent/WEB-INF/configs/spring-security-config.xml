@@ -9,9 +9,12 @@
         <intercept-url pattern="/courseadmin/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/subjectadmin/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/accountadmin/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/taskadmin/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/courseuser/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/sign/signin" access="!isAuthenticated()" />
 
-        <access-denied-handler error-page="/" />
+
+        <access-denied-handler />
 
         <form-login login-page="/sign/signin"
             authentication-failure-url="/sign/signin?error=true"

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configure NameSpace for action web -->
+    <package name="taskadmin" namespace="/taskadmin" extends="default-web">
+
+        <action name="removetask*" class="TaskAdmin" method="removeTask">
+            <param name="task.taskId">{1}</param>
+            <result name="success" type="redirect">
+                <param name="location">/subjectadmin/viewsubjectdetails${task.subject.subjectId}</param>
+            </result>
+            <result name="error">HomePage</result>
+        </action>
+
+        <action name="addtask" class="TaskAdmin" method="createTask">
+            <result name="success" type="redirect">
+                <param name="location">/subjectadmin/viewsubjectdetails${subject.subjectId}</param>
+            </result>
+            <result name="error">HomePage</result>
+        </action>
+    </package>
+</struts>

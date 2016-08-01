@@ -37,5 +37,6 @@
     <include file="struts/config/struts-course.xml" />
     <include file="struts/config/struts-account.xml" />
     <include file="struts/config/struts-subject.xml" />
+    <include file="struts/config/struts-task.xml" />
 
 </struts>

@@ -20,8 +20,10 @@ public class SubjectAction extends ActionSupport {
 
   private SubjectBusiness   subjectBusiness;
   private Subjects          subject;
+  private List<Subjects>    listSubjects;
   private List<String>      taskName;
   private List<String>      taskDescription;
+  private boolean           update           = false;
 
   public SubjectBusiness getSubjectBusiness() {
 
@@ -63,6 +65,26 @@ public class SubjectAction extends ActionSupport {
     this.taskDescription = taskDescription;
   }
 
+  public List<Subjects> getListSubjects() {
+
+    return listSubjects;
+  }
+
+  public void setListSubjects(List<Subjects> listSubjects) {
+
+    this.listSubjects = listSubjects;
+  }
+
+  public boolean isUpdate() {
+
+    return update;
+  }
+
+  public void setUpdate(boolean update) {
+
+    this.update = update;
+  }
+
   public String createSubject() {
 
     List<Tasks> listTask;
@@ -77,6 +99,43 @@ public class SubjectAction extends ActionSupport {
       addActionMessage(BusinessMessage.ADD_SUCCESS);
     }
     return SUCCESS;
+  }
+
+  public String viewAllSubject() {
+
+    listSubjects = subjectBusiness.getSubjects();
+    return SUCCESS;
+  }
+
+  public String deleteSubject() {
+
+    if (Helpers.isExist(subject)
+        && Helpers.isExist(subjectBusiness.getSubjectById(subject))) {
+      subject = subjectBusiness.getSubjectById(subject);
+      subjectBusiness.removeSubject(subject);
+      addActionMessage(BusinessMessage.DELETE_SUCCESS);
+    }
+    return viewAllSubject();
+  }
+
+  public String updateSubject() {
+
+    if (update && Helpers.isExist(subject))
+      subjectBusiness.updateSubject(subject);
+    subject = subjectBusiness.getSubjectById(subject);
+    if (Helpers.isExist(subject))
+      return SUCCESS;
+    else
+      return ERROR;
+  }
+
+  public String viewSubjectDetails() {
+
+    if (Helpers.isExist(subject)) {
+      subject = subjectBusiness.getSubjectById(subject);
+      return SUCCESS;
+    }
+    return ERROR;
   }
 
   public List<Tasks> validateTask(Subjects subject) {
