@@ -414,4 +414,35 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         return null;
     }
+	@Override
+	public List<Courses> getMyListCourses(Users user) {
+
+		List<Courses> listCourse = new ArrayList<Courses>();
+		List<UsersCourses> listUsersCourses;
+		UsersCourses myUserCourse;
+		try {
+			user = userDAO.findById(user.getUserId());
+			listUsersCourses = user.getListUsersCourses();
+			for (UsersCourses userCourse : listUsersCourses) {
+				myUserCourse = userCourseDAO.findById(userCourse.getUserCourseId());
+				myUserCourse.getCourse().setStatus(userCourse.getStatus());
+				listCourse.add(myUserCourse.getCourse());
+			}
+			return listCourse;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<UsersCourses> getUsersCoursesFromCourseId(Courses course) throws Exception {
+		try {
+			return course.getListUsersCourses();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 }

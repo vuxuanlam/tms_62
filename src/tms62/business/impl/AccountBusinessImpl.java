@@ -12,18 +12,18 @@ public class AccountBusinessImpl implements AccountBusiness {
     private UserDAO userDAO;
     
     public UserDAO getUserDAO() {
-    
+        
         return userDAO;
     }
     
     public void setUserDAO(UserDAO userDAO) {
-    
+        
         this.userDAO = userDAO;
     }
     
     @Override
     public List<Users> getAllUsers() {
-    
+        
         try {
             return userDAO.listAll();
         }
@@ -35,7 +35,7 @@ public class AccountBusinessImpl implements AccountBusiness {
     
     @Override
     public Users updateUserInfo(Users user) throws Exception {
-    
+        
         try {
             userDAO.update(user);
         }
@@ -47,12 +47,25 @@ public class AccountBusinessImpl implements AccountBusiness {
     
     @Override
     public Users getUserByEmail(String email) {
-    
+        
         List<Users> listUser;
         try {
             listUser = userDAO.findByProperty(DatabaseValue.EMAIL, email);
             if (listUser.size() > 0)
                 return (Users) listUser.get(0);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    @Override
+    public Users getUserById(int id) {
+        
+        // TODO Auto-generated method stub
+        try {
+            return userDAO.findById(id);
         }
         catch (Exception e) {
             e.printStackTrace();
