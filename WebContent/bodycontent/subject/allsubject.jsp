@@ -33,13 +33,21 @@
             <s:if test="listSubjects">
                 <s:iterator value="listSubjects">
                     <tr>
-                        <td><a
-                            href='<s:url value="viewsubjectdetails"></s:url>${subjectId}'>${name }</a></td>
+                        <s:url action="viewsubjectdetails" var="subjectdetails">
+                            <s:param name="subject.subjectId">${subjectId }</s:param>
+                        </s:url>
+                        <td><a href='${subjectdetails }'>${name }</a></td>
                         <td>${description }</td>
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
-                            <td><a href="deletesubject${subjectId }"><i
+                            <s:url action="deletesubject" var="deleteSubject">
+                                <s:param name="subject.subjectId">${subjectId }</s:param>
+                            </s:url>
+                            <td><a href="${deleteSubject }"><i
                                     class="glyphicon glyphicon-trash"></i></a></td>
-                            <td><a href="updatesubject${subjectId }"><i
+                            <s:url action="updatesubject" var="updateSubject">
+                                <s:param name="subject.subjectId">${subjectId }</s:param>
+                            </s:url>
+                            <td><a href="${updateSubject }"><i
                                     class="glyphicon glyphicon-edit"></i></a></td>
                         </sec:authorize>
                     </tr>

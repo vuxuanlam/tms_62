@@ -8,16 +8,21 @@
             <column name="COURSESUBJECTID" />
             <generator class="identity" />
         </id>
-        <property name="status" type="boolean">
+        <property name="status" type="byte">
             <column name="STATUS" />
         </property>
         <many-to-one name="course" class="tms62.model.entity.Courses"
-            fetch="select">
+            fetch="select" lazy="false">
             <column name="courseId" not-null="true" />
         </many-to-one>
-        <many-to-one name="subject" class="tms62.model.entity.Subjects"
-            fetch="select">
+        <many-to-one name="subject" lazy="false"
+            class="tms62.model.entity.Subjects" fetch="select">
             <column name="subjectId" not-null="true" />
         </many-to-one>
+        <bag name="listUserSubject" inverse="true" lazy="false"
+            cascade="all" table="UsersSubjects" fetch="select">
+            <key column="courseSubjectId" not-null="true" />
+            <one-to-many class="tms62.model.entity.UsersSubjects" />
+        </bag>
     </class>
 </hibernate-mapping>

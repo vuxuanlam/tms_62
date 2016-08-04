@@ -14,40 +14,44 @@ import tms62.model.entity.Users;
 import tms62.util.Helpers;
 
 public class AccountDetailsService implements UserDetailsService {
-
-  AccountBusiness        accountBusiness;
-  Users                  user;
-  SimpleGrantedAuthority authority;
-  List<GrantedAuthority> authorities;
-  AccountDetails         accountDetails;
-
-  public void setAccountBusiness(AccountBusiness accountBusiness) {
-
-    this.accountBusiness = accountBusiness;
-  }
-
-  public AccountBusiness getAccountBusiness() {
-
-    return accountBusiness;
-  }
-
-  @Override
-  public AccountDetails loadUserByUsername(String email)
-      throws UsernameNotFoundException {
-
-    user = accountBusiness.getUserByEmail(email);
-    if (Helpers.isExist(user)) {
-      authorities = new ArrayList<GrantedAuthority>();
-      if (user.isRole() == DatabaseValue.ADMIN)
-        authority = new SimpleGrantedAuthority("ROLE_ADMIN");
-      else
-        authority = new SimpleGrantedAuthority("ROLE_USER");
-      authorities.add(authority);
-      accountDetails = new AccountDetails(user.getUserId(), email,
-          user.getPassword(), authorities);
-      return accountDetails;
-    } else {
-      throw new UsernameNotFoundException("Email not found");
+    
+    AccountBusiness        accountBusiness;
+    Users                  user;
+    SimpleGrantedAuthority authority;
+    List<GrantedAuthority> authorities;
+    AccountDetails         accountDetails;
+    
+    public void setAccountBusiness(AccountBusiness accountBusiness) {
+    
+        this.accountBusiness = accountBusiness;
     }
-  }
+    
+    public AccountBusiness getAccountBusiness() {
+    
+        return accountBusiness;
+    }
+    
+    @Override
+    public AccountDetails loadUserByUsername(String email)
+            throws UsernameNotFoundException {
+    
+        user = accountBusiness.getUserByEmail(email);
+        if (Helpers.isExist(user)) {
+            authorities = new ArrayList<GrantedAuthority>();
+            if (user.getRole() == DatabaseValue.ADMIN)
+                authority = new SimpleGrantedAuthority("ROLE_ADMIN");
+            else
+                if (user.getRole() == DatabaseValue.SUPERVIOR)
+                    authority = new SimpleGrantedAuthority("ROLE_SUPERVIOR");
+                else
+                    authority = new SimpleGrantedAuthority("ROLE_USER");
+            authorities.add(authority);
+            accountDetails = new AccountDetails(user.getUserId(), email,
+                    user.getPassword(), authorities);
+            return accountDetails;
+        }
+        else {
+            throw new UsernameNotFoundException("Email not found");
+        }
+    }
 }

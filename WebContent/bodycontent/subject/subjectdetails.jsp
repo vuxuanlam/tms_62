@@ -24,10 +24,17 @@
                 <strong>Subject Description: </strong>
                 <p>${subject.description }</p>
                 <strong>Create At: </strong>
-                <p>${subject.createAt }</p>
+                <p>
+                    <s:date name="subject.createAt" format="dd/MM/yyyy" />
+                </p>
                 <strong>Update At: </strong>
-                <p>${subject.updateAt }</p>
-                <a href='<s:url value="updatesubject"></s:url>${subject.subjectId }'>Edit</a>
+                <p>
+                    <s:date name="subject.updateAt" format="dd/MM/yyyy" />
+                </p>
+                <s:url action="updatesubject" var="updateSubject">
+                    <s:param name="subject.subjectId">${subject.subjectId }</s:param>
+                </s:url>
+                <a href="${updateSubject }" class="btn btn-primary">Edit</a>
             </div>
         </div>
     </div>
@@ -39,7 +46,10 @@
                     <div class="row">
                         <div class="col-md-8">${task.name }</div>
                         <div class="col-md-4">
-                            <a href='<s:url value="/taskadmin/removetask"></s:url>${task.taskId}'>Remove</a>
+                            <s:url value="/taskadmin/removetask" var="removetasklink">
+                                <s:param name="task.taskId">${task.taskId }</s:param>
+                            </s:url>
+                            <a href='${removetasklink }'>Remove</a>
                         </div>
                     </div>
                 </s:iterator>

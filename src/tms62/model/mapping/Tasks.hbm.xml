@@ -21,7 +21,7 @@
             <column name="UPDATEAT" />
         </property>
         <many-to-one name="subject" class="tms62.model.entity.Subjects"
-            fetch="select">
+            fetch="select" lazy="false">
             <column name="subjectId" not-null="true" />
         </many-to-one>
         <bag name="listUsersTasks" inverse="true" lazy="false"

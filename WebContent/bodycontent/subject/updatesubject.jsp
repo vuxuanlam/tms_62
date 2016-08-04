@@ -15,7 +15,8 @@
             </s:if>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <s:form class="form-horizontal" method="POST" action="/subjectadmin/updatesubject?update=true">
+            <s:form class="form-horizontal" method="POST"
+                action="/subjectadmin/updatesubject?update=true">
                 <div class="form-group">
                     <input type="hidden" name="subject.subjectId" value="${subject.subjectId }">
                     <label for="name" class="col-md-3 control-label">Name*</label>

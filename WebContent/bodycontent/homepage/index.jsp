@@ -1,6 +1,6 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
-<div class="container">
+<div class="container text-center">
     <s:if test="hasActionErrors()">
         <div class="alert alert-danger" role="alert">
             <s:actionerror />
@@ -22,15 +22,23 @@
             </p>
         </div>
     </sec:authorize>
-    <sec:authorize access="hasRole('ROLE_ADMIN')">
+    <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERVIOR')">
         <h3>
-            <a href="courseadmin/viewallcourse">Courses Manager</a>
+            <a href='<s:url value="courseadmin/viewallcourse"></s:url>' class="btn btn-default">Courses
+                Manager</a>
         </h3>
         <h3>
-            <a href="subjectadmin/viewallsubject">Subject Manager</a>
+            <a href='<s:url value="subjectadmin/viewallsubject"></s:url>' class="btn btn-default">Subject
+                Manager</a>
         </h3>
         <h3>
-            <a href="accountadmin/viewallaccount">Account Manager</a>
+            <a href='<s:url value="accountadmin/viewallaccount"></s:url>' class="btn btn-default">Account
+                Manager</a>
+        </h3>
+    </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_USER')">
+        <h3>
+            <a href='<s:url value="courseuser/viewallcourse"></s:url>'>Courses Manager</a>
         </h3>
     </sec:authorize>
 </div>
