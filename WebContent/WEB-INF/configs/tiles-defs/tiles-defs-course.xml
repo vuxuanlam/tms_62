@@ -5,22 +5,30 @@
 
 <tiles-definitions>
 
-    <definition name="Course.ViewAllCourse" extends="Default.Web">
-        <put-attribute name="body"
-            value="/bodycontent/course/allcourse.jsp" />
-        <put-list-attribute name="js">
-        </put-list-attribute>
-        <put-list-attribute name="css">
-        </put-list-attribute>
-    </definition>
+	<definition name="Course.ViewAllCourse" extends="Default.Web">
+		<put-attribute name="body" value="/bodycontent/course/allcourse.jsp" />
+		<put-list-attribute name="js">
+		</put-list-attribute>
+		<put-list-attribute name="css">
+		</put-list-attribute>
+	</definition>
 
-    <definition name="Course.ViewCourseDetails" extends="Default.Web">
-        <put-attribute name="body"
-            value="/bodycontent/course/coursedetails.jsp" />
-        <put-list-attribute name="js">
-        </put-list-attribute>
-        <put-list-attribute name="css">
-        </put-list-attribute>
-    </definition>
+	<definition name="Course.ViewCourseDetails" extends="Default.Web">
+		<put-attribute name="body"
+			value="/bodycontent/course/coursedetails.jsp" />
+		<put-list-attribute name="js">
+		</put-list-attribute>
+		<put-list-attribute name="css">
+		</put-list-attribute>
+	</definition>
+
+	<definition name="Course.CreateCourse" extends="Default.Web">
+		<put-attribute name="body"
+			value="/bodycontent/course/createcourse.jsp" />
+		<put-list-attribute name="js">
+		</put-list-attribute>
+		<put-list-attribute name="css">
+		</put-list-attribute>
+	</definition>
 
 </tiles-definitions>

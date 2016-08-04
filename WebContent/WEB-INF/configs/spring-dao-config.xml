@@ -32,5 +32,4 @@
             <ref bean="sessionFactory"></ref>
         </property>
     </bean>
-
 </beans>

@@ -4,37 +4,39 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <!-- Configure NameSpace for action web -->
-    <package name="courseadmin" namespace="/courseadmin"
-        extends="default-web">
+	<!-- Configure NameSpace for action web -->
+	<package name="courseadmin" namespace="/courseadmin" extends="default-web">
 
-        <action name="viewallcourse" class="CourseAdmin" method="viewAllCourse">
-            <result name="success">Course.ViewAllCourse</result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="viewallcourse" class="CourseAdmin" method="viewAllCourse">
+			<result name="success">Course.ViewAllCourse</result>
+			<result name="error">HomePage</result>
+		</action>
 
-        <action name="viewcoursedetails*" class="CourseAdmin"
-            method="viewCourseDetails">
-            <param name="currentCourse.courseId">{1}</param>
-            <result name="success">Course.ViewCourseDetails</result>
-            <result name="error">HomePage</result>
-        </action>
-    </package>
+		<action name="viewcoursedetails*" class="CourseAdmin" method="viewCourseDetails">
+			<param name="currentCourse.courseId">{1}</param>
+			<result name="success">Course.ViewCourseDetails</result>
+			<result name="error">HomePage</result>
+		</action>
 
-    <package name="courseuser" namespace="/courseuser" extends="default-web">
+		<action name="createcourse" class="CourseAdmin" method="createCourse">
+			<result name="success">Course.CreateCourse</result>
+			<result name="error">HomePage</result>
+		</action>
+	</package>
 
-        <action name="viewmycourse" class="CourseUser" method="viewMyCourse">
-            <result name="success">Course.ViewAllCourse</result>
-            <result name="error">HomePage</result>
-        </action>
+	<package name="courseuser" namespace="/courseuser" extends="default-web">
 
-        <action name="viewmycoursedetails*" class="CourseUser"
-            method="viewMyCourseDetails">
-            <param name="currentCourse.courseId">{1}</param>
-            <result name="success">Course.ViewCourseDetails</result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="viewmycourse" class="CourseUser" method="viewMyCourse">
+			<result name="success">Course.ViewAllCourse</result>
+			<result name="error">HomePage</result>
+		</action>
 
-    </package>
+		<action name="viewmycoursedetails*" class="CourseUser" method="viewMyCourseDetails">
+			<param name="currentCourse.courseId">{1}</param>
+			<result name="success">Course.ViewCourseDetails</result>
+			<result name="error">HomePage</result>
+		</action>
+
+	</package>
 
 </struts>

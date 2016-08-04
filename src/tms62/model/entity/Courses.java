@@ -1,6 +1,7 @@
 package tms62.model.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -56,6 +57,15 @@ public class Courses implements Serializable {
     return startDate;
   }
 
+  public void setStartDate(String startDate) {
+
+    try {
+      this.startDate = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   public void setStartDate(Date startDate) {
 
     this.startDate = startDate;
@@ -64,6 +74,15 @@ public class Courses implements Serializable {
   public Date getEndDate() {
 
     return endDate;
+  }
+
+  public void setEndDate(String endDate) {
+
+    try {
+      this.endDate = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   public void setEndDate(Date endDate) {
@@ -106,7 +125,8 @@ public class Courses implements Serializable {
     return listCoursesSubjects;
   }
 
-  public void setListCoursesSubjects(List<CoursesSubjects> listCoursesSubjects) {
+  public void setListCoursesSubjects(
+      List<CoursesSubjects> listCoursesSubjects) {
 
     this.listCoursesSubjects = listCoursesSubjects;
   }

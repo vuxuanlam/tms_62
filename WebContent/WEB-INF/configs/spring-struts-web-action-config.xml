@@ -20,7 +20,7 @@
     <bean id="CourseUser" class="tms62.action.user.course.CourseAction"
         scope="prototype">
         <property name="courseBusiness" ref="CourseBusiness"></property>
-    </bean>
+           </bean>
 
     <bean id="AccountAdmin" class="tms62.action.admin.account.AccountAction"
         scope="prototype">

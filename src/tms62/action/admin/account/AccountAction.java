@@ -11,10 +11,10 @@ import tms62.model.entity.Users;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class AccountAction extends ActionSupport implements SessionAware {
+public class AccountAction extends ActionSupport {
 
-  SessionMap      session;
   AccountBusiness accountBusiness;
+  List<Users>     listAccounts;
 
   public AccountBusiness getAccountBusiness() {
 
@@ -24,14 +24,6 @@ public class AccountAction extends ActionSupport implements SessionAware {
   public void setAccountBusiness(AccountBusiness accountBusiness) {
 
     this.accountBusiness = accountBusiness;
-  }
-
-  List<Users> listAccounts;
-
-  @Override
-  public void setSession(Map<String, Object> session) {
-
-    this.session = (SessionMap) session;
   }
 
   public List<Users> getListAccounts() {
