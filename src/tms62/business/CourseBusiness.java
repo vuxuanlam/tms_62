@@ -11,6 +11,7 @@ import tms62.model.entity.UsersSubjects;
 
 public interface CourseBusiness {
 
+
     public List<Courses> getAllCourses();
     
     public Courses getCourseById(Courses course);
@@ -44,7 +45,12 @@ public interface CourseBusiness {
     public List<UsersCourses> getUsersCoursesFromCourseId(Courses course)
             throws Exception;
     
-    public List<Subjects> getSubjects();
-    
+    public List<Subjects> getSubjects(); 
+
     public List<UsersSubjects> getListUserSubject(Users user, Courses course);
+
+    public void removeCourse(Courses course);
+    
+    public void updateCourse(Courses course);
+
 }

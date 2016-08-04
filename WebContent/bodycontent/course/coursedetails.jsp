@@ -37,9 +37,9 @@
                     <strong>Description:</strong>
                     <p>${currentCourse.description }</p>
                     <b>Start date: </b>
-                    <s:date name="currentCourse.startDate " format="dd/MM/yyyy" />
+                    ${currentCourse.startDate }
                     <br> <b>End date:</b>
-                    <s:date name="currentCourse.endDate " format="dd/MM/yyyy" />
+                    ${currentCourse.endDate }
 
                     <!-- admin, supervior : start, finish course -->
                     <sec:authorize
@@ -225,6 +225,7 @@
                     </div>
                 </div>
             </div>
+
 
             <!-- User of course, not of course -->
             <div class="row">
