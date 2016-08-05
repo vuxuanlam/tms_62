@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import tms62.business.AccountBusiness;
-import tms62.constant.value.DatabaseValue;
+import tms62.constant.DatabaseValue;
 import tms62.model.entity.Users;
 import tms62.util.Helpers;
 

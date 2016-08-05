@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 
-import tms62.constant.value.DatabaseValue;
+import tms62.constant.DatabaseValue;
 import tms62.dao.UserCourseDAO;
 import tms62.model.entity.Courses;
 import tms62.model.entity.Users;

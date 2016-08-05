@@ -3,7 +3,7 @@ package tms62.business.impl;
 import java.util.List;
 
 import tms62.business.AccountBusiness;
-import tms62.constant.value.DatabaseValue;
+import tms62.constant.DatabaseValue;
 import tms62.dao.UserDAO;
 import tms62.model.entity.Users;
 

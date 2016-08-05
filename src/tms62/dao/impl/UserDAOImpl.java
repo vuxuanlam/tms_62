@@ -2,7 +2,7 @@ package tms62.dao.impl;
 
 import org.hibernate.Query;
 
-import tms62.constant.value.DatabaseValue;
+import tms62.constant.DatabaseValue;
 import tms62.dao.UserDAO;
 import tms62.model.entity.Users;
 

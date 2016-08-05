@@ -1,6 +1,6 @@
 package tms62.action.authentication;
 
-import tms62.constant.message.AuthenticationMessage;
+import tms62.messages.Messages;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -22,10 +22,10 @@ public class SigninAction extends ActionSupport {
     public String signin() {
     
         if (error) {
-            addActionError(AuthenticationMessage.SIGNIN_ERROR);
+            addActionError(Messages.SIGNIN_ERROR);
         }
         else
-            addActionMessage(AuthenticationMessage.SIGNIN_SUCCESS);
+            addActionMessage(Messages.SIGNIN_SUCCESS);
         return SUCCESS;
     }
 }
