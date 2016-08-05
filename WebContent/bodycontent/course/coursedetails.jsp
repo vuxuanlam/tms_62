@@ -96,8 +96,10 @@
                                                 disabled="disabled">FINISHED</button>
                                         </s:if>
                                         <s:else>
-                                            <a href="removesubject${courseSubject.courseSubjectId }"
-                                                class="btn btn-danger">Remove</a>
+                                            <s:url action="removesubject" var="removesubject">
+                                                <s:param name="courseSubject.courseSubjectId">${courseSubject.courseSubjectId }</s:param>
+                                            </s:url>
+                                            <a href="${removesubject }" class="btn btn-danger">Remove</a>
                                         </s:else>
 
                                     </div>

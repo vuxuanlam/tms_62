@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tms62.business.SubjectBusiness;
-import tms62.constant.message.BusinessMessage;
+import tms62.messages.Messages;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Tasks;
 import tms62.util.Helpers;
@@ -93,7 +93,7 @@ public class SubjectAction extends ActionSupport {
                 subject.getListTasks().addAll(listTask);
             }
             subjectBusiness.createSubject(subject);
-            addActionMessage(BusinessMessage.ADD_SUCCESS);
+            addActionMessage(Messages.ADD_SUCCESS);
         }
         return SUCCESS;
     }
@@ -110,9 +110,12 @@ public class SubjectAction extends ActionSupport {
                 && Helpers.isExist(subjectBusiness.getSubjectById(subject))) {
             subject = subjectBusiness.getSubjectById(subject);
             subjectBusiness.removeSubject(subject);
-            addActionMessage(BusinessMessage.DELETE_SUCCESS);
+            addActionMessage(Messages.DELETE_SUCCESS);
         }
-        return viewAllSubject();
+        else {
+            addActionError(Messages.DELETE_ERROR);
+        }
+        return SUCCESS;
     }
     
     public String updateSubject() {

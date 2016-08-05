@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import tms62.business.CourseBusiness;
-import tms62.constant.message.WrongAccess;
-import tms62.constant.value.DatabaseValue;
+import tms62.constant.DatabaseValue;
+import tms62.messages.Messages;
 import tms62.model.entity.Courses;
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
@@ -147,7 +147,7 @@ public class CourseAction extends ActionSupport {
             return SUCCESS;
         }
         else {
-            addActionError(WrongAccess.NOTFOUND);
+            addActionError(Messages.CONTENT_NOT_FOUND);
             return ERROR;
         }
     }
@@ -201,7 +201,7 @@ public class CourseAction extends ActionSupport {
             courseBusiness.startCourse(currentCourse);
             return SUCCESS;
         }
-        addActionError(WrongAccess.NOTFOUND);
+        addActionError(Messages.CONTENT_NOT_FOUND);
         return ERROR;
     }
     
@@ -212,7 +212,7 @@ public class CourseAction extends ActionSupport {
             courseBusiness.finishCourse(currentCourse);
             return SUCCESS;
         }
-        addActionError(WrongAccess.NOTFOUND);
+        addActionError(Messages.CONTENT_NOT_FOUND);
         return ERROR;
     }
     

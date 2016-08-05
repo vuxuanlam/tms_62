@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tms62.business.CourseBusiness;
-import tms62.constant.value.DatabaseValue;
+import tms62.constant.DatabaseValue;
 import tms62.dao.CourseDAO;
 import tms62.dao.CourseSubjectDAO;
 import tms62.dao.SubjectDAO;
@@ -93,31 +93,12 @@ public class CourseBusinessImpl implements CourseBusiness {
         List<Courses> listCourse = new ArrayList<Courses>();
         try {
             for (UsersCourses userCourse : user.getListUsersCourses()) {
+                if (user.getRole() == DatabaseValue.USER) {
+                    userCourse.getCourse().setStatus(userCourse.getStatus());
+                }
                 listCourse.add(userCourse.getCourse());
             }
             return listCourse;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    @Override
-    public Courses getMyCourseDetails(Users user, Courses course) {
-    
-        List<UsersCourses> myListUsersCourses;
-        Courses myCourse;
-        try {
-            user = userDAO.findById(user.getUserId());
-            myListUsersCourses = user.getListUsersCourses();
-            for (UsersCourses userCourse : myListUsersCourses) {
-                myCourse = userCourse.getCourse();
-                if (myCourse.getCourseId() == course.getCourseId()) {
-                    myCourse.setStatus(userCourse.getStatus());
-                    return myCourse;
-                }
-            }
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -378,7 +359,11 @@ public class CourseBusinessImpl implements CourseBusiness {
                     .getListCoursesSubjects()) {
                 courseSubject.setStatus(DatabaseValue.FINISH);
             }
+            for (UsersCourses userCourse : course.getListUsersCourses()) {
+                userCourse.setStatus(DatabaseValue.FINISH);
+            }
             courseDAO.update(course);
+            activeOtherCourseForUsers(course);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -414,35 +399,39 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         return null;
     }
-	@Override
-	public List<Courses> getMyListCourses(Users user) {
-
-		List<Courses> listCourse = new ArrayList<Courses>();
-		List<UsersCourses> listUsersCourses;
-		UsersCourses myUserCourse;
-		try {
-			user = userDAO.findById(user.getUserId());
-			listUsersCourses = user.getListUsersCourses();
-			for (UsersCourses userCourse : listUsersCourses) {
-				myUserCourse = userCourseDAO.findById(userCourse.getUserCourseId());
-				myUserCourse.getCourse().setStatus(userCourse.getStatus());
-				listCourse.add(myUserCourse.getCourse());
-			}
-			return listCourse;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public List<UsersCourses> getUsersCoursesFromCourseId(Courses course) throws Exception {
-		try {
-			return course.getListUsersCourses();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
+    
+    @Override
+    public List<UsersCourses> getUsersCoursesFromCourseId(Courses course)
+            throws Exception {
+    
+        try {
+            return course.getListUsersCourses();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public void activeOtherCourseForUsers(Courses course) {
+    
+        try {
+            for (UsersCourses userCourse : course.getListUsersCourses()) {
+                if (userCourse.getUser().getRole() != DatabaseValue.SUPERVIOR) {
+                    for (UsersCourses userCourseOfUser : userCourse.getUser()
+                            .getListUsersCourses()) {
+                        if (userCourseOfUser.getStatus() == DatabaseValue.CLOSE
+                                && userCourseOfUser.getCourse().getStatus() == DatabaseValue.OPEN) {
+                            userCourseOfUser.setStatus(DatabaseValue.OPEN);
+                            userCourseDAO.update(userCourseOfUser);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

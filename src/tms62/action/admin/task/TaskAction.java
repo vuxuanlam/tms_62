@@ -1,7 +1,7 @@
 package tms62.action.admin.task;
 
 import tms62.business.TaskBusiness;
-import tms62.constant.message.BusinessMessage;
+import tms62.messages.Messages;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Tasks;
 import tms62.util.Helpers;
@@ -50,7 +50,7 @@ public class TaskAction extends ActionSupport {
         if (Helpers.isExist(task)) {
             task = taskBusiness.getTaskById(task);
             taskBusiness.removeTask(task);
-            addActionMessage(BusinessMessage.DELETE_SUCCESS);
+            addActionMessage(Messages.DELETE_SUCCESS);
         }
         return SUCCESS;
     }
@@ -63,11 +63,11 @@ public class TaskAction extends ActionSupport {
                 subject = taskBusiness.getSubjectById(subject);
                 task.setSubject(subject);
                 taskBusiness.createTask(task);
-                addActionMessage(BusinessMessage.ADD_SUCCESS);
+                addActionMessage(Messages.ADD_SUCCESS);
                 return SUCCESS;
             }
         }
-        addActionError(BusinessMessage.ADD_ERROR);
+        addActionError(Messages.ADD_ERROR);
         return ERROR;
     }
 }

@@ -13,11 +13,9 @@ public interface CourseBusiness {
     public List<Courses> getAllCourses();
     
     public Courses getCourseById(Courses course);
-
+    
     public List<Courses> getListCourseByAccount(Users user);
-    
-    public Courses getMyCourseDetails(Users user, Courses course);
-    
+
     public List<Subjects> getSubjectNotOfCourse(Courses course);
     
     public void removeSubject(CoursesSubjects courseSubject);
@@ -41,8 +39,6 @@ public interface CourseBusiness {
     public void finishCourse(Courses course);
     
     public Courses createCourse(Courses course, Subjects subject);
-
-    public List<Courses> getMyListCourses(Users user);
     
     public List<UsersCourses> getUsersCoursesFromCourseId(Courses course)
             throws Exception;

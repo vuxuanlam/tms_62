@@ -21,8 +21,10 @@
         </action>
 
         <action name="deletesubject" class="SubjectAdmin" method="deleteSubject">
-            <result name="success">Subject.ViewAllSubjects</result>
-            <result name="error">HomePage</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">viewallsubject</param>
+                <param name="namespace">/subjectadmin</param>
+            </result>
         </action>
 
         <action name="updatesubject" class="SubjectAdmin" method="updateSubject">
