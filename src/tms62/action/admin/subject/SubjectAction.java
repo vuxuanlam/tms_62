@@ -5,6 +5,7 @@ import java.util.List;
 
 import tms62.business.SubjectBusiness;
 import tms62.messages.Messages;
+import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Tasks;
 import tms62.util.Helpers;
@@ -20,6 +21,7 @@ public class SubjectAction extends ActionSupport {
     private List<String>      taskName;
     private List<String>      taskDescription;
     private boolean           update           = false;
+    private CoursesSubjects   courseSubject;
     
     public SubjectBusiness getSubjectBusiness() {
     
@@ -81,6 +83,16 @@ public class SubjectAction extends ActionSupport {
         this.update = update;
     }
     
+    public CoursesSubjects getCourseSubject() {
+    
+        return courseSubject;
+    }
+    
+    public void setCourseSubject(CoursesSubjects courseSubject) {
+    
+        this.courseSubject = courseSubject;
+    }
+
     public String createSubject() {
     
         List<Tasks> listTask;
@@ -153,5 +165,29 @@ public class SubjectAction extends ActionSupport {
             }
         }
         return listTask;
+    }
+    
+    public String startSubject() {
+    
+        if (Helpers.isExist(courseSubject)) {
+            courseSubject = subjectBusiness
+                    .getCourseSubjecttById(courseSubject);
+            subjectBusiness.startSubject(courseSubject);
+            return SUCCESS;
+        }
+        else
+            return ERROR;
+    }
+    
+    public String finishSubject() {
+    
+        if (Helpers.isExist(courseSubject)) {
+            courseSubject = subjectBusiness
+                    .getCourseSubjecttById(courseSubject);
+            subjectBusiness.finishSubject(courseSubject);
+            return SUCCESS;
+        }
+        else
+            return ERROR;
     }
 }

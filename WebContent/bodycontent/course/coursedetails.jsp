@@ -84,12 +84,36 @@
                 <div class="panel panel-info">
                     <div class="panel-heading">Subjects</div>
                     <div class="panel-body">
-                        <s:iterator value="currentCourse.listCoursesSubjects" var="courseSubject">
+                        <s:iterator value="currentCourse.listCoursesSubjects">
                             <div class="row">
-                                <div class="col-md-9">${courseSubject.subject.name }</div>
-
+                                <div class="col-md-6">${subject.name }</div>
                                 <!-- Admin, Supervior remove subject of course -->
                                 <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERVIOR')">
+                                    <div class="col-md-3">
+                                        <s:if test="currentCourse.status == 0">
+                                            <a href="#" class="btn btn-danger disabled">CLOSE</a>
+                                        </s:if>
+                                        <s:if test="status == 0 && currentCourse.status == 1">
+                                            <s:url value="/subjectadmin/startsubject"
+                                                var="startsubject">
+                                                <s:param name="courseSubject.courseSubjectId">${courseSubjectId }</s:param>
+                                            </s:url>
+                                            <a href="${startsubject }" class="btn btn-primary">Start</a>
+                                        </s:if>
+                                        <s:if test="currentCourse.status == 1 && status == 1">
+                                            <s:url value="/subjectadmin/finishsubject"
+                                                var="finishsubject">
+                                                <s:param name="courseSubject.courseSubjectId">${courseSubjectId }</s:param>
+                                            </s:url>
+                                            <a href="${finishsubject }" class="btn btn-danger">Finish</a>
+                                        </s:if>
+                                        <s:if test="currentCourse.status == 1 && status == 2">
+                                            <a href="#" class="disabled btn btn-warning">FINISHED</a>
+                                        </s:if>
+                                        <s:if test="currentCourse.status == 2">
+                                            <a href="#" class="disabled btn btn-warning">FINISHED</a>
+                                        </s:if>
+                                    </div>
                                     <div class="col-md-3">
                                         <s:if test="currentCourse.status == 2">
                                             <button class="btn btn-warning" type="button"
@@ -97,7 +121,7 @@
                                         </s:if>
                                         <s:else>
                                             <s:url action="removesubject" var="removesubject">
-                                                <s:param name="courseSubject.courseSubjectId">${courseSubject.courseSubjectId }</s:param>
+                                                <s:param name="courseSubject.courseSubjectId">${courseSubjectId }</s:param>
                                             </s:url>
                                             <a href="${removesubject }" class="btn btn-danger">Remove</a>
                                         </s:else>
