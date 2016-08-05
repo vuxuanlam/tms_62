@@ -31,4 +31,12 @@
 		</put-list-attribute>
 	</definition>
 
+	<definition name="Course.ViewMemberCourse" extends="Default.Web">
+		<put-attribute name="body"
+			value="/bodycontent/course/membercourse.jsp" />
+		<put-list-attribute name="js">
+		</put-list-attribute>
+		<put-list-attribute name="css">
+		</put-list-attribute>
+	</definition>
 </tiles-definitions>

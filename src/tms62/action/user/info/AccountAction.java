@@ -9,7 +9,6 @@ import tms62.business.AccountBusiness;
 import tms62.constant.value.DatabaseValue;
 import tms62.model.entity.Users;
 import tms62.util.Helpers;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 public class AccountAction extends ActionSupport implements SessionAware {
@@ -17,30 +16,20 @@ public class AccountAction extends ActionSupport implements SessionAware {
     private static final long serialVersionUID = 1L;
     private AccountBusiness   accountBusiness;
     private SessionMap        session;
-    private Users             user;
-    
+    private Users             user;  
     public AccountBusiness getAccountBusiness() {
-    
         return accountBusiness;
-    }
-    
+    }  
     public void setAccountBusiness(AccountBusiness accountBusiness) {
-    
         this.accountBusiness = accountBusiness;
-    }
-    
+    }    
     public Users getUser() {
-    
         return user;
-    }
-    
+    }    
     public void setUser(Users user) {
-    
         this.user = user;
-    }
-    
+    }   
     public String viewAccount() {
-    
         Users currentUser = Helpers.getCurrentUserFromSession();
         if (Helpers.isExist(currentUser)
                 && currentUser.getRole() == DatabaseValue.USER) {
@@ -49,10 +38,8 @@ public class AccountAction extends ActionSupport implements SessionAware {
             return SUCCESS;
         }
         return ERROR;
-    }
-    
+    }    
     public String editAccount() throws Exception {
-    
         Users currentUser = Helpers.getCurrentUserFromSession();
         if (Helpers.isExist(currentUser)
                 && currentUser.getRole() == DatabaseValue.USER) {
@@ -62,10 +49,8 @@ public class AccountAction extends ActionSupport implements SessionAware {
         }
         return ERROR;
     }
-
     @Override
     public void setSession(Map<String, Object> session) {
-    
         // TODO Auto-generated method stub
         this.session = (SessionMap) session;
     }

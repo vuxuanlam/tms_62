@@ -6,13 +6,14 @@ import tms62.model.entity.Courses;
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Users;
+import tms62.model.entity.UsersCourses;
 
 public interface CourseBusiness {
-    
+
     public List<Courses> getAllCourses();
     
     public Courses getCourseById(Courses course);
-    
+
     public List<Courses> getListCourseByAccount(Users user);
     
     public Courses getMyCourseDetails(Users user, Courses course);
@@ -40,6 +41,11 @@ public interface CourseBusiness {
     public void finishCourse(Courses course);
     
     public Courses createCourse(Courses course, Subjects subject);
+
+    public List<Courses> getMyListCourses(Users user);
+    
+    public List<UsersCourses> getUsersCoursesFromCourseId(Courses course)
+            throws Exception;
     
     public List<Subjects> getSubjects();
 }

@@ -11,4 +11,6 @@ public interface AccountBusiness {
     public Users updateUserInfo(Users user) throws Exception;
     
     public Users getUserByEmail(String email);
+    
+    public Users getUserById(int id);
 }
