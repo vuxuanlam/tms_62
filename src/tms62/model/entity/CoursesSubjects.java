@@ -3,6 +3,8 @@ package tms62.model.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class CoursesSubjects implements Serializable {
     
     private static final long   serialVersionUID = 1L;
@@ -52,6 +54,7 @@ public class CoursesSubjects implements Serializable {
         this.subject = subject;
     }
     
+    @JsonIgnore
     public List<UsersSubjects> getListUserSubject() {
     
         return listUserSubject;

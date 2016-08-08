@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class Courses implements Serializable {
     
     private static final long     serialVersionUID = 1L;
@@ -99,6 +101,7 @@ public class Courses implements Serializable {
         this.updateAt = updateAt;
     }
     
+    @JsonIgnore
     public List<CoursesSubjects> getListCoursesSubjects() {
     
         return listCoursesSubjects;
@@ -109,6 +112,7 @@ public class Courses implements Serializable {
         this.listCoursesSubjects = listCoursesSubjects;
     }
     
+    @JsonIgnore
     public List<UsersCourses> getListUsersCourses() {
     
         return listUsersCourses;

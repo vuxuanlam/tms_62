@@ -12,7 +12,6 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class AccountAction extends ActionSupport {
     
-    
     private static final long serialVersionUID = 1L;
     AccountBusiness           accountBusiness;
     List<Users>               listAccounts;
@@ -20,56 +19,58 @@ public class AccountAction extends ActionSupport {
     Users                     currentUser;
     
     public Users getCurrentUser() {
-        
+
         return currentUser;
     }
     
     public void setCurrentUser(Users currentUser) {
-        
+
         this.currentUser = currentUser;
     }
     
     private AccountDetails accountDetails = (AccountDetails) SecurityContextHolder
-            .getContext().getAuthentication().getPrincipal();
+                                                  .getContext()
+                                                  .getAuthentication()
+                                                  .getPrincipal();
     
     public Users getUserTemp() {
-        
+
         return userTemp;
     }
     
     public void setUserTemp(Users userTemp) {
-        
+
         this.userTemp = userTemp;
     }
     
     public AccountBusiness getAccountBusiness() {
-        
+
         return accountBusiness;
     }
     
     public void setAccountBusiness(AccountBusiness accountBusiness) {
-        
+
         this.accountBusiness = accountBusiness;
     }
     
     public List<Users> getListAccounts() {
-        
+
         return listAccounts;
     }
     
     public void setListAccounts(List<Users> listAccounts) {
-        
+
         this.listAccounts = listAccounts;
     }
     
     public String viewAllAccount() {
-        
+
         listAccounts = accountBusiness.getAllUsers();
         return SUCCESS;
     }
     
     public String createAccount() {
-        
+
         if (userTemp != null) {
             accountBusiness.createAccount(userTemp);
             return SUCCESS;
@@ -78,7 +79,7 @@ public class AccountAction extends ActionSupport {
     }
     
     public String viewAccount() {
-        
+
         currentUser = accountBusiness.getUserById(accountDetails.getUserId());
         return SUCCESS;
     }

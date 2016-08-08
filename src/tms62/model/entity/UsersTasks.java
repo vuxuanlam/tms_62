@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class UsersTasks implements Serializable {
     
     private static final long          serialVersionUID = 1L;
@@ -75,6 +77,7 @@ public class UsersTasks implements Serializable {
         this.user = user;
     }
     
+    @JsonIgnore
     public List<CoursesSubjectsTasks> getListCourseSubjectTask() {
     
         return listCourseSubjectTask;
