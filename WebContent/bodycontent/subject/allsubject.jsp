@@ -3,7 +3,8 @@
 <div class="container">
     <h2 class="text-center">All Subjects</h2>
     <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <a href='<s:url value="/subjectadmin/createsubject"></s:url>'>Add Subject</a>
+        <a href='<s:url value="/subjectadmin/createsubject"></s:url>'>Add
+            Subject</a>
     </sec:authorize>
 
     <div class="row text-center">
@@ -39,11 +40,9 @@
                         <td><a href='${subjectdetails }'>${name }</a></td>
                         <td>${description }</td>
                         <sec:authorize access="hasRole('ROLE_ADMIN')">
-                            <s:url action="deletesubject" var="deleteSubject">
-                                <s:param name="subject.subjectId">${subjectId }</s:param>
-                            </s:url>
-                            <td><a href="${deleteSubject }"><i
-                                    class="glyphicon glyphicon-trash"></i></a></td>
+                            <td><a href="#"
+                                onclick="deleteSubject(${subjectId},this.parentNode.parentNode);return false;"><i
+                                    class="glyphicon glyphicon-trash deletesubject"></i></a></td>
                             <s:url action="updatesubject" var="updateSubject">
                                 <s:param name="subject.subjectId">${subjectId }</s:param>
                             </s:url>

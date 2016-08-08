@@ -9,7 +9,6 @@ $(document).ready(function() {
 	$("#close").click(function() {
 		hidepopup();
 	});
-
 });
 
 function showpopup() {
@@ -26,4 +25,17 @@ function hidepopup() {
 		"visibility" : "hidden",
 		"display" : "none"
 	});
+}
+
+function deleteSubject(subjectId, content) {
+	if (confirm("are you sure want delete this")) {
+		$.ajax({
+			type : 'POST',
+			url : 'subjectadmin/deletesubject?subject.subjectId=' + subjectId,
+			dataType : 'text',
+			success : function(data) {
+				content.remove();
+			}
+		});
+	}
 }
