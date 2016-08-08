@@ -72,4 +72,17 @@ public class AccountBusinessImpl implements AccountBusiness {
         }
         return null;
     }
+
+    @Override
+    public boolean createAccount(Users user) throws Exception {
+        
+        // TODO Auto-generated method stub
+        try{
+            userDAO.save(user);
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -22,5 +22,13 @@
 		<put-list-attribute name="css">
 		</put-list-attribute>
 	</definition>
+	<definition name="Account.CreateAccount" extends="Default.Web">
+		<put-attribute name="body"
+			value="/bodycontent/account/createaccount.jsp" />
+		<put-list-attribute name="js">
+		</put-list-attribute>
+		<put-list-attribute name="css">
+		</put-list-attribute>
+	</definition>
 
 </tiles-definitions>
