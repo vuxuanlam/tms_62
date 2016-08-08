@@ -434,4 +434,25 @@ public class CourseBusinessImpl implements CourseBusiness {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public List<UsersSubjects> getListUserSubject(Users user, Courses course) {
+    
+        List<UsersSubjects> listUserSubject = new ArrayList<UsersSubjects>();
+        try {
+            for (CoursesSubjects courseSubject : course
+                    .getListCoursesSubjects()) {
+                for (UsersSubjects userSubject : user.getListUsersSubjects()) {
+                    if (courseSubject.getCourseSubjectId() == userSubject
+                            .getCourseSubject().getCourseSubjectId()) {
+                        listUserSubject.add(userSubject);
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listUserSubject;
+    }
 }

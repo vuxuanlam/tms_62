@@ -7,6 +7,7 @@ import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Users;
 import tms62.model.entity.UsersCourses;
+import tms62.model.entity.UsersSubjects;
 
 public interface CourseBusiness {
 
@@ -44,4 +45,6 @@ public interface CourseBusiness {
             throws Exception;
     
     public List<Subjects> getSubjects();
+    
+    public List<UsersSubjects> getListUserSubject(Users user, Courses course);
 }

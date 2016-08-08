@@ -7,8 +7,10 @@ import tms62.constant.DatabaseValue;
 import tms62.dao.CourseSubjectDAO;
 import tms62.dao.SubjectDAO;
 import tms62.dao.TaskDAO;
+import tms62.dao.UserSubjectDAO;
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
+import tms62.model.entity.UsersSubjects;
 import tms62.util.Helpers;
 
 public class SubjectBusinessImpl implements SubjectBusiness {
@@ -16,6 +18,7 @@ public class SubjectBusinessImpl implements SubjectBusiness {
     private SubjectDAO       subjectDAO;
     private TaskDAO          taskDAO;
     private CourseSubjectDAO courseSubjectDAO;
+    private UserSubjectDAO   userSubjectDAO;
     
     public SubjectDAO getSubjectDAO() {
     
@@ -72,6 +75,16 @@ public class SubjectBusinessImpl implements SubjectBusiness {
     public void setCourseSubjectDAO(CourseSubjectDAO courseSubjectDAO) {
     
         this.courseSubjectDAO = courseSubjectDAO;
+    }
+
+    public UserSubjectDAO getUserSubjectDAO() {
+    
+        return userSubjectDAO;
+    }
+    
+    public void setUserSubjectDAO(UserSubjectDAO userSubjectDAO) {
+    
+        this.userSubjectDAO = userSubjectDAO;
     }
 
     @Override
@@ -144,5 +157,20 @@ public class SubjectBusinessImpl implements SubjectBusiness {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public UsersSubjects finishSubject(UsersSubjects userSubject) {
+    
+        try {
+            userSubject = userSubjectDAO.findById(userSubject
+                    .getUserCourseSubjectId());
+            userSubject.setStatus(DatabaseValue.FINISH);
+            userSubjectDAO.update(userSubject);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userSubject;
     }
 }
