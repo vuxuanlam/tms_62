@@ -48,3 +48,4 @@ bower.json
 .tern-project
 .md
 bin/
+/target/

@@ -34,9 +34,20 @@
 
         <action name="viewsubjectdetails" class="SubjectAdmin"
             method="viewSubjectDetails">
-            <result name="success">Subject.ViewSubjectDetails
-            </result>
+            <result name="success">Subject.ViewSubjectDetails</result>
             <result name="error">HomePage</result>
+        </action>
+
+        <action name="startsubject" class="SubjectAdmin" method="startSubject">
+            <result type="redirect" name="success">
+                <param name="location">/courseadmin/viewcoursedetails?currentCourse.courseId=${courseSubject.course.courseId}</param>
+            </result>
+        </action>
+
+        <action name="finishsubject" class="SubjectAdmin" method="finishSubject">
+            <result type="redirect" name="success">
+                <param name="location">/courseadmin/viewcoursedetails?currentCourse.courseId=${courseSubject.course.courseId}</param>
+            </result>
         </action>
 
     </package>
