@@ -23,11 +23,11 @@
 
         <form method="post" action="edit">
             <p>If you want to change your infomation</p>
-            <input type="hidden" name="user.userId" value="${user.userId }" /> <input type="hidden"
-                name="user.email" value="${user.email }" /> <input type="hidden" name="user.role"
-                value="${user.role }" /> <input type="text" id="name" placeholder="Username"
-                name="user.name" value="${user.name }"> <input type="password" id="password"
-                name="user.password" value="${user.password }"> <input type="submit"
+            <input type="hidden" name="user.userId" value="${currentUser.userId }" /> <input type="hidden"
+                name="user.email" value="${currentUser.email }" /> <input type="hidden" name="user.role"
+                value="${currentUser.role }" /> <input type="text" id="name" placeholder="Username"
+                name="user.name" value="${currentUser.name }"> <input type="password" id="password"
+                name="user.password" value="${currentUser.password }"> <input type="submit"
                 id="dochange" value="Change"> <input type="button" id="close" value="Close" />
         </form>
 
