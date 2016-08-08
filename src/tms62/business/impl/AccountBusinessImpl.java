@@ -34,13 +34,13 @@ public class AccountBusinessImpl implements AccountBusiness {
     }
     
     @Override
-    public Users updateUserInfo(Users user) throws Exception {
+    public Users updateUserInfo(Users user) {
         
         try {
             userDAO.update(user);
         }
         catch (Exception e) {
-            throw e;
+            e.printStackTrace();
         }
         return null;
     }
@@ -74,7 +74,7 @@ public class AccountBusinessImpl implements AccountBusiness {
     }
 
     @Override
-    public boolean createAccount(Users user) throws Exception {
+    public boolean createAccount(Users user){
         
         // TODO Auto-generated method stub
         try{
