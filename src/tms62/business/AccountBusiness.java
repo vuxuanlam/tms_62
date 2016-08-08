@@ -8,10 +8,10 @@ public interface AccountBusiness {
     
     public List<Users> getAllUsers();
     
-    public Users updateUserInfo(Users user) throws Exception;
+    public Users updateUserInfo(Users user);
     
     public Users getUserByEmail(String email);
     
     public Users getUserById(int id);
-    public boolean createAccount(Users user) throws Exception;
+    public boolean createAccount(Users user);
 }

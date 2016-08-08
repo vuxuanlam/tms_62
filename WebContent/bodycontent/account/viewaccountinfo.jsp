@@ -11,9 +11,9 @@
         </thead>
         <tbody>
             <tr>
-                <td><s:property value="user.name" /></td>
-                <td><s:property value="user.password" /></td>
-                <td><s:property value="user.email" /></td>
+                <td><s:property value="currentUser.name" /></td>
+                <td><s:property value="currentUser.password" /></td>
+                <td><s:property value="currentUser.email" /></td>
             </tr>
         </tbody>
     </table>

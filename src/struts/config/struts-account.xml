@@ -14,6 +14,10 @@
 			<result name="success">Account.CreateAccount</result>
 			<result name="error">HomePage</result>
 		</action>
+		<action name="info" class="AccountAdmin" method="viewAccount">
+			<result name="success">Account.ViewAccountInfo</result>
+			<result name="error">HomePage</result>
+		</action>
 
 	</package>
 
