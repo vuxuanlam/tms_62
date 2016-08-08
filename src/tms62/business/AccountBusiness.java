@@ -13,4 +13,5 @@ public interface AccountBusiness {
     public Users getUserByEmail(String email);
     
     public Users getUserById(int id);
+    public boolean createAccount(Users user) throws Exception;
 }
