@@ -34,6 +34,7 @@
                 <property name="subjectDAO" ref="SubjectDAO" />
                 <property name="taskDAO" ref="TaskDAO" />
                 <property name="courseSubjectDAO" ref="CourseSubjectDAO"></property>
+                <property name="userSubjectDAO" ref="UserSubjectDAO"></property>
             </bean>
         </property>
     </bean>

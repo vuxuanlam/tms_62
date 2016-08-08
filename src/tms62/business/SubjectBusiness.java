@@ -4,6 +4,7 @@ import java.util.List;
 
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
+import tms62.model.entity.UsersSubjects;
 
 public interface SubjectBusiness {
     
@@ -22,4 +23,6 @@ public interface SubjectBusiness {
     public void finishSubject(CoursesSubjects courseSubject);
 
     public CoursesSubjects getCourseSubjecttById(CoursesSubjects courseSubject);
+    
+    public UsersSubjects finishSubject(UsersSubjects userSubject);
 }

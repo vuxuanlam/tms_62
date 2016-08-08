@@ -6,16 +6,14 @@
 <struts>
 
     <!-- Configure NameSpace for action web -->
-    <package name="subjectadmin" namespace="/subjectadmin"
-        extends="default-web">
+    <package name="subjectadmin" namespace="/subjectadmin" extends="default-web">
 
         <action name="createsubject" class="SubjectAdmin" method="createSubject">
             <result name="success">Subject.CreateSubject</result>
             <result name="error">HomePage</result>
         </action>
 
-        <action name="viewallsubject" class="SubjectAdmin"
-            method="viewAllSubject">
+        <action name="viewallsubject" class="SubjectAdmin" method="viewAllSubject">
             <result name="success">Subject.ViewAllSubjects</result>
             <result name="error">HomePage</result>
         </action>
@@ -32,8 +30,7 @@
             <result name="error">Subject.ViewAllSubjects</result>
         </action>
 
-        <action name="viewsubjectdetails" class="SubjectAdmin"
-            method="viewSubjectDetails">
+        <action name="viewsubjectdetails" class="SubjectAdmin" method="viewSubjectDetails">
             <result name="success">Subject.ViewSubjectDetails</result>
             <result name="error">HomePage</result>
         </action>
@@ -49,6 +46,18 @@
                 <param name="location">/courseadmin/viewcoursedetails?currentCourse.courseId=${courseSubject.course.courseId}</param>
             </result>
         </action>
+
+    </package>
+
+    <package name="subjectuser" namespace="/subjectuser" extends="default-web">
+
+        <action name="finishsubject" class="SubjectUser" method="finishSubject">
+            <result name="success" type="redirect">
+                <param name="location">/courseuser/viewcoursedetails?currentCourse.courseId=${userSubject.courseSubject.course.courseId}</param>
+            </result>
+            <result name="error">HomePage</result>
+        </action>
+
 
     </package>
 

@@ -15,6 +15,7 @@
         <intercept-url pattern="/taskadmin/**"
             access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERVIOR')" />
         <intercept-url pattern="/courseuser/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/subjectuser/**" access="hasRole('ROLE_USER')" />
         <intercept-url pattern="/sign/signin" access="!isAuthenticated()" />
 
 

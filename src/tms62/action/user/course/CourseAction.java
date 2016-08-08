@@ -9,6 +9,7 @@ import tms62.messages.Messages;
 import tms62.model.entity.Courses;
 import tms62.model.entity.Users;
 import tms62.model.entity.UsersCourses;
+import tms62.model.entity.UsersSubjects;
 import tms62.springsecurity.AccountDetails;
 import tms62.util.Helpers;
 
@@ -16,15 +17,17 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class CourseAction extends ActionSupport {
     
-    private static final long  serialVersionUID = 1L;
-    private CourseBusiness     courseBusiness;
-    private List<Courses>      listCourses;
-    private Courses            currentCourse;
-    private List<UsersCourses> listUsersCourse;
-    AccountDetails             accountDetails   = (AccountDetails) SecurityContextHolder
-                                                        .getContext()
-                                                        .getAuthentication()
-                                                        .getPrincipal();
+    private static final long   serialVersionUID = 1L;
+    private CourseBusiness      courseBusiness;
+    private List<Courses>       listCourses;
+    private Courses             currentCourse;
+    private List<UsersCourses>  listUsersCourse;
+    private List<UsersSubjects> listUserSubject;
+    private UsersCourses        userCourse;
+    AccountDetails              accountDetails   = (AccountDetails) SecurityContextHolder
+                                                         .getContext()
+                                                         .getAuthentication()
+                                                         .getPrincipal();
     
     public List<UsersCourses> getlistUsersCourse() {
 
@@ -66,6 +69,26 @@ public class CourseAction extends ActionSupport {
         this.currentCourse = currentCourse;
     }
     
+    public List<UsersSubjects> getListUserSubject() {
+    
+        return listUserSubject;
+    }
+    
+    public void setListUserSubject(List<UsersSubjects> listUserSubject) {
+    
+        this.listUserSubject = listUserSubject;
+    }
+    
+    public UsersCourses getUserCourse() {
+    
+        return userCourse;
+    }
+    
+    public void setUserCourse(UsersCourses userCourse) {
+    
+        this.userCourse = userCourse;
+    }
+
     public String viewAllCourse() {
 
         Users user = new Users();
@@ -77,7 +100,19 @@ public class CourseAction extends ActionSupport {
     
     public String viewCourseDetails() {
 
+        Users user = new Users();
+        user.setUserId(accountDetails.getUserId());
+        user = courseBusiness.getUserById(user);
         currentCourse = courseBusiness.getCourseById(currentCourse);
+        listUserSubject = courseBusiness
+                .getListUserSubject(user, currentCourse);
+        for (UsersCourses userCourse : user.getListUsersCourses()) {
+            if (userCourse.getCourse().getCourseId() == currentCourse
+                    .getCourseId()) {
+                this.userCourse = userCourse;
+                break;
+            }
+        }
         if (Helpers.isExist(currentCourse))
             return SUCCESS;
         else
