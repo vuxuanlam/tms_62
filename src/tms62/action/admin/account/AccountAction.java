@@ -83,4 +83,34 @@ public class AccountAction extends ActionSupport {
         currentUser = accountBusiness.getUserById(accountDetails.getUserId());
         return SUCCESS;
     }
+    
+    public String deleteAccount() {
+        
+        listAccounts = accountBusiness.getAllUsers();
+        if (currentUser.getUserId() != 0
+                && currentUser.getUserId() != accountDetails.getUserId()) {
+            boolean result = false;
+            result = accountBusiness.deleteAccount(
+                    accountBusiness.getUserById(currentUser.getUserId()));
+            if (result == true)
+                return SUCCESS;
+            else
+                return ERROR;
+        }
+        return SUCCESS;
+    }
+    
+    public String editAccount() {
+        
+        listAccounts = accountBusiness.getAllUsers();
+        if (currentUser.getUserId() != 0) {
+            boolean result = false;
+            result = accountBusiness.updateAccount(currentUser);
+            if (result == true)
+                return SUCCESS;
+            else
+                return ERROR;
+        }
+        return SUCCESS;
+    }
 }

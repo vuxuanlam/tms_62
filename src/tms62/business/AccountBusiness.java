@@ -14,4 +14,6 @@ public interface AccountBusiness {
     
     public Users getUserById(int id);
     public boolean createAccount(Users user);
+    public boolean deleteAccount(Users user);
+    public boolean updateAccount(Users user);
 }

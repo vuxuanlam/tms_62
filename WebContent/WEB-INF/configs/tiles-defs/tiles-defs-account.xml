@@ -30,5 +30,13 @@
 		<put-list-attribute name="css">
 		</put-list-attribute>
 	</definition>
+	<definition name="Account.DeleteAccount" extends="Default.Web">
+		<put-attribute name="body"
+			value="/bodycontent/account/deleteaccount.jsp" />
+		<put-list-attribute name="js">
+		</put-list-attribute>
+		<put-list-attribute name="css">
+		</put-list-attribute>
+	</definition>
 
 </tiles-definitions>
