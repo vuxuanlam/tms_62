@@ -9,28 +9,26 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import tms62.dao.GenericDAO;
 
-public class GenericDAOImpl<E, Id extends Serializable> extends
-        HibernateDaoSupport implements GenericDAO<E, Id> {
-    
+public class GenericDAOImpl<E, Id extends Serializable>
+        extends HibernateDaoSupport implements GenericDAO<E, Id> {
+        
     private Class<E> persistentClass;
     
     public GenericDAOImpl(Class<E> persistentClass) {
-    
         this.persistentClass = persistentClass;
     }
     
     public Class<E> getPersistentClass() {
-    
+        
         return persistentClass;
     }
     
     protected void initDao() {
-    
         // do nothing
     }
     
     public void save(E transientInstance) throws Exception {
-    
+        
         try {
             getHibernateTemplate().save(transientInstance);
         }
@@ -41,7 +39,7 @@ public class GenericDAOImpl<E, Id extends Serializable> extends
     
     @Override
     public void update(E transientInstance) throws Exception {
-    
+        
         try {
             getHibernateTemplate().update(transientInstance);
         }
@@ -51,7 +49,7 @@ public class GenericDAOImpl<E, Id extends Serializable> extends
     }
     
     public void delete(E persistentInstance) throws Exception {
-    
+        
         try {
             getHibernateTemplate().delete(persistentInstance);
         }
@@ -61,12 +59,12 @@ public class GenericDAOImpl<E, Id extends Serializable> extends
     }
     
     public E findById(Id id) throws Exception {
-    
+        
         return findById(id, false);
     }
     
     public E findById(Id id, boolean lock) {
-    
+        
         try {
             E entity;
             if (lock) {
@@ -92,7 +90,7 @@ public class GenericDAOImpl<E, Id extends Serializable> extends
     }
     
     public List<E> findByExample(E instance) throws Exception {
-    
+        
         try {
             List results = getHibernateTemplate().findByExample(instance);
             return results;
@@ -104,7 +102,7 @@ public class GenericDAOImpl<E, Id extends Serializable> extends
     
     public List<E> findByProperty(String propertyName, Object value)
             throws Exception {
-    
+            
         try {
             String queryString = "from " + persistentClass.getName()
                     + " model where model." + propertyName + "= ?";
@@ -116,7 +114,7 @@ public class GenericDAOImpl<E, Id extends Serializable> extends
     }
     
     public List<E> listAll() throws Exception {
-    
+        
         try {
             return getHibernateTemplate().loadAll(getPersistentClass());
         }

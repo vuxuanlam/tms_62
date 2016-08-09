@@ -5,84 +5,92 @@
 
 <struts>
 
-    <!-- Configure NameSpace for action web -->
-    <package name="courseadmin" namespace="/courseadmin"
-        extends="default-web">
-        <action name="viewallcourse" class="CourseAdmin" method="viewAllCourse">
-            <result name="success">Course.ViewAllCourse</result>
-            <result name="error">HomePage</result>
-        </action>
+	<!-- Configure NameSpace for action web -->
+	<package name="courseadmin" namespace="/courseadmin" extends="default-web">
+		<action name="viewallcourse" class="CourseAdmin" method="viewAllCourse">
+			<result name="success">Course.ViewAllCourse</result>
+			<result name="error">HomePage</result>
+		</action>
 
-        <action name="viewcoursedetails" class="CourseAdmin"
-            method="viewCourseDetails">
-            <result name="success">Course.ViewCourseDetails</result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="viewcoursedetails" class="CourseAdmin" method="viewCourseDetails">
+			<result name="success">Course.ViewCourseDetails</result>
+			<result name="error">HomePage</result>
+		</action>
 
-        <action name="removesubject" class="CourseAdmin" method="removeSubject">
-            <result name="success" type="redirect">
-                <param name="location">courseadmin/viewcoursedetails?currentCourse.courseId=${courseSubject.course.courseId}</param>
-            </result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="removesubject" class="CourseAdmin" method="removeSubject">
+			<result name="success" type="redirect">
+				<param name="location">courseadmin/viewcoursedetails?currentCourse.courseId=${courseSubject.course.courseId}</param>
+			</result>
+			<result name="error">HomePage</result>
+		</action>
 
-        <action name="addsubject" class="CourseAdmin" method="addSubject">
-            <result name="success" type="redirect">
-                <param name="location">courseadmin/viewcoursedetails?currentCourse.courseId=${currentCourse.courseId}</param>
-            </result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="addsubject" class="CourseAdmin" method="addSubject">
+			<result name="success" type="redirect">
+				<param name="location">courseadmin/viewcoursedetails?currentCourse.courseId=${currentCourse.courseId}</param>
+			</result>
+			<result name="error">HomePage</result>
+		</action>
 
-        <action name="addusertocourse" class="CourseAdmin"
-            method="addUserToCourse">
-            <result name="success" type="redirect">
-                <param name="location">courseadmin/viewcoursedetails?currentCourse.courseId=${currentCourse.courseId}</param>
-            </result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="addusertocourse" class="CourseAdmin" method="addUserToCourse">
+			<result name="success" type="redirect">
+				<param name="location">courseadmin/viewcoursedetails?currentCourse.courseId=${currentCourse.courseId}</param>
+			</result>
+			<result name="error">HomePage</result>
+		</action>
 
-        <action name="removeuserfromcourse" class="CourseAdmin"
-            method="removeUserFromCourse">
-            <result name="success" type="redirect">
-                <param name="location">courseadmin/viewcoursedetails?currentCourse.courseId=${currentCourse.courseId}</param>
-            </result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="removeuserfromcourse" class="CourseAdmin"
+			method="removeUserFromCourse">
+			<result name="success" type="redirect">
+				<param name="location">courseadmin/viewcoursedetails?currentCourse.courseId=${currentCourse.courseId}</param>
+			</result>
+			<result name="error">HomePage</result>
+		</action>
 
-        <action name="startcourse" class="CourseAdmin" method="startCourse">
-            <result name="success" type="redirect">
-                <param name="location">courseadmin/viewcoursedetails?currentCourse.courseId=${currentCourse.courseId}</param>
-            </result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="startcourse" class="CourseAdmin" method="startCourse">
+			<result name="success" type="redirect">
+				<param name="location">courseadmin/viewcoursedetails?currentCourse.courseId=${currentCourse.courseId}</param>
+			</result>
+			<result name="error">HomePage</result>
+		</action>
 
-        <action name="finishcourse" class="CourseAdmin" method="finishCourse">
-            <result name="success" type="redirect">
-                <param name="location">courseadmin/viewallcourse</param>
-            </result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="finishcourse" class="CourseAdmin" method="finishCourse">
+			<result name="success" type="redirect">
+				<param name="location">courseadmin/viewallcourse</param>
+			</result>
+			<result name="error">HomePage</result>
+		</action>
 
-        <action name="createcourse" class="CourseAdmin" method="createCourse">
-            <result name="success">Course.CreateCourse</result>
-            <result name="error">HomePage</result>
-        </action>
+		<action name="createcourse" class="CourseAdmin" method="createCourse">
+			<result name="success">Course.CreateCourse</result>
+			<result name="error">HomePage</result>
+		</action>
 
-    </package>
+		<action name="deletecourse" class="CourseAdmin" method="deleteCourse">
+			<result name="success" type="redirect">
+				<param name="location">courseadmin/viewallcourse</param>
+			</result>
+		</action>
 
-    <package name="courseuser" namespace="/courseuser" extends="default-web">
+		<action name="updatecourse" class="CourseAdmin" method="updateCourse">
+			<result name="success">Course.UpdateCourse</result>
+			<result name="error">Course.ViewAllCourse</result>
+		</action>
 
-        <action name="viewallcourse" class="CourseUser" method="viewAllCourse">
-            <result name="success">Course.ViewAllCourse</result>
-            <result name="error">HomePage</result>
-        </action>
+	</package>
 
-        <action name="viewcoursedetails" class="CourseUser"
-            method="viewCourseDetails">
-            <result name="success">Course.ViewCourseDetails</result>
-            <result name="error">HomePage</result>
-        </action>
+	<package name="courseuser" namespace="/courseuser" extends="default-web">
 
-    </package>
+		<action name="viewallcourse" class="CourseUser" method="viewAllCourse">
+			<result name="success">Course.ViewAllCourse</result>
+			<result name="error">HomePage</result>
+		</action>
+
+		<action name="viewcoursedetails" class="CourseUser" method="viewCourseDetails">
+			<result name="success">Course.ViewCourseDetails</result>
+			<result name="error">HomePage</result>
+		</action>
+
+	</package>
 
 </struts>
+

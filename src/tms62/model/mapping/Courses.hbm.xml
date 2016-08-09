@@ -14,10 +14,10 @@
         <property name="description" type="java.lang.String">
             <column name="DESCRIPTION" />
         </property>
-        <property name="startDate" type="java.util.Date">
+        <property name="startDate" type="java.lang.String">
             <column name="STARTDATE" />
         </property>
-        <property name="endDate" type="java.util.Date">
+        <property name="endDate" type="java.lang.String">
             <column name="ENDDATE" />
         </property>
         <property name="status" type="byte">
@@ -32,12 +32,12 @@
 
         <bag name="listCoursesSubjects" inverse="true" lazy="false"
             cascade="all" table="CoursesSubjects" fetch="select">
-            <key column="courseId" not-null="true" />
+            <key column="courseId" />
             <one-to-many class="tms62.model.entity.CoursesSubjects" />
         </bag>
         <bag name="listUsersCourses" inverse="true" lazy="false"
             cascade="all" table="UsersCourses" fetch="select">
-            <key column="courseId" not-null="true" />
+            <key column="courseId" />
             <one-to-many class="tms62.model.entity.UsersCourses" />
         </bag>
     </class>
