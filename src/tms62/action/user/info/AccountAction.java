@@ -14,6 +14,17 @@ public class AccountAction extends ActionSupport {
     private AccountBusiness   accountBusiness;
     private SessionMap        session;
     private Users             currentUser;
+    private Users             user;
+    public Users getUser() {
+        return user;
+    }
+
+    
+    public void setUser(Users user) {
+        
+        this.user = user;
+    }
+
     private AccountDetails    accountDetails   = (AccountDetails) SecurityContextHolder
             .getContext().getAuthentication().getPrincipal();
     
@@ -41,7 +52,10 @@ public class AccountAction extends ActionSupport {
     }
     
     public String editAccount() throws Exception {
-
+        currentUser = accountBusiness.getUserById(accountDetails.getUserId());
+        if(user!=null){
+           accountBusiness.updateUserInfo(user);
+        }
         return SUCCESS;
     }
 }
