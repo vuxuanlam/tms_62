@@ -19,7 +19,15 @@
 			<result name="success">Account.ViewAccountInfo</result>
 			<result name="error">HomePage</result>
 		</action>
-
+		<action name="deleteaccount*" class="AccountAdmin" method="deleteAccount">
+		    <param name="currentUser.userId">{1}</param>
+		    <result name="success">Account.DeleteAccount</result>
+			<result name="error">HomePage</result>
+		</action>
+		<action name="editaccount" class="AccountAdmin" method="editAccount">
+		    <result name="success">Account.DeleteAccount</result>
+			<result name="error">HomePage</result>
+		</action>
 	</package>
 
 	<package name="accountuser" namespace="/accountuser" extends="default-web">

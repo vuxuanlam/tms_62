@@ -9,20 +9,24 @@ import tms62.model.entity.Users;
 
 public class AccountBusinessImpl implements AccountBusiness {
     
+    
     private UserDAO userDAO;
     
     public UserDAO getUserDAO() {
+        
         
         return userDAO;
     }
     
     public void setUserDAO(UserDAO userDAO) {
         
+        
         this.userDAO = userDAO;
     }
     
     @Override
     public List<Users> getAllUsers() {
+        
         
         try {
             return userDAO.listAll();
@@ -36,6 +40,7 @@ public class AccountBusinessImpl implements AccountBusiness {
     @Override
     public Users updateUserInfo(Users user) {
         
+        
         try {
             userDAO.update(user);
         }
@@ -47,6 +52,7 @@ public class AccountBusinessImpl implements AccountBusiness {
     
     @Override
     public Users getUserByEmail(String email) {
+        
         
         List<Users> listUser;
         try {
@@ -63,6 +69,7 @@ public class AccountBusinessImpl implements AccountBusiness {
     @Override
     public Users getUserById(int id) {
         
+        
         // TODO Auto-generated method stub
         try {
             return userDAO.findById(id);
@@ -72,13 +79,43 @@ public class AccountBusinessImpl implements AccountBusiness {
         }
         return null;
     }
+    
+    @Override
+    public boolean createAccount(Users user) {
+        
+        
+        // TODO Auto-generated method stub
+        try {
+            userDAO.save(user);
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    @Override
+    public boolean deleteAccount(Users user) {
+        
+        
+        // TODO Auto-generated method stub
+        try {
+            userDAO.delete(user);
+            return true;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     @Override
-    public boolean createAccount(Users user){
+    public boolean updateAccount(Users user) {
         
         // TODO Auto-generated method stub
         try{
-            userDAO.save(user);
+            userDAO.update(user);
             return true;
         }catch(Exception e){
             e.printStackTrace();
