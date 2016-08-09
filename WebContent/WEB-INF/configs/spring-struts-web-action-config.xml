@@ -48,4 +48,9 @@
     <bean id="SubjectUser" class="tms62.action.user.subject.SubjectAction">
         <property name="subjectBusiness" ref="SubjectBusiness"></property>
     </bean>
+
+    <bean id="AccountJson" class="tms62.action.json.AccountJsonAction">
+        <property name="accountBusiness" ref="AccountBusiness"></property>
+    </bean>
+
 </beans>

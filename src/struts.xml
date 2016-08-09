@@ -10,8 +10,7 @@
 
         <result-types>
             <result-type name="tiles"
-                class="org.apache.struts2.views.tiles.TilesResult"
-                default="true" />
+                class="org.apache.struts2.views.tiles.TilesResult" default="true" />
         </result-types>
 
         <global-results>
@@ -38,5 +37,6 @@
     <include file="struts/config/struts-account.xml" />
     <include file="struts/config/struts-subject.xml" />
     <include file="struts/config/struts-task.xml" />
+    <include file="struts/config/struts-json.xml" />
 
 </struts>
