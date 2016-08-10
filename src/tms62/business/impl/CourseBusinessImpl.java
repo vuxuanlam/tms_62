@@ -102,9 +102,10 @@ public class CourseBusinessImpl implements CourseBusiness {
     }
     
     @Override
-    public List<Courses> getListCourseByAccount(Users user) {
-
+    public List<Courses> getListCourseByAccount(Users user) throws Exception {
+    	
         List<Courses> listCourse = new ArrayList<Courses>();
+        user = userDAO.findById(user.getUserId());
         try {
             for (UsersCourses userCourse : user.getListUsersCourses()) {
                 if (user.getRole() == DatabaseValue.USER) {
@@ -116,8 +117,8 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
     
     @Override
@@ -415,9 +416,7 @@ public class CourseBusinessImpl implements CourseBusiness {
     }
     
     @Override
-    public List<UsersCourses> getUsersCoursesFromCourseId(Courses course)
-            throws Exception {
-
+    public List<UsersCourses> getUsersCoursesFromCourseId(Courses course){
         try {
             return course.getListUsersCourses();
         }

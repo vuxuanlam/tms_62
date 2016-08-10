@@ -126,7 +126,7 @@ public class CourseAction extends ActionSupport {
         this.listSubjects = listSubjects;
     }
     
-    public String viewAllCourse() {
+    public String viewAllCourse() throws Exception {
     
         user = accountDetails.getUser();
         if (user.getRole() == DatabaseValue.ADMIN) {

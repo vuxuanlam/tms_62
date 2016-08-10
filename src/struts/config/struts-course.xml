@@ -89,7 +89,11 @@
 			<result name="success">Course.ViewCourseDetails</result>
 			<result name="error">HomePage</result>
 		</action>
-
+		<action name="viewmembercourse*" class="CourseUser" method="viewMemberCourse">
+			<param name="currentCourse.courseId">{1}</param>
+			<result name="success">Course.ViewMemberCourse</result>
+			<result name="error">HomePage</result>
+		</action>
 	</package>
 
 </struts>

@@ -15,8 +15,8 @@ public interface CourseBusiness {
     
     public Courses getCourseById(Courses course);
     
-    public List<Courses> getListCourseByAccount(Users user);
-
+    public List<Courses> getListCourseByAccount(Users user) throws Exception;
+    
     public List<Subjects> getSubjectNotOfCourse(Courses course);
     
     public void removeSubject(CoursesSubjects courseSubject);
@@ -47,7 +47,7 @@ public interface CourseBusiness {
     public List<Subjects> getSubjects();
 
     public List<UsersSubjects> getListUserSubject(Users user, Courses course);
-
+    
     public void removeCourse(Courses course);
     
     public void updateCourse(Courses course);
@@ -55,4 +55,5 @@ public interface CourseBusiness {
     public void saveActivity(Users user, int targetId, String log);
     
     public void saveActivity(Users user, String target, int targetId, String log);
+
 }
