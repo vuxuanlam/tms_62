@@ -15,4 +15,6 @@ public interface TaskBusiness {
     public Subjects getSubjectById(Subjects subject);
     
     public void saveActivity(Users user, int targetId, String log);
+    
+    public void saveActivity(Users user, String target, int targetId, String log);
 }
