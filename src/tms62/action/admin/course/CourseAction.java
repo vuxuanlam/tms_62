@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import tms62.business.CourseBusiness;
 import tms62.constant.DatabaseValue;
+import tms62.dao.impl.UserDAOImpl;
 import tms62.messages.Messages;
 import tms62.model.entity.Courses;
 import tms62.model.entity.CoursesSubjects;
@@ -33,6 +34,7 @@ public class CourseAction extends ActionSupport {
                                                        .getContext()
                                                        .getAuthentication()
                                                        .getPrincipal();
+    private String            log;
 
     public CourseBusiness getCourseBusiness() {
 
@@ -168,6 +170,12 @@ public class CourseAction extends ActionSupport {
         if (Helpers.isExist(courseSubject)) {
             courseSubject = courseBusiness.getCourseSubjectById(courseSubject);
             courseBusiness.removeSubject(courseSubject);
+            // Save activity
+            log = "Delete Subject ".concat(courseSubject.getSubject().getName()
+                    .concat(" From Course")
+                    .concat(courseSubject.getCourse().getName()));
+            courseBusiness.saveActivity(accountDetails.getUser(), courseSubject
+                    .getCourse().getCourseId(), log);
         }
         return SUCCESS;
     }
@@ -178,6 +186,10 @@ public class CourseAction extends ActionSupport {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             subject = courseBusiness.getSubjectById(subject);
             courseBusiness.addSubject(currentCourse, subject);
+            log = "Add Subject ".concat(subject.getName().concat("To Course")
+                    .concat(currentCourse.getName()));
+            courseBusiness.saveActivity(accountDetails.getUser(),
+                    currentCourse.getCourseId(), log);
             return SUCCESS;
         }
         return ERROR;
@@ -189,27 +201,54 @@ public class CourseAction extends ActionSupport {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             user = courseBusiness.getUserById(user);
             courseBusiness.addUserToCourse(user, currentCourse);
+            // Log to Course
+            log = "Add User ".concat(user.getEmail().concat("to Course")
+                    .concat(currentCourse.getName()));
+            courseBusiness.saveActivity(accountDetails.getUser(),
+                    currentCourse.getCourseId(), log);
+            // Log to user
+            log = "User "
+                    .concat(user.getEmail().concat(
+                    " was Add To Course ".concat(currentCourse
+                                    .getName())));
+            courseBusiness.saveActivity(accountDetails.getUser(),
+                    UserDAOImpl.NAME, user.getUserId(), log);
             return SUCCESS;
         }
         return ERROR;
     }
     
     public String removeUserFromCourse() {
-
+    
         if (Helpers.isExist(currentCourse) && Helpers.isExist(user)) {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             user = courseBusiness.getUserById(user);
             courseBusiness.removeUserFromCourse(user, currentCourse);
+            // Log to course
+            log = "Remove User ".concat(user.getEmail().concat(" From Course ")
+                    .concat(currentCourse.getName()));
+            courseBusiness.saveActivity(accountDetails.getUser(),
+                    currentCourse.getCourseId(), log);
+            // Log to User
+            log = "User "
+                    .concat(user.getEmail().concat(
+                            " was Remove From Course ".concat(currentCourse
+                                    .getName())));
+            courseBusiness.saveActivity(accountDetails.getUser(),
+                    UserDAOImpl.NAME, user.getUserId(), log);
             return SUCCESS;
         }
         return ERROR;
     }
     
     public String startCourse() {
-
+    
         if (Helpers.isExist(currentCourse)) {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             courseBusiness.startCourse(currentCourse);
+            log = "Start Course ".concat(currentCourse.getName());
+            courseBusiness.saveActivity(accountDetails.getUser(),
+                    currentCourse.getCourseId(), log);
             return SUCCESS;
         }
         addActionError(Messages.CONTENT_NOT_FOUND);
@@ -221,6 +260,9 @@ public class CourseAction extends ActionSupport {
         if (Helpers.isExist(currentCourse)) {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             courseBusiness.finishCourse(currentCourse);
+            log = "Finish course ".concat(currentCourse.getName());
+            courseBusiness.saveActivity(accountDetails.getUser(),
+                    currentCourse.getCourseId(), log);
             return SUCCESS;
         }
         addActionError(Messages.CONTENT_NOT_FOUND);

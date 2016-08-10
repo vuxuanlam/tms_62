@@ -101,4 +101,15 @@ public class TaskBusinessImpl implements TaskBusiness {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public void saveActivity(Users user, String target, int targetId, String log) {
+    
+        try {
+            activityDAO.saveActivities(user, target, targetId, log);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

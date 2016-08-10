@@ -28,4 +28,6 @@ public interface SubjectBusiness {
     public UsersSubjects finishSubject(UsersSubjects userSubject);
     
     public void saveActivity(Users user, int targetId, String log);
+    
+    public void saveActivity(Users user, String target, int targetId, String log);
 }
