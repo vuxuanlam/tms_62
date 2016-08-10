@@ -43,4 +43,10 @@
             <ref bean="sessionFactory"></ref>
         </property>
     </bean>
+    
+    <bean id="ActivityDAO" class="tms62.dao.impl.ActivityDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"></ref>
+        </property>
+    </bean>
 </beans>

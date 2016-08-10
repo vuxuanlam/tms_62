@@ -4,12 +4,15 @@ import java.util.List;
 
 import tms62.business.SubjectBusiness;
 import tms62.constant.DatabaseValue;
+import tms62.dao.ActivityDAO;
 import tms62.dao.CourseSubjectDAO;
 import tms62.dao.SubjectDAO;
 import tms62.dao.TaskDAO;
 import tms62.dao.UserSubjectDAO;
+import tms62.dao.impl.SubjectDAOImpl;
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
+import tms62.model.entity.Users;
 import tms62.model.entity.UsersSubjects;
 import tms62.util.Helpers;
 
@@ -19,7 +22,18 @@ public class SubjectBusinessImpl implements SubjectBusiness {
     private TaskDAO          taskDAO;
     private CourseSubjectDAO courseSubjectDAO;
     private UserSubjectDAO   userSubjectDAO;
+    private ActivityDAO      activityDAO;
     
+    public ActivityDAO getActivityDAO() {
+    
+        return activityDAO;
+    }
+    
+    public void setActivityDAO(ActivityDAO activityDAO) {
+    
+        this.activityDAO = activityDAO;
+    }
+
     public SubjectDAO getSubjectDAO() {
     
         return subjectDAO;
@@ -172,5 +186,17 @@ public class SubjectBusinessImpl implements SubjectBusiness {
             e.printStackTrace();
         }
         return userSubject;
+    }
+    
+    @Override
+    public void saveActivity(Users user, int targetId, String log) {
+    
+        try {
+            activityDAO
+                    .saveActivities(user, SubjectDAOImpl.NAME, targetId, log);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,16 +1,30 @@
 package tms62.business.impl;
 
 import tms62.business.TaskBusiness;
+import tms62.dao.ActivityDAO;
 import tms62.dao.SubjectDAO;
 import tms62.dao.TaskDAO;
+import tms62.dao.impl.TaskDAOImpl;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Tasks;
+import tms62.model.entity.Users;
 
 public class TaskBusinessImpl implements TaskBusiness {
     
-    private TaskDAO    taskDAO;
-    private SubjectDAO subjectDAO;
+    private TaskDAO     taskDAO;
+    private SubjectDAO  subjectDAO;
+    private ActivityDAO activityDAO;
     
+    public ActivityDAO getActivityDAO() {
+    
+        return activityDAO;
+    }
+    
+    public void setActivityDAO(ActivityDAO activityDAO) {
+    
+        this.activityDAO = activityDAO;
+    }
+
     public TaskDAO getTaskDAO() {
     
         return taskDAO;
@@ -74,6 +88,17 @@ public class TaskBusinessImpl implements TaskBusiness {
         catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+    
+    @Override
+    public void saveActivity(Users user, int targetId, String log) {
+    
+        try {
+            activityDAO.saveActivities(user, TaskDAOImpl.NAME, targetId, log);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

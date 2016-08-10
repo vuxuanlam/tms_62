@@ -9,6 +9,8 @@ import tms62.model.entity.Users;
 public class UserDAOImpl extends GenericDAOImpl<Users, Integer> implements
         UserDAO {
     
+    public static final String NAME = "USERS";
+    
     public UserDAOImpl() {
     
         super(Users.class);

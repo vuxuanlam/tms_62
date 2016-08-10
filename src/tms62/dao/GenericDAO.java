@@ -21,4 +21,5 @@ public interface GenericDAO<E, Id extends Serializable> {
             throws Exception;
     
     public List<E> listAll() throws Exception;
+
 }
