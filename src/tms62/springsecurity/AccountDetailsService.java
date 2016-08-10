@@ -46,7 +46,7 @@ public class AccountDetailsService implements UserDetailsService {
                 else
                     authority = new SimpleGrantedAuthority("ROLE_USER");
             authorities.add(authority);
-            accountDetails = new AccountDetails(user.getUserId(), email,
+            accountDetails = new AccountDetails(user, email,
                     user.getPassword(), authorities);
             return accountDetails;
         }

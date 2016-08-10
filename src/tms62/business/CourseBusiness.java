@@ -52,5 +52,7 @@ public interface CourseBusiness {
     public void removeCourse(Courses course);
     
     public void updateCourse(Courses course);
+    
+    public void saveActivity(Users user, int targetId, String log);
 
 }

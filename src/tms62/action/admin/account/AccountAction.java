@@ -17,6 +17,10 @@ public class AccountAction extends ActionSupport {
     List<Users>               listAccounts;
     Users                     userTemp;
     Users                     currentUser;
+    private AccountDetails    accountDetails   = (AccountDetails) SecurityContextHolder
+                                                       .getContext()
+                                                       .getAuthentication()
+                                                       .getPrincipal();
     
     public Users getCurrentUser() {
 
@@ -27,11 +31,6 @@ public class AccountAction extends ActionSupport {
 
         this.currentUser = currentUser;
     }
-    
-    private AccountDetails accountDetails = (AccountDetails) SecurityContextHolder
-                                                  .getContext()
-                                                  .getAuthentication()
-                                                  .getPrincipal();
     
     public Users getUserTemp() {
 
@@ -70,28 +69,34 @@ public class AccountAction extends ActionSupport {
     }
     
     public String createAccount() {
-
+    
+        String log;
         if (userTemp != null) {
             accountBusiness.createAccount(userTemp);
+            log = "Create Account ".concat(userTemp.getName());
+            // Save activity
+            accountBusiness.saveActivity(accountDetails.getUser(),
+                    userTemp.getUserId(), log);
             return SUCCESS;
         }
         return SUCCESS;
     }
     
     public String viewAccount() {
-
-        currentUser = accountBusiness.getUserById(accountDetails.getUserId());
+    
+        currentUser = accountDetails.getUser();
         return SUCCESS;
     }
     
     public String deleteAccount() {
-        
+
         listAccounts = accountBusiness.getAllUsers();
         if (currentUser.getUserId() != 0
-                && currentUser.getUserId() != accountDetails.getUserId()) {
+                && currentUser.getUserId() != accountDetails.getUser()
+                        .getUserId()) {
             boolean result = false;
-            result = accountBusiness.deleteAccount(
-                    accountBusiness.getUserById(currentUser.getUserId()));
+            result = accountBusiness.deleteAccount(accountBusiness
+                    .getUserById(currentUser.getUserId()));
             if (result == true)
                 return SUCCESS;
             else
@@ -101,7 +106,7 @@ public class AccountAction extends ActionSupport {
     }
     
     public String editAccount() {
-        
+
         listAccounts = accountBusiness.getAllUsers();
         if (currentUser.getUserId() != 0) {
             boolean result = false;

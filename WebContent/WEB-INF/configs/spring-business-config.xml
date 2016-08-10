@@ -11,6 +11,7 @@
         <property name="target">
             <bean class="tms62.business.impl.AccountBusinessImpl">
                 <property name="userDAO" ref="UserDAO" />
+                <property name="activityDAO" ref="ActivityDAO"></property>
             </bean>
         </property>
     </bean>
@@ -24,6 +25,7 @@
                 <property name="subjectDAO" ref="SubjectDAO"></property>
                 <property name="courseSubjectDAO" ref="CourseSubjectDAO"></property>
                 <property name="userSubjectDAO" ref="UserSubjectDAO"></property>
+                <property name="activityDAO" ref="ActivityDAO"></property>
             </bean>
         </property>
     </bean>
@@ -35,6 +37,7 @@
                 <property name="taskDAO" ref="TaskDAO" />
                 <property name="courseSubjectDAO" ref="CourseSubjectDAO"></property>
                 <property name="userSubjectDAO" ref="UserSubjectDAO"></property>
+                <property name="activityDAO" ref="ActivityDAO"></property>
             </bean>
         </property>
     </bean>
@@ -52,7 +55,9 @@
             <bean class="tms62.business.impl.TaskBusinessImpl">
                 <property name="taskDAO" ref="TaskDAO" />
                 <property name="subjectDAO" ref="SubjectDAO"></property>
+                <property name="activityDAO" ref="ActivityDAO"></property>
             </bean>
         </property>
     </bean>
+    
 </beans>

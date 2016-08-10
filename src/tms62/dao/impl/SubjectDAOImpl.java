@@ -9,6 +9,8 @@ import tms62.model.entity.Subjects;
 public class SubjectDAOImpl extends GenericDAOImpl<Subjects, Integer> implements
         SubjectDAO {
     
+    public static final String NAME = "SUBJECTS";
+
     public SubjectDAOImpl() {
     
         super(Subjects.class);

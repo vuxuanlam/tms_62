@@ -6,6 +6,8 @@ import tms62.model.entity.Tasks;
 public class TaskDAOImpl extends GenericDAOImpl<Tasks, Integer> implements
         TaskDAO {
     
+    public static final String NAME = "TASKS";
+
     public TaskDAOImpl() {
     
         super(Tasks.class);

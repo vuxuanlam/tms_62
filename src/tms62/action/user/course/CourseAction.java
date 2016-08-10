@@ -30,12 +30,12 @@ public class CourseAction extends ActionSupport {
                                                          .getPrincipal();
     
     public List<UsersCourses> getlistUsersCourse() {
-
+    
         return listUsersCourse;
     }
     
     public void setListUsers(List<UsersCourses> listUsersCourse) {
-
+    
         this.listUsersCourse = listUsersCourse;
     }
     
@@ -45,27 +45,27 @@ public class CourseAction extends ActionSupport {
     }
     
     public void setCourseBusiness(CourseBusiness courseBusiness) {
-
+    
         this.courseBusiness = courseBusiness;
     }
     
     public List<Courses> getListCourses() {
-
+    
         return listCourses;
     }
     
     public void setListCourses(List<Courses> listMyCourses) {
-
+    
         this.listCourses = listMyCourses;
     }
     
     public Courses getCurrentCourse() {
-
+    
         return currentCourse;
     }
     
     public void setCurrentCourse(Courses currentCourse) {
-
+    
         this.currentCourse = currentCourse;
     }
     
@@ -88,21 +88,17 @@ public class CourseAction extends ActionSupport {
     
         this.userCourse = userCourse;
     }
-
+    
     public String viewAllCourse() {
-
-        Users user = new Users();
-        user.setUserId(accountDetails.getUserId());
-        user = courseBusiness.getUserById(user);
+    
+        Users user = accountDetails.getUser();
         listCourses = courseBusiness.getListCourseByAccount(user);
         return SUCCESS;
     }
     
     public String viewCourseDetails() {
-
-        Users user = new Users();
-        user.setUserId(accountDetails.getUserId());
-        user = courseBusiness.getUserById(user);
+    
+        Users user = accountDetails.getUser();
         currentCourse = courseBusiness.getCourseById(currentCourse);
         listUserSubject = courseBusiness
                 .getListUserSubject(user, currentCourse);
@@ -121,9 +117,8 @@ public class CourseAction extends ActionSupport {
     }
     
     public String viewMemberCourse() throws Exception {
-
-        Users user = new Users();
-        user.setUserId(accountDetails.getUserId());
+    
+        Users user = accountDetails.getUser();
         listCourses = courseBusiness.getListCourseByAccount(user);
         if (currentCourse.getCourseId() != 0) {
             try {

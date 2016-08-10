@@ -6,26 +6,28 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import tms62.model.entity.Users;
+
 public class AccountDetails implements UserDetails {
     
     private static final long      serialVersionUID = 1L;
-    private int                    userId;
+    private Users                  user;
     private String                 email;
     private String                 password;
     private List<GrantedAuthority> authorities;
     
-    public AccountDetails(int userId, String email, String password,
+    public AccountDetails(Users user, String email, String password,
             List<GrantedAuthority> authorities) {
     
-        this.userId = userId;
+        this.user = user;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
     }
     
-    public int getUserId() {
+    public Users getUser() {
     
-        return this.userId;
+        return this.user;
     }
     
     @Override

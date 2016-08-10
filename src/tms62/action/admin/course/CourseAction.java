@@ -30,102 +30,103 @@ public class CourseAction extends ActionSupport {
     private List<Subjects>    listSubjects;
     private boolean           update           = false;
     private AccountDetails    accountDetails   = (AccountDetails) SecurityContextHolder
-            .getContext().getAuthentication().getPrincipal();
-            
+                                                       .getContext()
+                                                       .getAuthentication()
+                                                       .getPrincipal();
+
     public CourseBusiness getCourseBusiness() {
-        
+
         return courseBusiness;
     }
     
     public void setCourseBusiness(CourseBusiness courseBusiness) {
-        
+
         this.courseBusiness = courseBusiness;
     }
     
     public List<Courses> getListCourses() {
-        
+
         return listCourses;
     }
     
     public void setListCourses(List<Courses> listCourses) {
-        
+
         this.listCourses = listCourses;
     }
     
     public Courses getCurrentCourse() {
-        
+
         return currentCourse;
     }
     
     public void setCurrentCourse(Courses currentCourse) {
-        
+
         this.currentCourse = currentCourse;
     }
     
     public Subjects getSubject() {
-        
+
         return subject;
     }
     
     public void setSubject(Subjects subject) {
-        
+
         this.subject = subject;
     }
     
     public List<Subjects> getListSubjectNotOfCourse() {
-        
+
         return listSubjectNotOfCourse;
     }
     
-    public void setListSubjectNotOfCourse(
-            List<Subjects> listSubjectNotOfCourse) {
-            
+    public void setListSubjectNotOfCourse(List<Subjects> listSubjectNotOfCourse) {
+
         this.listSubjectNotOfCourse = listSubjectNotOfCourse;
     }
     
     public CoursesSubjects getCourseSubject() {
-        
+
         return courseSubject;
     }
     
     public void setCourseSubject(CoursesSubjects courseSubject) {
-        
+
         this.courseSubject = courseSubject;
     }
     
     public List<Users> getListUsersNotOfCourse() {
-        
+
         return listUsersNotOfCourse;
     }
     
     public void setListUsersNotOfCourse(List<Users> listUsersNotOfCourse) {
-        
+
         this.listUsersNotOfCourse = listUsersNotOfCourse;
     }
     
     public Users getUser() {
-        
+
         return user;
     }
     
     public void setUser(Users user) {
-        
+
         this.user = user;
     }
     
     public List<Subjects> getListSubjects() {
-        
+
         return listSubjects;
     }
     
     public void setListSubjects(List<Subjects> listSubjects) {
-        
+
         this.listSubjects = listSubjects;
     }
     
     public String viewAllCourse() {
-        
-        setCurrentUser();
+    
+        user = accountDetails.getUser();
         if (user.getRole() == DatabaseValue.ADMIN) {
             listCourses = courseBusiness.getAllCourses();
         }
@@ -137,17 +138,17 @@ public class CourseAction extends ActionSupport {
     }
     
     public boolean isUpdate() {
-        
+
         return update;
     }
     
     public void setUpdate(boolean update) {
-        
+
         this.update = update;
     }
     
     public String viewCourseDetails() {
-        
+
         currentCourse = courseBusiness.getCourseById(currentCourse);
         listSubjectNotOfCourse = courseBusiness
                 .getSubjectNotOfCourse(currentCourse);
@@ -163,7 +164,7 @@ public class CourseAction extends ActionSupport {
     }
     
     public String removeSubject() {
-        
+
         if (Helpers.isExist(courseSubject)) {
             courseSubject = courseBusiness.getCourseSubjectById(courseSubject);
             courseBusiness.removeSubject(courseSubject);
@@ -172,7 +173,7 @@ public class CourseAction extends ActionSupport {
     }
     
     public String addSubject() {
-        
+
         if (Helpers.isExist(currentCourse) && Helpers.isExist(subject)) {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             subject = courseBusiness.getSubjectById(subject);
@@ -183,7 +184,7 @@ public class CourseAction extends ActionSupport {
     }
     
     public String addUserToCourse() {
-        
+
         if (Helpers.isExist(currentCourse) && Helpers.isExist(user)) {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             user = courseBusiness.getUserById(user);
@@ -194,7 +195,7 @@ public class CourseAction extends ActionSupport {
     }
     
     public String removeUserFromCourse() {
-        
+
         if (Helpers.isExist(currentCourse) && Helpers.isExist(user)) {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             user = courseBusiness.getUserById(user);
@@ -205,7 +206,7 @@ public class CourseAction extends ActionSupport {
     }
     
     public String startCourse() {
-        
+
         if (Helpers.isExist(currentCourse)) {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             courseBusiness.startCourse(currentCourse);
@@ -216,7 +217,7 @@ public class CourseAction extends ActionSupport {
     }
     
     public String finishCourse() {
-        
+
         if (Helpers.isExist(currentCourse)) {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             courseBusiness.finishCourse(currentCourse);
@@ -226,16 +227,8 @@ public class CourseAction extends ActionSupport {
         return ERROR;
     }
     
-    public void setCurrentUser() {
-        
-        if (Helpers.isNull(user))
-            user = new Users();
-        user.setUserId(accountDetails.getUserId());
-        user = courseBusiness.getUserById(user);
-    }
-    
     public String createCourse() {
-        
+
         listSubjects = courseBusiness.getSubjects();
         if (Helpers.isExist(currentCourse)) {
             try {
@@ -250,7 +243,7 @@ public class CourseAction extends ActionSupport {
     }
     
     public String deleteCourse() {
-        
+
         if (Helpers.isExist(currentCourse)) {
             currentCourse = courseBusiness.getCourseById(currentCourse);
             courseBusiness.removeCourse(currentCourse);
@@ -261,7 +254,7 @@ public class CourseAction extends ActionSupport {
     }
     
     public String updateCourse() {
-        
+
         if (Helpers.isExist(currentCourse)) {
             if (update) {
                 courseBusiness.updateCourse(currentCourse);

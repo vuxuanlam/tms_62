@@ -13,6 +13,18 @@ public class Activities implements Serializable {
     private Date              createAt;
     private Users             user;
     
+    public Activities() {
+    
+    }
+
+    public Activities(Users user, String targetType, int targetId, String log) {
+
+        this.user = user;
+        this.targetType = targetType;
+        this.targetId = targetId;
+        this.description = log;
+    }
+
     public int getActivityId() {
     
         return activityId;
