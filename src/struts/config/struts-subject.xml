@@ -58,6 +58,10 @@
             <result name="error">HomePage</result>
         </action>
 
+        <action name="viewsubjectdetails" class="SubjectUser" method="viewSubjectDetails">
+            <result name="success">Subject.ViewSubjectDetails</result>
+            <result name="error">HomePage</result>
+        </action>
 
     </package>
 

@@ -55,4 +55,8 @@
         <property name="accountBusiness" ref="AccountBusiness"></property>
     </bean>
 
+    <bean id="TaskUser" class="tms62.action.user.task.TaskAction" scope="prototype">
+        <property name="taskBusiness" ref="TaskBusiness"></property>
+    </bean>
+
 </beans>

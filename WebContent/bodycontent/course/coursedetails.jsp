@@ -94,10 +94,17 @@
                     <div class="panel-body">
                         <s:iterator value="currentCourse.listCoursesSubjects">
                             <div class="row">
-                                <div class="col-md-6">${subject.name }</div>
                                 <!-- Admin, Supervior remove subject of course -->
                                 <sec:authorize
                                     access="hasAnyRole('ROLE_ADMIN','ROLE_SUPERVIOR')">
+                                    <s:url
+                                        value="/subjectadmin/viewsubjectdetails"
+                                        var="subjectdetails">
+                                        <s:param name="subject.subjectId">${subject.subjectId }</s:param>
+                                    </s:url>
+                                    <div class="col-md-6">
+                                        <a href="${subjectdetails }">${subject.name }</a>
+                                    </div>
                                     <div class="col-md-3">
                                         <s:if test="currentCourse.status == 0">
                                             <a href="#"
@@ -155,15 +162,29 @@
                                 </sec:authorize>
                                 <!-- user view my subject -->
                                 <sec:authorize access="hasRole('ROLE_USER')">
+                                    <!--  link to usersubject -->
+                                    <s:iterator value="listSubjectOfUser"
+                                        var="subjectOfUser">
+                                        <c:if
+                                            test="${subjectOfUser.courseSubject.courseSubjectId == courseSubjectId}">
+                                            <s:url
+                                                value="/subjectuser/viewsubjectdetails"
+                                                var="subjectdetails">
+                                                <s:param
+                                                    name="userSubject.userCourseSubjectId">${subjectOfUser.userCourseSubjectId }</s:param>
+                                            </s:url>
+                                        </c:if>
+                                    </s:iterator>
                                     <div class="col-md-6">
-                                        <s:if test="currentCourse.status == 2">
-
-                                        </s:if>
-                                        <s:elseif
+                                        <a href="${subjectdetails }">${subject.name }</a>
+                                    </div>
+                                    <!-- check status of subject -->
+                                    <div class="col-md-6">
+                                        <s:if
                                             test="status == 0 || userCourse.status == 0">
                                             <a href="#"
                                                 class="btn btn-danger disabled">CLOSE</a>
-                                        </s:elseif>
+                                        </s:if>
                                         <s:elseif test="status == 1">
                                             <s:iterator
                                                 value="listSubjectOfUser"

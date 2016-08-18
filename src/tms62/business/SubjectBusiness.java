@@ -1,9 +1,11 @@
 package tms62.business;
 
 import java.util.List;
+import java.util.Map;
 
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
+import tms62.model.entity.Tasks;
 import tms62.model.entity.Users;
 import tms62.model.entity.UsersSubjects;
 
@@ -30,4 +32,8 @@ public interface SubjectBusiness {
     public void saveActivity(Users user, int targetId, String log);
     
     public void saveActivity(Users user, String target, int targetId, String log);
+    
+    public UsersSubjects getUserSubjectById(UsersSubjects userSubject);
+    
+    public Map<String, List<Tasks>> getTaskOfUser(UsersSubjects userSubject);
 }
