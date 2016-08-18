@@ -103,7 +103,7 @@ public class CourseBusinessImpl implements CourseBusiness {
     
     @Override
     public List<Courses> getListCourseByAccount(Users user) throws Exception {
-    	
+
         List<Courses> listCourse = new ArrayList<Courses>();
         user = userDAO.findById(user.getUserId());
         try {
@@ -416,7 +416,8 @@ public class CourseBusinessImpl implements CourseBusiness {
     }
     
     @Override
-    public List<UsersCourses> getUsersCoursesFromCourseId(Courses course){
+    public List<UsersCourses> getUsersCoursesFromCourseId(Courses course) {
+
         try {
             return course.getListUsersCourses();
         }
@@ -453,13 +454,10 @@ public class CourseBusinessImpl implements CourseBusiness {
 
         List<UsersSubjects> listUserSubject = new ArrayList<UsersSubjects>();
         try {
-            for (CoursesSubjects courseSubject : course
-                    .getListCoursesSubjects()) {
-                for (UsersSubjects userSubject : user.getListUsersSubjects()) {
-                    if (courseSubject.getCourseSubjectId() == userSubject
-                            .getCourseSubject().getCourseSubjectId()) {
-                        listUserSubject.add(userSubject);
-                    }
+            for (UsersSubjects userSubject : user.getListUsersSubjects()) {
+                if (userSubject.getCourseSubject().getCourse().getCourseId() == course
+                        .getCourseId()) {
+                    listUserSubject.add(userSubject);
                 }
             }
         }
