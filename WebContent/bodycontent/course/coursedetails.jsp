@@ -1,5 +1,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="container">
     <h2 class="text-center">Course Details</h2>
 
@@ -36,10 +37,8 @@
                     <strong>Course name:</strong> ${currentCourse.name } <br />
                     <strong>Description:</strong>
                     <p>${currentCourse.description }</p>
-                    <b>Start date: </b>
-                    ${currentCourse.startDate }
-                    <br> <b>End date:</b>
-                    ${currentCourse.endDate }
+                    <b>Start date: </b> ${currentCourse.startDate } <br> <b>End
+                        date:</b> ${currentCourse.endDate }
 
                     <!-- admin, supervior : start, finish course -->
                     <sec:authorize
@@ -157,42 +156,60 @@
                                 <!-- user view my subject -->
                                 <sec:authorize access="hasRole('ROLE_USER')">
                                     <div class="col-md-6">
-                                        <s:if
+                                        <s:if test="currentCourse.status == 2">
+
+                                        </s:if>
+                                        <s:elseif
                                             test="status == 0 || userCourse.status == 0">
                                             <a href="#"
                                                 class="btn btn-danger disabled">CLOSE</a>
-                                        </s:if>
+                                        </s:elseif>
                                         <s:elseif test="status == 1">
-                                            <s:iterator value="listUserSubject">
-                                                <s:if test="status == 0">
-                                                    <s:url
-                                                        value="/subjectuser/finishsubject"
-                                                        var="finishsubject">
-                                                        <s:param
-                                                            name="userSubject.userCourseSubjectId">${userCourseSubjectId }</s:param>
-                                                    </s:url>
-                                                    <a href="${finishsubject }"
-                                                        class="btn btn-danger">FINISH</a>
-                                                </s:if>
-                                                <s:elseif test="status == 2">
-                                                    <a href="#"
-                                                        class="btn btn-warning disabled">FINISHED</a>
-                                                </s:elseif>
+                                            <s:iterator
+                                                value="listSubjectOfUser"
+                                                var="subjectOfUser">
+                                                <c:if
+                                                    test="${subjectOfUser.courseSubject.courseSubjectId == courseSubjectId}">
+                                                    <c:if
+                                                        test="${subjectOfUser.status == 0 }">
+                                                        <s:url
+                                                            value="/subjectuser/finishsubject"
+                                                            var="finishsubject">
+                                                            <s:param
+                                                                name="userSubject.userCourseSubjectId">${userCourseSubjectId }</s:param>
+                                                        </s:url>
+                                                        <a
+                                                            href="${finishsubject }"
+                                                            class="btn btn-danger">FINISH</a>
+                                                    </c:if>
+                                                    <c:if
+                                                        test="${subjectOfUser.status == 2 }">
+                                                        <a href="#"
+                                                            class="btn btn-warning disabled">FINISHED</a>
+                                                    </c:if>
+                                                </c:if>
                                             </s:iterator>
                                         </s:elseif>
-                                        <s:elseif test="status == 2">
-                                            <s:iterator value="listUserSubject">
-                                                <s:if test="status == 0">
-                                                    <a href="#"
-                                                        class="btn btn-primary disabled">NOT
-                                                        FINISH</a>
-                                                </s:if>
-                                                <s:elseif test="status == 2">
-                                                    <a href="#"
-                                                        class="btn btn-warning disabled">FINISHED</a>
-                                                </s:elseif>
+                                        <c:if test="${status == 2 }">
+                                            <s:iterator
+                                                value="listSubjectOfUser"
+                                                var="subjectOfUser">
+                                                <c:if
+                                                    test="${subjectOfUser.courseSubject.courseSubjectId == courseSubjectId }">
+                                                    <c:if
+                                                        test="${subjectOfUser.status == 0 }">
+                                                        <a href="#"
+                                                            class="btn btn-primary disabled">NOT
+                                                            FINISH</a>
+                                                    </c:if>
+                                                    <c:if
+                                                        test="${subjectOfUser.status == 2 }">
+                                                        <a href="#"
+                                                            class="btn btn-warning disabled">FINISHED</a>
+                                                    </c:if>
+                                                </c:if>
                                             </s:iterator>
-                                        </s:elseif>
+                                        </c:if>
                                     </div>
                                 </sec:authorize>
                             </div>
@@ -233,11 +250,12 @@
                     <div class="panel-heading">Users of Course</div>
                     <div class="panel-body">
                         <s:iterator value="currentCourse.listUsersCourses"
-                            var="userCourse">
+                            var="userCourseTemp">
                             <div class="row">
-                                <div class="col-md-4">${userCourse.user.name }</div>
+                                <div class="col-md-4">${userCourseTemp.user.name }</div>
                                 <div class="col-md-4">
-                                    <s:set value="userCourse.user" var="user">
+                                    <s:set value="userCourseTemp.user"
+                                        var="user">
                                     </s:set>
                                     <s:if test="user.role == 1">
                                         <span class="text-info">Supervior</span>

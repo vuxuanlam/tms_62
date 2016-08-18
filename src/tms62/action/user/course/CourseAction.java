@@ -15,7 +15,6 @@ import tms62.springsecurity.AccountDetails;
 import tms62.util.Helpers;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.restfb.types.User;
 
 public class CourseAction extends ActionSupport {
 
@@ -24,18 +23,23 @@ public class CourseAction extends ActionSupport {
     private List<Courses>       listCourses;
     private Courses             currentCourse;
     private List<UsersCourses>  listUsersCourse;
-    private List<UsersSubjects> listUserSubject;
+    private List<UsersSubjects> listSubjectOfUser;
     private UsersCourses        userCourse;
-    private List<Users> listUser;
-
-	public List<Users> getListUser() {
-		return listUser;
-	}
-	public void setListUser(List<Users> listUser){
-		this.listUser = listUser;
-	}
-	AccountDetails              accountDetails   = (AccountDetails) SecurityContextHolder
-            .getContext().getAuthentication().getPrincipal();
+    private List<Users>         listUser;
+    
+    public List<Users> getListUser() {
+    
+        return listUser;
+    }
+    
+    public void setListUser(List<Users> listUser) {
+    
+        this.listUser = listUser;
+    }
+    
+    AccountDetails accountDetails = (AccountDetails) SecurityContextHolder
+                                          .getContext().getAuthentication()
+                                          .getPrincipal();
     
     public List<UsersCourses> getlistUsersCourse() {
     
@@ -77,14 +81,14 @@ public class CourseAction extends ActionSupport {
         this.currentCourse = currentCourse;
     }
     
-    public List<UsersSubjects> getListUserSubject() {
+    public List<UsersSubjects> getListSubjectOfUser() {
 
-        return listUserSubject;
+        return listSubjectOfUser;
     }
     
-    public void setListUserSubject(List<UsersSubjects> listUserSubject) {
+    public void setListSubjectOfUser(List<UsersSubjects> listSubjectOfUser) {
 
-        this.listUserSubject = listUserSubject;
+        this.listSubjectOfUser = listSubjectOfUser;
     }
     
     public UsersCourses getUserCourse() {
@@ -112,7 +116,7 @@ public class CourseAction extends ActionSupport {
         user1.setUserId(accountDetails.getUser().getUserId());
         user1 = courseBusiness.getUserById(user1);
         currentCourse = courseBusiness.getCourseById(currentCourse);
-        listUserSubject = courseBusiness.getListUserSubject(user1,
+        listSubjectOfUser = courseBusiness.getListUserSubject(user1,
                 currentCourse);
         for (UsersCourses userCourse : user1.getListUsersCourses()) {
             if (userCourse.getCourse().getCourseId() == currentCourse
@@ -129,25 +133,25 @@ public class CourseAction extends ActionSupport {
     }
     
     public String viewMemberCourse() throws Exception {
-        
+
         Users user1 = new Users();
-        List<Users> listUser =new ArrayList<Users>();
+        List<Users> listUser = new ArrayList<Users>();
         user1.setUserId(accountDetails.getUser().getUserId());
         listCourses = courseBusiness.getListCourseByAccount(user1);
         while (currentCourse.getCourseId() != 0) {
-        	System.out.println("Tesst");
+            System.out.println("Tesst");
             try {
                 currentCourse = courseBusiness.getCourseById(currentCourse);
                 listUsersCourse = courseBusiness
                         .getUsersCoursesFromCourseId(currentCourse);
-                for(UsersCourses uc : listUsersCourse){
-                	user1 = uc.getUser();
-                	if(user1!=null)
-                		listUser.add(user1);
+                for (UsersCourses uc : listUsersCourse) {
+                    user1 = uc.getUser();
+                    if (user1 != null)
+                        listUser.add(user1);
                 }
                 currentCourse.setCourseId(0);
-                if(listUser!=null)
-                	return SUCCESS;
+                if (listUser != null)
+                    return SUCCESS;
             }
             catch (Exception e) {
                 e.printStackTrace();
