@@ -7,6 +7,7 @@ import tms62.constant.DatabaseValue;
 import tms62.dao.ActivityDAO;
 import tms62.dao.UserDAO;
 import tms62.dao.impl.UserDAOImpl;
+import tms62.model.entity.Activities;
 import tms62.model.entity.Users;
 import tms62.util.Logit2;
 
@@ -137,6 +138,30 @@ public class AccountBusinessImpl implements AccountBusiness {
         }
         catch (Exception e) {
             AccountBusinessImpl.log.error(e);
+        }
+    }
+    
+    @Override
+    public List<Activities> getListActivities(Activities activity) {
+    
+        try {
+            return activityDAO.getListActivities(activity);
+        }
+        catch (Exception e) {
+            log.error(e);
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Activities> getListActivities(String targetType) {
+    
+        try {
+            return activityDAO.getListActivities(targetType);
+        }
+        catch (Exception e) {
+            log.error(e);
+            return null;
         }
     }
 }

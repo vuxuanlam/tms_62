@@ -19,8 +19,8 @@
             class="tms62.model.entity.Subjects" fetch="select">
             <column name="subjectId" />
         </many-to-one>
-        <bag name="listUserSubject" inverse="true" lazy="false"
-            cascade="all" table="UsersSubjects" fetch="select">
+        <bag name="listUserSubject" inverse="true" lazy="false" cascade="all"
+            table="UsersSubjects" fetch="select">
             <key column="courseSubjectId" />
             <one-to-many class="tms62.model.entity.UsersSubjects" />
         </bag>

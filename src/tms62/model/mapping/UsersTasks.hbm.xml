@@ -4,32 +4,32 @@
 <!-- Generated 2016/07/26 8:57:55 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
 
-	<class name="tms62.model.entity.UsersTasks" table="USERSTASKS">
-		<id name="userTaskId" type="int">
-			<column name="USERTASKID" />
-			<generator class="identity" />
-		</id>
-		<property name="status" type="byte">
-			<column name="STATUS" />
-		</property>
-		<property name="createAt" type="java.util.Date">
-			<column name="CREATEAT" />
-		</property>
-		<property name="updateAt" type="java.util.Date">
-			<column name="UPDATEAT" />
-		</property>
-		<many-to-one name="task" class="tms62.model.entity.Tasks"
-			fetch="select" lazy="false">
-			<column name="taskId" not-null="true" />
-		</many-to-one>
-		<many-to-one name="user" class="tms62.model.entity.Users"
-			fetch="select" lazy="false">
-			<column name="userId" not-null="true" />
-		</many-to-one>
-		<bag name="listCourseSubjectTask" inverse="true" lazy="false"
-			cascade="all" table="CoursesSubjectsTasks" fetch="select">
-			<key column="userTaskId" not-null="true" />
-			<one-to-many class="tms62.model.entity.CoursesSubjectsTasks" />
-		</bag>
-	</class>
+    <class name="tms62.model.entity.UsersTasks" table="USERSTASKS">
+        <id name="userTaskId" type="int">
+            <column name="USERTASKID" />
+            <generator class="identity" />
+        </id>
+        <property name="status" type="byte">
+            <column name="STATUS" />
+        </property>
+        <property name="createAt" type="java.util.Date">
+            <column name="CREATEAT" />
+        </property>
+        <property name="updateAt" type="java.util.Date">
+            <column name="UPDATEAT" />
+        </property>
+        <many-to-one name="task" class="tms62.model.entity.Tasks"
+            fetch="select" lazy="false">
+            <column name="taskId" not-null="true" />
+        </many-to-one>
+        <many-to-one name="user" class="tms62.model.entity.Users"
+            fetch="select" lazy="false">
+            <column name="userId" not-null="true" />
+        </many-to-one>
+        <bag name="listCourseSubjectTask" inverse="true" lazy="false"
+            cascade="all" table="CoursesSubjectsTasks" fetch="select">
+            <key column="userTaskId" not-null="true" />
+            <one-to-many class="tms62.model.entity.CoursesSubjectsTasks" />
+        </bag>
+    </class>
 </hibernate-mapping>

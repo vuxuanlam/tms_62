@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import tms62.business.AccountBusiness;
+import tms62.dao.impl.UserDAOImpl;
+import tms62.model.entity.Activities;
 import tms62.model.entity.Users;
 import tms62.springsecurity.AccountDetails;
 
@@ -21,7 +23,18 @@ public class AccountAction extends ActionSupport {
                                                        .getContext()
                                                        .getAuthentication()
                                                        .getPrincipal();
+    private List<Activities>  listActivities;
     
+    public List<Activities> getListActivities() {
+    
+        return listActivities;
+    }
+    
+    public void setListActivities(List<Activities> listActivities) {
+    
+        this.listActivities = listActivities;
+    }
+
     public Users getCurrentUser() {
 
         return currentUser;
@@ -65,6 +78,7 @@ public class AccountAction extends ActionSupport {
     public String viewAllAccount() {
 
         listAccounts = accountBusiness.getAllUsers();
+        listActivities = accountBusiness.getListActivities(UserDAOImpl.NAME);
         return SUCCESS;
     }
     

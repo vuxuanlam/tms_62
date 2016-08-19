@@ -2,6 +2,7 @@ package tms62.business;
 
 import java.util.List;
 
+import tms62.model.entity.Activities;
 import tms62.model.entity.Courses;
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
@@ -55,5 +56,8 @@ public interface CourseBusiness {
     public void saveActivity(Users user, int targetId, String log);
     
     public void saveActivity(Users user, String target, int targetId, String log);
-
+    
+    public List<Activities> getListActivities(Activities activity);
+    
+    public List<Activities> getListActivities(String targetType);
 }

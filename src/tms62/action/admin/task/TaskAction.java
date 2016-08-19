@@ -3,7 +3,7 @@ package tms62.action.admin.task;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import tms62.business.TaskBusiness;
-import tms62.dao.impl.TaskDAOImpl;
+import tms62.dao.impl.SubjectDAOImpl;
 import tms62.messages.Messages;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Tasks;
@@ -59,9 +59,10 @@ public class TaskAction extends ActionSupport {
         if (Helpers.isExist(task)) {
             task = taskBusiness.getTaskById(task);
             // Log remove task
-            log = "Remove Task ".concat(task.getName());
-            taskBusiness.saveActivity(accountDetails.getUser(), task
-                    .getSubject().getSubjectId(), log);
+            log = "Remove Task ".concat(task.getName().concat(" of Subject ")
+                    .concat(task.getSubject().getName()));
+            taskBusiness.saveActivity(accountDetails.getUser(),
+                    SubjectDAOImpl.NAME, task.getSubject().getSubjectId(), log);
             taskBusiness.removeTask(task);
             addActionMessage(Messages.DELETE_SUCCESS);
         }
@@ -77,9 +78,10 @@ public class TaskAction extends ActionSupport {
                 task.setSubject(subject);
                 taskBusiness.createTask(task);
                 // Log create task
-                log = "Create Task ".concat(task.getName());
+                log = "Create Task ".concat(task.getName()
+                        .concat(" of Subject ").concat(subject.getName()));
                 taskBusiness.saveActivity(accountDetails.getUser(),
-                        TaskDAOImpl.NAME, subject.getSubjectId(), log);
+                        SubjectDAOImpl.NAME, subject.getSubjectId(), log);
                 addActionMessage(Messages.ADD_SUCCESS);
                 return SUCCESS;
             }

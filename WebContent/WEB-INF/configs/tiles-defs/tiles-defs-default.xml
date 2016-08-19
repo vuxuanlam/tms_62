@@ -6,8 +6,7 @@
 <tiles-definitions>
     <!-- Define Struts Tile for Front-End module -->
     <definition name="Default.Web" template="/assets/layout/layout-default.jsp">
-        <put-attribute name="navigation"
-            value="/assets/layout/navigation.jsp" />
+        <put-attribute name="navigation" value="/assets/layout/navigation.jsp" />
         <put-attribute name="header" value="/assets/layout/header.jsp" />
         <put-attribute name="footer" value="/assets/layout/footer.jsp" />
 
@@ -32,8 +31,7 @@
     </definition>
 
     <definition name="HomePage" extends="Default.Web">
-        <put-attribute name="body"
-            value="/bodycontent/homepage/index.jsp" />
+        <put-attribute name="body" value="/bodycontent/homepage/index.jsp" />
         <put-list-attribute name="js">
         </put-list-attribute>
         <put-list-attribute name="css">

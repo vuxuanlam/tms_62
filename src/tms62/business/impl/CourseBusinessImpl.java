@@ -13,6 +13,7 @@ import tms62.dao.UserCourseDAO;
 import tms62.dao.UserDAO;
 import tms62.dao.UserSubjectDAO;
 import tms62.dao.impl.CourseDAOImpl;
+import tms62.model.entity.Activities;
 import tms62.model.entity.Courses;
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
@@ -510,6 +511,30 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         catch (Exception e) {
             CourseBusinessImpl.log.error(e);
+        }
+    }
+    
+    @Override
+    public List<Activities> getListActivities(Activities activity) {
+    
+        try {
+            return activityDAO.getListActivities(activity);
+        }
+        catch (Exception e) {
+            log.error(e);
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Activities> getListActivities(String targetType) {
+    
+        try {
+            return activityDAO.getListActivities(targetType);
+        }
+        catch (Exception e) {
+            log.error(e);
+            return null;
         }
     }
 }

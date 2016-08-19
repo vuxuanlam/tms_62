@@ -17,28 +17,30 @@
             <p>I am Training Management System</p>
             <p>Can I help you</p>
             <p>
-                <a class="btn btn-primary btn-lg" href='<s:url value="/sign/signin"></s:url>'
-                    role="button">Sign in</a>
+                <a class="btn btn-primary btn-lg"
+                    href='<s:url value="/sign/signin"></s:url>' role="button">Sign
+                    in</a>
             </p>
         </div>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPERVIOR')">
         <h3>
-            <a href='<s:url value="courseadmin/viewallcourse"></s:url>' class="btn btn-default">Courses
-                Manager</a>
+            <a href='<s:url value="courseadmin/viewallcourse"></s:url>'
+                class="btn btn-default">Courses Manager</a>
         </h3>
         <h3>
-            <a href='<s:url value="subjectadmin/viewallsubject"></s:url>' class="btn btn-default">Subject
-                Manager</a>
+            <a href='<s:url value="subjectadmin/viewallsubject"></s:url>'
+                class="btn btn-default">Subject Manager</a>
         </h3>
         <h3>
-            <a href='<s:url value="accountadmin/viewallaccount"></s:url>' class="btn btn-default">Account
-                Manager</a>
+            <a href='<s:url value="accountadmin/viewallaccount"></s:url>'
+                class="btn btn-default">Account Manager</a>
         </h3>
     </sec:authorize>
     <sec:authorize access="hasRole('ROLE_USER')">
         <h3>
-            <a href='<s:url value="courseuser/viewallcourse"></s:url>'>Courses Manager</a>
+            <a href='<s:url value="courseuser/viewallcourse"></s:url>'>Courses
+                Manager</a>
         </h3>
     </sec:authorize>
 </div>

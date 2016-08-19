@@ -30,8 +30,7 @@
     </http>
 
     <authentication-manager erase-credentials="false">
-        <authentication-provider
-            user-service-ref="AccountDetailsService">
+        <authentication-provider user-service-ref="AccountDetailsService">
         </authentication-provider>
     </authentication-manager>
 </beans:beans>
