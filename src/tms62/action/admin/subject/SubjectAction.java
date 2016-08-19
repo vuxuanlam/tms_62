@@ -7,7 +7,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import tms62.business.SubjectBusiness;
 import tms62.dao.impl.CourseDAOImpl;
+import tms62.dao.impl.SubjectDAOImpl;
 import tms62.messages.Messages;
+import tms62.model.entity.Activities;
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Tasks;
@@ -31,7 +33,18 @@ public class SubjectAction extends ActionSupport {
                                                        .getContext()
                                                        .getAuthentication()
                                                        .getPrincipal();
+    private List<Activities>  listActivities;
     
+    public List<Activities> getListActivities() {
+    
+        return listActivities;
+    }
+    
+    public void setListActivities(List<Activities> listActivities) {
+    
+        this.listActivities = listActivities;
+    }
+
     public SubjectBusiness getSubjectBusiness() {
 
         return subjectBusiness;
@@ -128,6 +141,8 @@ public class SubjectAction extends ActionSupport {
     public String viewAllSubject() {
 
         listSubjects = subjectBusiness.getSubjects();
+        listActivities = subjectBusiness
+.getListActivities(SubjectDAOImpl.NAME);
         return SUCCESS;
     }
     
@@ -171,7 +186,11 @@ public class SubjectAction extends ActionSupport {
     public String viewSubjectDetails() {
 
         if (Helpers.isExist(subject)) {
+            Activities activity = new Activities();
             subject = subjectBusiness.getSubjectById(subject);
+            activity.setTargetType(SubjectDAOImpl.NAME);
+            activity.setTargetId(subject.getSubjectId());
+            listActivities = subjectBusiness.getListActivities(activity);
             return SUCCESS;
         }
         return ERROR;

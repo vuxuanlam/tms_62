@@ -26,23 +26,23 @@
         <property name="updateAt" type="java.util.Date">
             <column name="UPDATEAT" />
         </property>
-        <bag name="listActivities" inverse="true" lazy="false"
-            cascade="save-update, delete" table="Activities" fetch="select">
+        <bag name="listActivities" inverse="true" lazy="false" cascade="save-update, delete"
+            table="Activities" fetch="select">
             <key column="userId" not-null="true" />
             <one-to-many class="tms62.model.entity.Activities" />
         </bag>
-        <bag name="listUsersCourses" inverse="true" lazy="false"
-            cascade="all" table="UsersCourses" fetch="select">
+        <bag name="listUsersCourses" inverse="true" lazy="false" cascade="all"
+            table="UsersCourses" fetch="select">
             <key column="userId" not-null="true" />
             <one-to-many class="tms62.model.entity.UsersCourses" />
         </bag>
-        <bag name="listUsersSubjects" inverse="true" lazy="false"
-            cascade="all" table="UsersSubjects" fetch="select">
+        <bag name="listUsersSubjects" inverse="true" lazy="false" cascade="all"
+            table="UsersSubjects" fetch="select">
             <key column="userId" not-null="true" />
             <one-to-many class="tms62.model.entity.UsersSubjects" />
         </bag>
-        <bag name="listUsersTasks" inverse="true" lazy="false"
-            cascade="all" table="UsersTasks" fetch="select">
+        <bag name="listUsersTasks" inverse="true" lazy="false" cascade="all"
+            table="UsersTasks" fetch="select">
             <key column="userId" not-null="true" />
             <one-to-many class="tms62.model.entity.UsersTasks" />
         </bag>
@@ -52,6 +52,7 @@
         from Users user
         where user.email =
         :email
-        and user.password = :password
+        and
+        user.password = :password
     </query>
 </hibernate-mapping>

@@ -15,12 +15,14 @@
 <meta http-equiv="expires" content="0" />
 <tiles:useAttribute id="list" name="default-css" classname="java.util.List" />
 <c:forEach var="item" items="${list}">
-    <link rel="stylesheet" href="<c:url value='${item}'/>" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<c:url value='${item}'/>" type="text/css"
+        media="screen" />
 </c:forEach>
 <%-- Addition CSS --%>
 <tiles:useAttribute id="list" name="css" classname="java.util.List" />
 <c:forEach var="item" items="${list}">
-    <link rel="stylesheet" href="<c:url value='${item}'/>" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<c:url value='${item}'/>" type="text/css"
+        media="screen" />
 </c:forEach>
 
 <%-- Default JS --%>

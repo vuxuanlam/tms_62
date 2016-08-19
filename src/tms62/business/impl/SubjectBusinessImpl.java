@@ -13,6 +13,7 @@ import tms62.dao.SubjectDAO;
 import tms62.dao.TaskDAO;
 import tms62.dao.UserSubjectDAO;
 import tms62.dao.impl.SubjectDAOImpl;
+import tms62.model.entity.Activities;
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.CoursesSubjectsTasks;
 import tms62.model.entity.Subjects;
@@ -23,12 +24,12 @@ import tms62.util.Helpers;
 import tms62.util.Logit2;
 
 public class SubjectBusinessImpl implements SubjectBusiness {
-
-    private SubjectDAO       subjectDAO;
-    private TaskDAO          taskDAO;
-    private CourseSubjectDAO courseSubjectDAO;
-    private UserSubjectDAO   userSubjectDAO;
-    private ActivityDAO      activityDAO;
+    
+    private SubjectDAO          subjectDAO;
+    private TaskDAO             taskDAO;
+    private CourseSubjectDAO    courseSubjectDAO;
+    private UserSubjectDAO      userSubjectDAO;
+    private ActivityDAO         activityDAO;
     private static final Logit2 log = Logit2.getInstance(SubjectBusinessImpl.class);
 
     public ActivityDAO getActivityDAO() {
@@ -262,6 +263,30 @@ public class SubjectBusinessImpl implements SubjectBusiness {
             mapTaskOfUser.put("listTaskFinished", listTaskFinished);
             mapTaskOfUser.put("listTaskUnfinish", listTaskUnfinish);
             return mapTaskOfUser;
+        }
+        catch (Exception e) {
+            log.error(e);
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Activities> getListActivities(Activities activity) {
+    
+        try {
+            return activityDAO.getListActivities(activity);
+        }
+        catch (Exception e) {
+            log.error(e);
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Activities> getListActivities(String targetType) {
+    
+        try {
+            return activityDAO.getListActivities(targetType);
         }
         catch (Exception e) {
             log.error(e);

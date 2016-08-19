@@ -13,12 +13,14 @@
                     <s:actionmessage />
                 </div>
             </s:if>
-            <s:form class="form-horizontal" method="POST" action="/subjectadmin/createsubject">
+            <s:form class="form-horizontal" method="POST"
+                action="/subjectadmin/createsubject">
                 <div class="form-group">
                     <label for="name" class="col-md-3 control-label">Name*</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" id="name" name="subject.name"
-                            placeholder="Name of subject" required="required">
+                        <input type="text" class="form-control" id="name"
+                            name="subject.name" placeholder="Name of subject"
+                            required="required">
                     </div>
                 </div>
                 <br>
@@ -27,8 +29,8 @@
                     <label for="description" class="col-md-3 control-label">Description*</label>
                     <div class="col-md-9">
                         <textarea class="form-control" rows="3" id="description"
-                            placeholder="Description of subject" name="subject.description"
-                            required="required"></textarea>
+                            placeholder="Description of subject"
+                            name="subject.description" required="required"></textarea>
                     </div>
                 </div>
                 <br>
@@ -37,25 +39,31 @@
                 <div class="list-task-item">
                     <div class="task-item">
                         <div class="form-group">
-                            <label for="task-name" class="col-md-3 control-label">Task Name</label>
+                            <label for="task-name"
+                                class="col-md-3 control-label">Task Name</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="task-name"
-                                    name="taskName" placeholder="Task name">
+                                <input type="text" class="form-control"
+                                    id="task-name" name="taskName"
+                                    placeholder="Task name">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="task-description" class="col-md-3 control-label">Task
+                            <label for="task-description"
+                                class="col-md-3 control-label">Task
                                 Description</label>
                             <div class="col-md-9">
-                                <textarea class="form-control" rows="3" id="task-description"
-                                    placeholder="Description of Task" name="taskDescription"></textarea>
+                                <textarea class="form-control" rows="3"
+                                    id="task-description"
+                                    placeholder="Description of Task"
+                                    name="taskDescription"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-md-9">
-                        <br> <a type="button" class="btn btn-default btn-block" id="add-task">Add
+                        <br> <a type="button"
+                            class="btn btn-default btn-block" id="add-task">Add
                             task</a>
                     </div>
                 </div>

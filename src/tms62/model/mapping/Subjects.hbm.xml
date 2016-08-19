@@ -25,8 +25,8 @@
             <key column="subjectId" not-null="true" />
             <one-to-many class="tms62.model.entity.Tasks" />
         </bag>
-        <bag name="listCoursesSubjects" inverse="true" lazy="false"
-            cascade="all" table="CoursesSubjects" fetch="select">
+        <bag name="listCoursesSubjects" inverse="true" lazy="false" cascade="all"
+            table="CoursesSubjects" fetch="select">
             <key column="subjectId" not-null="true" />
             <one-to-many class="tms62.model.entity.CoursesSubjects" />
         </bag>

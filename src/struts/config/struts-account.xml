@@ -4,44 +4,44 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 
-	<!-- Configure NameSpace for action web -->
-	<package name="accountadmin" namespace="/accountadmin" extends="default-web">
+    <!-- Configure NameSpace for action web -->
+    <package name="accountadmin" namespace="/accountadmin" extends="default-web">
 
-		<action name="viewallaccount" class="AccountAdmin" method="viewAllAccount">
-			<result name="success">Account.ViewAllAccount</result>
-			<result name="error">HomePage</result>
-		</action>
-		<action name="createaccount" class="AccountAdmin" method="createAccount">
-			<result name="success">Account.CreateAccount</result>
-			<result name="error">HomePage</result>
-		</action>
-		<action name="info" class="AccountAdmin" method="viewAccount">
-			<result name="success">Account.ViewAccountInfo</result>
-			<result name="error">HomePage</result>
-		</action>
-		<action name="deleteaccount*" class="AccountAdmin" method="deleteAccount">
-		    <param name="currentUser.userId">{1}</param>
-		    <result name="success">Account.DeleteAccount</result>
-			<result name="error">HomePage</result>
-		</action>
-		<action name="editaccount" class="AccountAdmin" method="editAccount">
-		    <result name="success">Account.DeleteAccount</result>
-			<result name="error">HomePage</result>
-		</action>
-	</package>
+        <action name="viewallaccount" class="AccountAdmin" method="viewAllAccount">
+            <result name="success">Account.ViewAllAccount</result>
+            <result name="error">HomePage</result>
+        </action>
+        <action name="createaccount" class="AccountAdmin" method="createAccount">
+            <result name="success">Account.CreateAccount</result>
+            <result name="error">HomePage</result>
+        </action>
+        <action name="info" class="AccountAdmin" method="viewAccount">
+            <result name="success">Account.ViewAccountInfo</result>
+            <result name="error">HomePage</result>
+        </action>
+        <action name="deleteaccount*" class="AccountAdmin" method="deleteAccount">
+            <param name="currentUser.userId">{1}</param>
+            <result name="success">Account.DeleteAccount</result>
+            <result name="error">HomePage</result>
+        </action>
+        <action name="editaccount" class="AccountAdmin" method="editAccount">
+            <result name="success">Account.DeleteAccount</result>
+            <result name="error">HomePage</result>
+        </action>
+    </package>
 
-	<package name="accountuser" namespace="/accountuser" extends="default-web">
+    <package name="accountuser" namespace="/accountuser" extends="default-web">
 
-		<action name="info" class="AccountUser" method="viewAccount">
-			<result name="success">Account.ViewAccountInfo</result>
-			<result name="error">HomePage</result>
-		</action>
+        <action name="info" class="AccountUser" method="viewAccount">
+            <result name="success">Account.ViewAccountInfo</result>
+            <result name="error">HomePage</result>
+        </action>
 
-		<action name="edit" class="AccountUser" method="editAccount">
-			<result name="success">Account.ViewAccountInfo</result>
-			<result name="error">HomePage</result>
-		</action>
+        <action name="edit" class="AccountUser" method="editAccount">
+            <result name="success">Account.ViewAccountInfo</result>
+            <result name="error">HomePage</result>
+        </action>
 
-	</package>
+    </package>
 
 </struts>

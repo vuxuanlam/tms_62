@@ -6,8 +6,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import tms62.business.CourseBusiness;
 import tms62.constant.DatabaseValue;
+import tms62.dao.impl.CourseDAOImpl;
 import tms62.dao.impl.UserDAOImpl;
 import tms62.messages.Messages;
+import tms62.model.entity.Activities;
 import tms62.model.entity.Courses;
 import tms62.model.entity.CoursesSubjects;
 import tms62.model.entity.Subjects;
@@ -35,6 +37,17 @@ public class CourseAction extends ActionSupport {
                                                        .getAuthentication()
                                                        .getPrincipal();
     private String            log;
+    private List<Activities>  listActivities;
+    
+    public List<Activities> getListActivities() {
+    
+        return listActivities;
+    }
+
+    public void setListActivities(List<Activities> listActivities) {
+    
+        this.listActivities = listActivities;
+    }
 
     public CourseBusiness getCourseBusiness() {
 
@@ -130,10 +143,15 @@ public class CourseAction extends ActionSupport {
     
         user = courseBusiness.getUserById(accountDetails.getUser());
         if (user.getRole() == DatabaseValue.ADMIN) {
+            // list course
             listCourses = courseBusiness.getAllCourses();
+            // list activities
+            listActivities = courseBusiness
+                    .getListActivities(CourseDAOImpl.NAME);
         }
         else
             if (user.getRole() == DatabaseValue.SUPERVIOR) {
+                // list coutse of supervior
                 listCourses = courseBusiness.getListCourseByAccount(user);
             }
         return SUCCESS;
@@ -150,12 +168,17 @@ public class CourseAction extends ActionSupport {
     }
     
     public String viewCourseDetails() {
-
+    
+        Activities activity = new Activities();
         currentCourse = courseBusiness.getCourseById(currentCourse);
         listSubjectNotOfCourse = courseBusiness
                 .getSubjectNotOfCourse(currentCourse);
         listUsersNotOfCourse = courseBusiness
                 .getListUserNotOfCourse(currentCourse);
+        // get activity
+        activity.setTargetType(CourseDAOImpl.NAME);
+        activity.setTargetId(currentCourse.getCourseId());
+        listActivities = courseBusiness.getListActivities(activity);
         if (Helpers.isExist(currentCourse)) {
             return SUCCESS;
         }
@@ -202,7 +225,7 @@ public class CourseAction extends ActionSupport {
             user = courseBusiness.getUserById(user);
             courseBusiness.addUserToCourse(user, currentCourse);
             // Log to Course
-            log = "Add User ".concat(user.getEmail().concat("to Course")
+            log = "Add User ".concat(user.getEmail().concat(" to Course")
                     .concat(currentCourse.getName()));
             courseBusiness.saveActivity(accountDetails.getUser(),
                     currentCourse.getCourseId(), log);
@@ -264,8 +287,7 @@ public class CourseAction extends ActionSupport {
             courseBusiness.finishCourse(currentCourse);
             // Log finish course
             log = "Finish course ".concat(currentCourse.getName());
-            courseBusiness.saveActivity(user,
-                    currentCourse.getCourseId(), log);
+            courseBusiness.saveActivity(user, currentCourse.getCourseId(), log);
             return SUCCESS;
         }
         addActionError(Messages.CONTENT_NOT_FOUND);
