@@ -20,24 +20,26 @@ import tms62.model.entity.Users;
 import tms62.model.entity.UsersCourses;
 import tms62.model.entity.UsersSubjects;
 import tms62.util.Helpers;
+import tms62.util.Logit2;
 
 public class CourseBusinessImpl implements CourseBusiness {
-    
-    private CourseDAO        courseDAO;
-    private UserCourseDAO    userCourseDAO;
-    private UserDAO          userDAO;
-    private SubjectDAO       subjectDAO;
-    private CourseSubjectDAO courseSubjectDAO;
-    private UserSubjectDAO   userSubjectDAO;
-    private ActivityDAO      activityDAO;
-    
+
+    private CourseDAO           courseDAO;
+    private UserCourseDAO       userCourseDAO;
+    private UserDAO             userDAO;
+    private SubjectDAO          subjectDAO;
+    private CourseSubjectDAO    courseSubjectDAO;
+    private UserSubjectDAO      userSubjectDAO;
+    private ActivityDAO         activityDAO;
+    private static final Logit2 log = Logit2.getInstance(CourseBusinessImpl.class);
+
     public ActivityDAO getActivityDAO() {
-    
+
         return activityDAO;
     }
-    
+
     public void setActivityDAO(ActivityDAO activityDAO) {
-    
+
         this.activityDAO = activityDAO;
     }
 
@@ -45,62 +47,62 @@ public class CourseBusinessImpl implements CourseBusiness {
 
         return userDAO;
     }
-    
+
     public void setUserDAO(UserDAO userDAO) {
 
         this.userDAO = userDAO;
     }
-    
+
     public CourseDAO getCourseDAO() {
 
         return courseDAO;
     }
-    
+
     public void setCourseDAO(CourseDAO courseDAO) {
 
         this.courseDAO = courseDAO;
     }
-    
+
     public UserCourseDAO getUserCourseDAO() {
 
         return userCourseDAO;
     }
-    
+
     public SubjectDAO getSubjectDAO() {
 
         return subjectDAO;
     }
-    
+
     public void setSubjectDAO(SubjectDAO subjectDAO) {
 
         this.subjectDAO = subjectDAO;
     }
-    
+
     public void setUserCourseDAO(UserCourseDAO userCourseDAO) {
 
         this.userCourseDAO = userCourseDAO;
     }
-    
+
     public CourseSubjectDAO getCourseSubjectDAO() {
 
         return courseSubjectDAO;
     }
-    
+
     public void setCourseSubjectDAO(CourseSubjectDAO courseSubjectDAO) {
 
         this.courseSubjectDAO = courseSubjectDAO;
     }
-    
+
     public UserSubjectDAO getUserSubjectDAO() {
 
         return userSubjectDAO;
     }
-    
+
     public void setUserSubjectDAO(UserSubjectDAO userSubjectDAO) {
 
         this.userSubjectDAO = userSubjectDAO;
     }
-    
+
     @Override
     public List<Courses> getListCourseByAccount(Users user) throws Exception {
 
@@ -116,11 +118,11 @@ public class CourseBusinessImpl implements CourseBusiness {
             return listCourse;
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return null;
         }
     }
-    
+
     @Override
     public List<Courses> getAllCourses() {
 
@@ -128,11 +130,11 @@ public class CourseBusinessImpl implements CourseBusiness {
             return courseDAO.listAll();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     @Override
     public Courses getCourseById(Courses course) {
 
@@ -140,11 +142,11 @@ public class CourseBusinessImpl implements CourseBusiness {
             return courseDAO.findById(course.getCourseId());
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     @Override
     public List<Subjects> getSubjectNotOfCourse(Courses course) {
 
@@ -165,11 +167,11 @@ public class CourseBusinessImpl implements CourseBusiness {
             return listSubjects;
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     @Override
     public void removeSubject(CoursesSubjects courseSubject) {
 
@@ -177,10 +179,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             courseSubjectDAO.delete(courseSubject);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public CoursesSubjects getCourseSubjectById(CoursesSubjects courseSubject) {
 
@@ -189,11 +191,11 @@ public class CourseBusinessImpl implements CourseBusiness {
                     .findById(courseSubject.getCourseSubjectId());
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return null;
         }
     }
-    
+
     @Override
     public Subjects getSubjectById(Subjects subject) {
 
@@ -201,11 +203,11 @@ public class CourseBusinessImpl implements CourseBusiness {
             return subjectDAO.findById(subject.getSubjectId());
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     @Override
     public void addSubject(Courses course, Subjects subject) {
 
@@ -226,10 +228,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public List<Users> getListUserNotOfCourse(Courses course) {
 
@@ -248,11 +250,11 @@ public class CourseBusinessImpl implements CourseBusiness {
             return listUser;
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return null;
         }
     }
-    
+
     @Override
     public Users getUserById(Users user) {
 
@@ -260,11 +262,11 @@ public class CourseBusinessImpl implements CourseBusiness {
             return userDAO.findById(user.getUserId());
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return null;
         }
     }
-    
+
     @Override
     public void addUserToCourse(Users user, Courses course) {
 
@@ -287,10 +289,10 @@ public class CourseBusinessImpl implements CourseBusiness {
                 addSubjectForUser(userCourse);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public void removeUserFromCourse(Users user, Courses course) {
 
@@ -313,10 +315,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public void startCourse(Courses course) {
 
@@ -340,10 +342,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             courseDAO.update(course);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     public void addSubjectForUser(UsersCourses userCourse) {
 
         UsersSubjects userSubject;
@@ -360,11 +362,11 @@ public class CourseBusinessImpl implements CourseBusiness {
                 userSubjectDAO.save(userSubject);
             }
             catch (Exception e) {
-                e.printStackTrace();
+                log.error(e);
             }
         }
     }
-    
+
     @Override
     public void finishCourse(Courses course) {
 
@@ -381,10 +383,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             activeOtherCourseForUsers(course);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public Courses createCourse(Courses course, Subjects subject) {
 
@@ -398,11 +400,11 @@ public class CourseBusinessImpl implements CourseBusiness {
             courseDAO.save(course);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     @Override
     public List<Subjects> getSubjects() {
 
@@ -410,11 +412,11 @@ public class CourseBusinessImpl implements CourseBusiness {
             return subjectDAO.listAll();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     @Override
     public List<UsersCourses> getUsersCoursesFromCourseId(Courses course) {
 
@@ -422,13 +424,13 @@ public class CourseBusinessImpl implements CourseBusiness {
             return course.getListUsersCourses();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return null;
         }
     }
-    
-    public void activeOtherCourseForUsers(Courses course) {
 
+    public void activeOtherCourseForUsers(Courses course) {
+    
         try {
             for (UsersCourses userCourse : course.getListUsersCourses()) {
                 if (userCourse.getUser().getRole() != DatabaseValue.SUPERVIOR) {
@@ -445,10 +447,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public List<UsersSubjects> getListUserSubject(Users user, Courses course) {
 
@@ -462,21 +464,21 @@ public class CourseBusinessImpl implements CourseBusiness {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return listUserSubject;
     }
-    
+
     public void removeCourse(Courses course) {
 
         try {
             courseDAO.delete(course);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public void updateCourse(Courses course) {
 
@@ -485,18 +487,18 @@ public class CourseBusinessImpl implements CourseBusiness {
             courseDAO.update(course);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public void saveActivity(Users user, int targetId, String log) {
-    
+
         try {
             activityDAO.saveActivities(user, CourseDAOImpl.NAME, targetId, log);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            CourseBusinessImpl.log.error(e);
         }
     }
     
@@ -507,7 +509,7 @@ public class CourseBusinessImpl implements CourseBusiness {
             activityDAO.saveActivities(user, target, targetId, log);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            CourseBusinessImpl.log.error(e);
         }
     }
 }
