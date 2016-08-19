@@ -3,6 +3,7 @@ package tms62.business;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Tasks;
 import tms62.model.entity.Users;
+import tms62.model.entity.UsersSubjects;
 
 public interface TaskBusiness {
     
@@ -17,4 +18,8 @@ public interface TaskBusiness {
     public void saveActivity(Users user, int targetId, String log);
     
     public void saveActivity(Users user, String target, int targetId, String log);
+    
+    public void finishTask(UsersSubjects userSubject, Tasks task);
+    
+    public UsersSubjects getUserSubjectById(UsersSubjects userSubject);
 }

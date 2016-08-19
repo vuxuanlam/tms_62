@@ -128,7 +128,7 @@ public class CourseAction extends ActionSupport {
     
     public String viewAllCourse() throws Exception {
     
-        user = accountDetails.getUser();
+        user = courseBusiness.getUserById(accountDetails.getUser());
         if (user.getRole() == DatabaseValue.ADMIN) {
             listCourses = courseBusiness.getAllCourses();
         }
@@ -207,10 +207,8 @@ public class CourseAction extends ActionSupport {
             courseBusiness.saveActivity(accountDetails.getUser(),
                     currentCourse.getCourseId(), log);
             // Log to user
-            log = "User "
-                    .concat(user.getEmail().concat(
-                    " was Add To Course ".concat(currentCourse
-                                    .getName())));
+            log = "User ".concat(user.getEmail().concat(
+                    " was Add To Course ".concat(currentCourse.getName())));
             courseBusiness.saveActivity(accountDetails.getUser(),
                     UserDAOImpl.NAME, user.getUserId(), log);
             return SUCCESS;
@@ -244,11 +242,13 @@ public class CourseAction extends ActionSupport {
     public String startCourse() {
     
         if (Helpers.isExist(currentCourse)) {
+            // start
+            user = courseBusiness.getUserById(accountDetails.getUser());
             currentCourse = courseBusiness.getCourseById(currentCourse);
             courseBusiness.startCourse(currentCourse);
+            // Log start course
             log = "Start Course ".concat(currentCourse.getName());
-            courseBusiness.saveActivity(accountDetails.getUser(),
-                    currentCourse.getCourseId(), log);
+            courseBusiness.saveActivity(user, currentCourse.getCourseId(), log);
             return SUCCESS;
         }
         addActionError(Messages.CONTENT_NOT_FOUND);
@@ -258,10 +258,13 @@ public class CourseAction extends ActionSupport {
     public String finishCourse() {
 
         if (Helpers.isExist(currentCourse)) {
+            // finish course
+            user = courseBusiness.getUserById(accountDetails.getUser());
             currentCourse = courseBusiness.getCourseById(currentCourse);
             courseBusiness.finishCourse(currentCourse);
+            // Log finish course
             log = "Finish course ".concat(currentCourse.getName());
-            courseBusiness.saveActivity(accountDetails.getUser(),
+            courseBusiness.saveActivity(user,
                     currentCourse.getCourseId(), log);
             return SUCCESS;
         }
@@ -274,6 +277,7 @@ public class CourseAction extends ActionSupport {
         listSubjects = courseBusiness.getSubjects();
         if (Helpers.isExist(currentCourse)) {
             try {
+                // create course
                 subject = courseBusiness.getSubjectById(subject);
                 courseBusiness.createCourse(currentCourse, subject);
             }
@@ -287,6 +291,7 @@ public class CourseAction extends ActionSupport {
     public String deleteCourse() {
 
         if (Helpers.isExist(currentCourse)) {
+            // delete course
             currentCourse = courseBusiness.getCourseById(currentCourse);
             courseBusiness.removeCourse(currentCourse);
             addActionMessage(Messages.DELETE_SUCCESS);

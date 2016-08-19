@@ -58,6 +58,7 @@ public class TaskAction extends ActionSupport {
     
         if (Helpers.isExist(task)) {
             task = taskBusiness.getTaskById(task);
+            // Log remove task
             log = "Remove Task ".concat(task.getName());
             taskBusiness.saveActivity(accountDetails.getUser(), task
                     .getSubject().getSubjectId(), log);
@@ -75,6 +76,7 @@ public class TaskAction extends ActionSupport {
                 subject = taskBusiness.getSubjectById(subject);
                 task.setSubject(subject);
                 taskBusiness.createTask(task);
+                // Log create task
                 log = "Create Task ".concat(task.getName());
                 taskBusiness.saveActivity(accountDetails.getUser(),
                         TaskDAOImpl.NAME, subject.getSubjectId(), log);

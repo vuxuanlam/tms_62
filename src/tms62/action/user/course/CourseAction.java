@@ -26,6 +26,7 @@ public class CourseAction extends ActionSupport {
     private List<UsersSubjects> listSubjectOfUser;
     private UsersCourses        userCourse;
     private List<Users>         listUser;
+    private Users               user;
     
     public List<Users> getListUser() {
     
@@ -102,23 +103,19 @@ public class CourseAction extends ActionSupport {
     }
     
     public String viewAllCourse() throws Exception {
-
-        Users user = new Users();
-        user.setUserId(accountDetails.getUser().getUserId());
-        user = courseBusiness.getUserById(user);
+    
+        user = courseBusiness.getUserById(accountDetails.getUser());
         listCourses = courseBusiness.getListCourseByAccount(user);
         return SUCCESS;
     }
     
     public String viewCourseDetails() {
-
-        Users user1 = new Users();
-        user1.setUserId(accountDetails.getUser().getUserId());
-        user1 = courseBusiness.getUserById(user1);
+    
+        user = courseBusiness.getUserById(accountDetails.getUser());
         currentCourse = courseBusiness.getCourseById(currentCourse);
-        listSubjectOfUser = courseBusiness.getListUserSubject(user1,
+        listSubjectOfUser = courseBusiness.getListUserSubject(user,
                 currentCourse);
-        for (UsersCourses userCourse : user1.getListUsersCourses()) {
+        for (UsersCourses userCourse : user.getListUsersCourses()) {
             if (userCourse.getCourse().getCourseId() == currentCourse
                     .getCourseId()) {
                 this.userCourse = userCourse;

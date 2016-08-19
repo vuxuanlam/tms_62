@@ -1,6 +1,9 @@
 package tms62.business.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import tms62.business.SubjectBusiness;
 import tms62.constant.DatabaseValue;
@@ -11,7 +14,9 @@ import tms62.dao.TaskDAO;
 import tms62.dao.UserSubjectDAO;
 import tms62.dao.impl.SubjectDAOImpl;
 import tms62.model.entity.CoursesSubjects;
+import tms62.model.entity.CoursesSubjectsTasks;
 import tms62.model.entity.Subjects;
+import tms62.model.entity.Tasks;
 import tms62.model.entity.Users;
 import tms62.model.entity.UsersSubjects;
 import tms62.util.Helpers;
@@ -208,6 +213,57 @@ public class SubjectBusinessImpl implements SubjectBusiness {
         }
         catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    
+    @Override
+    public UsersSubjects getUserSubjectById(UsersSubjects userSubject) {
+    
+        try {
+            return userSubjectDAO
+                    .findById(userSubject.getUserCourseSubjectId());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public Map<String, List<Tasks>> getTaskOfUser(UsersSubjects userSubject) {
+    
+        Map<String, List<Tasks>> mapTaskOfUser = new HashMap<String, List<Tasks>>();
+        List<CoursesSubjectsTasks> listCourseSubjectTask;
+        List<Tasks> listTask;
+        List<Tasks> listTaskFinished = new ArrayList<Tasks>();
+        List<Tasks> listTaskUnfinish = new ArrayList<Tasks>();
+        boolean isAvalible = false;
+        try {
+            listCourseSubjectTask = userSubject.getListCourseSubjectTask();
+            listTask = userSubject.getCourseSubject().getSubject()
+                    .getListTasks();
+            for (Tasks task : listTask) {
+                for (CoursesSubjectsTasks courseSubjectTask : listCourseSubjectTask) {
+                    if (courseSubjectTask.getUserTask().getTask().getTaskId() == task
+                            .getTaskId()) {
+                        isAvalible = true;
+                        break;
+                    }
+                }
+                if (isAvalible) {
+                    listTaskFinished.add(task);
+                    isAvalible = false;
+                }
+                else {
+                    listTaskUnfinish.add(task);
+                }
+            }
+            mapTaskOfUser.put("listTaskFinished", listTaskFinished);
+            mapTaskOfUser.put("listTaskUnfinish", listTaskUnfinish);
+            return mapTaskOfUser;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

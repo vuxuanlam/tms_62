@@ -24,4 +24,14 @@
 
     </package>
 
+    <package name="taskuser" namespace="/taskuser" extends="default-web">
+
+        <action name="finishtask" class="TaskUser" method="finishTask">
+            <result type="redirect">
+                <param name="location">/subjectuser/viewsubjectdetails?userSubject.userCourseSubjectId=${userSubject.userCourseSubjectId}</param>
+            </result>
+            <result name="error">HomePage</result>
+        </action>
+
+    </package>
 </struts>

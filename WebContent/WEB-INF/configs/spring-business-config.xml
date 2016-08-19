@@ -56,8 +56,11 @@
                 <property name="taskDAO" ref="TaskDAO" />
                 <property name="subjectDAO" ref="SubjectDAO"></property>
                 <property name="activityDAO" ref="ActivityDAO"></property>
+                <property name="userSubjectDAO" ref="UserSubjectDAO"></property>
+                <property name="courseSubjectTaskDAO" ref="CourseSubjectTaskDAO"></property>
+                <property name="userTaskDAO" ref="UserTaskDAO" />
             </bean>
         </property>
     </bean>
-    
+
 </beans>

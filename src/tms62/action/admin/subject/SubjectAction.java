@@ -106,6 +106,7 @@ public class SubjectAction extends ActionSupport {
 
         List<Tasks> listTask;
         if (Helpers.isExist(subject)) {
+            // list task of subject
             listTask = validateTask(subject);
             if (Helpers.isEmpty(subject.getListTasks())) {
                 subject.setListTasks(listTask);
@@ -113,7 +114,9 @@ public class SubjectAction extends ActionSupport {
             else {
                 subject.getListTasks().addAll(listTask);
             }
+            // create subject
             subjectBusiness.createSubject(subject);
+            // Log create subject
             log = "Create Subject ".concat(subject.getName());
             subjectBusiness.saveActivity(accountDetails.getUser(),
                     subject.getSubjectId(), log);
@@ -132,8 +135,10 @@ public class SubjectAction extends ActionSupport {
 
         if (Helpers.isExist(subject)
                 && Helpers.isExist(subjectBusiness.getSubjectById(subject))) {
+            // remove subject
             subject = subjectBusiness.getSubjectById(subject);
             subjectBusiness.removeSubject(subject);
+            // Log delete subject
             log = "Delete subject ".concat(subject.getName());
             subjectBusiness.saveActivity(accountDetails.getUser(),
                     subject.getSubjectId(), log);
@@ -149,7 +154,9 @@ public class SubjectAction extends ActionSupport {
 
         if (Helpers.isExist(subject)) {
             if (update) {
+                // update
                 subjectBusiness.updateSubject(subject);
+                // Log update
                 log = "Update Subject ".concat(subject.getName());
                 subjectBusiness.saveActivity(accountDetails.getUser(),
                         subject.getSubjectId(), log);
@@ -170,6 +177,7 @@ public class SubjectAction extends ActionSupport {
         return ERROR;
     }
     
+    // return list task of subject.
     public List<Tasks> validateTask(Subjects subject) {
 
         List<Tasks> listTask = new ArrayList<Tasks>();
@@ -192,7 +200,9 @@ public class SubjectAction extends ActionSupport {
         if (Helpers.isExist(courseSubject)) {
             courseSubject = subjectBusiness
                     .getCourseSubjecttById(courseSubject);
+            // start
             subjectBusiness.startSubject(courseSubject);
+            // Log start subject
             log = "Start Subject".concat(courseSubject.getSubject().getName()
                     .concat("Of Course")
                     .concat(courseSubject.getCourse().getName()));
@@ -208,9 +218,11 @@ public class SubjectAction extends ActionSupport {
     public String finishSubject() {
 
         if (Helpers.isExist(courseSubject)) {
+            // finish subject
             courseSubject = subjectBusiness
                     .getCourseSubjecttById(courseSubject);
             subjectBusiness.finishSubject(courseSubject);
+            // Log finish subject
             log = "Finish Subject ".concat(courseSubject.getSubject().getName()
                     .concat(" Of Course ")
                     .concat(courseSubject.getCourse().getName()));
