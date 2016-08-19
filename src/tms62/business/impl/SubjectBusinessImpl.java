@@ -20,48 +20,50 @@ import tms62.model.entity.Tasks;
 import tms62.model.entity.Users;
 import tms62.model.entity.UsersSubjects;
 import tms62.util.Helpers;
+import tms62.util.Logit2;
 
 public class SubjectBusinessImpl implements SubjectBusiness {
-    
+
     private SubjectDAO       subjectDAO;
     private TaskDAO          taskDAO;
     private CourseSubjectDAO courseSubjectDAO;
     private UserSubjectDAO   userSubjectDAO;
     private ActivityDAO      activityDAO;
-    
+    private static final Logit2 log = Logit2.getInstance(SubjectBusinessImpl.class);
+
     public ActivityDAO getActivityDAO() {
-    
+
         return activityDAO;
     }
-    
+
     public void setActivityDAO(ActivityDAO activityDAO) {
     
         this.activityDAO = activityDAO;
     }
 
     public SubjectDAO getSubjectDAO() {
-    
+
         return subjectDAO;
     }
-    
+
     public void setSubjectDAO(SubjectDAO subjectDAO) {
-    
+
         this.subjectDAO = subjectDAO;
     }
-    
+
     public TaskDAO getTaskDAO() {
-    
+
         return taskDAO;
     }
-    
+
     public void setTaskDAO(TaskDAO taskDAO) {
     
         this.taskDAO = taskDAO;
     }
-    
+
     @Override
     public void createSubject(Subjects subject) {
-    
+
         Subjects tempSubject;
         try {
             tempSubject = subjectDAO.findSubjectByName(subject);
@@ -70,117 +72,117 @@ public class SubjectBusinessImpl implements SubjectBusiness {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public List<Subjects> getSubjects() {
-    
+
         try {
             return subjectDAO.listAll();
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     public CourseSubjectDAO getCourseSubjectDAO() {
-    
+
         return courseSubjectDAO;
     }
-    
+
     public void setCourseSubjectDAO(CourseSubjectDAO courseSubjectDAO) {
-    
+
         this.courseSubjectDAO = courseSubjectDAO;
     }
 
     public UserSubjectDAO getUserSubjectDAO() {
-    
+
         return userSubjectDAO;
     }
-    
+
     public void setUserSubjectDAO(UserSubjectDAO userSubjectDAO) {
-    
+
         this.userSubjectDAO = userSubjectDAO;
     }
 
     @Override
     public void removeSubject(Subjects subject) {
-    
+
         try {
             subjectDAO.delete(subject);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public void updateSubject(Subjects subject) {
-    
+
         try {
             subject.setUpdateAt(Helpers.getCurrentTime());
             subjectDAO.update(subject);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public Subjects getSubjectById(Subjects subject) {
-    
+
         try {
             return subjectDAO.findById(subject.getSubjectId());
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return null;
         }
     }
-    
+
     @Override
     public CoursesSubjects getCourseSubjecttById(CoursesSubjects courseSubject) {
-    
+
         try {
             return courseSubjectDAO
                     .findById(courseSubject.getCourseSubjectId());
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     @Override
     public void startSubject(CoursesSubjects courseSubject) {
-    
+
         try {
             courseSubject.setStatus(DatabaseValue.OPEN);
             courseSubjectDAO.update(courseSubject);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public void finishSubject(CoursesSubjects courseSubject) {
-    
+
         try {
             courseSubject.setStatus(DatabaseValue.FINISH);
             courseSubjectDAO.update(courseSubject);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
     }
-    
+
     @Override
     public UsersSubjects finishSubject(UsersSubjects userSubject) {
-    
+
         try {
             userSubject = userSubjectDAO.findById(userSubject
                     .getUserCourseSubjectId());
@@ -188,49 +190,49 @@ public class SubjectBusinessImpl implements SubjectBusiness {
             userSubjectDAO.update(userSubject);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return userSubject;
     }
-    
+
     @Override
     public void saveActivity(Users user, int targetId, String log) {
-    
+
         try {
             activityDAO
                     .saveActivities(user, SubjectDAOImpl.NAME, targetId, log);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            SubjectBusinessImpl.log.error(e);
         }
     }
-    
+
     @Override
     public void saveActivity(Users user, String target, int targetId, String log) {
-    
+
         try {
             activityDAO.saveActivities(user, target, targetId, log);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            SubjectBusinessImpl.log.error(e);
         }
     }
-    
+
     @Override
     public UsersSubjects getUserSubjectById(UsersSubjects userSubject) {
-    
+
         try {
             return userSubjectDAO
                     .findById(userSubject.getUserCourseSubjectId());
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return null;
         }
     }
-    
+
     public Map<String, List<Tasks>> getTaskOfUser(UsersSubjects userSubject) {
-    
+
         Map<String, List<Tasks>> mapTaskOfUser = new HashMap<String, List<Tasks>>();
         List<CoursesSubjectsTasks> listCourseSubjectTask;
         List<Tasks> listTask;
@@ -262,7 +264,7 @@ public class SubjectBusinessImpl implements SubjectBusiness {
             return mapTaskOfUser;
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return null;
         }
     }

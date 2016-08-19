@@ -8,35 +8,37 @@ import tms62.dao.ActivityDAO;
 import tms62.dao.UserDAO;
 import tms62.dao.impl.UserDAOImpl;
 import tms62.model.entity.Users;
+import tms62.util.Logit2;
 
 public class AccountBusinessImpl implements AccountBusiness {
-    
-    private UserDAO     userDAO;
-    private ActivityDAO activityDAO;
-    
+
+    private UserDAO             userDAO;
+    private ActivityDAO         activityDAO;
+    private static final Logit2 log = Logit2.getInstance(AccountBusinessImpl.class);
+
     public ActivityDAO getActivityDAO() {
     
         return activityDAO;
     }
-    
+
     public void setActivityDAO(ActivityDAO activityDAO) {
     
         this.activityDAO = activityDAO;
     }
 
     public UserDAO getUserDAO() {
-
+    
         return userDAO;
     }
-    
-    public void setUserDAO(UserDAO userDAO) {
 
+    public void setUserDAO(UserDAO userDAO) {
+    
         this.userDAO = userDAO;
     }
-    
+
     @Override
     public List<Users> getAllUsers() {
-
+    
         try {
             return userDAO.listAll();
         }
@@ -45,22 +47,22 @@ public class AccountBusinessImpl implements AccountBusiness {
         }
         return null;
     }
-    
+
     @Override
     public Users updateUserInfo(Users user) {
-
+    
         try {
             userDAO.update(user);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     @Override
     public Users getUserByEmail(String email) {
-
+    
         List<Users> listUser;
         try {
             listUser = userDAO.findByProperty(DatabaseValue.EMAIL, email);
@@ -68,27 +70,26 @@ public class AccountBusinessImpl implements AccountBusiness {
                 return (Users) listUser.get(0);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     @Override
     public Users getUserById(int id) {
-
-        // TODO Auto-generated method stub
+    
         try {
             return userDAO.findById(id);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return null;
     }
-    
+
     @Override
     public boolean createAccount(Users user) {
-
+    
         // TODO Auto-generated method stub
         try {
             userDAO.save(user);
@@ -99,43 +100,43 @@ public class AccountBusinessImpl implements AccountBusiness {
             return false;
         }
     }
-    
+
     @Override
     public boolean deleteAccount(Users user) {
-
+    
         // TODO Auto-generated method stub
         try {
             userDAO.delete(user);
             return true;
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return false;
         }
     }
 
     @Override
     public boolean updateAccount(Users user) {
-
+    
         // TODO Auto-generated method stub
         try {
             userDAO.update(user);
             return true;
         }
         catch (Exception e) {
-            e.printStackTrace();
+            log.error(e);
             return false;
         }
     }
-    
+
     @Override
     public void saveActivity(Users user, int targetId, String log) {
-
+    
         try {
             activityDAO.saveActivities(user, UserDAOImpl.NAME, targetId, log);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            AccountBusinessImpl.log.error(e);
         }
     }
 }
