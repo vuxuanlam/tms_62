@@ -73,7 +73,7 @@
 }
 
 .listactivities {
-    height: 400px;
+    height: 300px;
     width: auto;
     overflow-y: scroll;
 }

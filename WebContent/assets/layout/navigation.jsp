@@ -22,8 +22,17 @@
                             class="caret"></span> <sec:authentication
                                 property="principal.username" /></a>
                         <ul class="dropdown-menu">
-                            <li><a href='<s:url value="#"></s:url>'><i
-                                    class="glyphicon glyphicon-user"></i>&nbsp;Profile</a></li>
+                            <sec:authorize
+                                access="hasAnyRole('ROLE_ADMIN, ROLE_SUPERVIOR')">
+                                <li><a
+                                    href='<s:url value="/accountadmin/info"></s:url>'><i
+                                        class="glyphicon glyphicon-user"></i>&nbsp;Profile</a></li>
+                            </sec:authorize>
+                            <sec:authorize access="hasRole('ROLE_USER')">
+                                <li><a
+                                    href='<s:url value="/accountuser/info"></s:url>'><i
+                                        class="glyphicon glyphicon-user"></i>&nbsp;Profile</a></li>
+                            </sec:authorize>
                             <li><a href="tms_62/j_spring_security_logout"><i
                                     class="glyphicon glyphicon-off"></i>&nbsp;Sign
                                     out</a></li>

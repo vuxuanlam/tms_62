@@ -1,6 +1,5 @@
 package tms62.action.user.info;
 
-import org.apache.struts2.dispatcher.SessionMap;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import tms62.business.AccountBusiness;
@@ -13,9 +12,12 @@ public class AccountAction extends ActionSupport {
 
     private static final long serialVersionUID = 1L;
     private AccountBusiness   accountBusiness;
-    private SessionMap        session;
     private Users             currentUser;
     private Users             user;
+    private AccountDetails    accountDetails   = (AccountDetails) SecurityContextHolder
+                                                       .getContext()
+                                                       .getAuthentication()
+                                                       .getPrincipal();
 
     public Users getUser() {
 
@@ -27,11 +29,6 @@ public class AccountAction extends ActionSupport {
         this.user = user;
     }
     
-    private AccountDetails accountDetails = (AccountDetails) SecurityContextHolder
-                                                  .getContext()
-                                                  .getAuthentication()
-                                                  .getPrincipal();
-
     public AccountBusiness getAccountBusiness() {
 
         return accountBusiness;
@@ -53,18 +50,16 @@ public class AccountAction extends ActionSupport {
     }
     
     public String viewAccount() {
-
-        // currentUser =
-        // accountBusiness.getUserById(accountDetails.getUserId());
-        currentUser = accountDetails.getUser();
+    
+        currentUser = accountBusiness.getUserById(accountDetails.getUser()
+                .getUserId());
         return SUCCESS;
     }
     
     public String editAccount() throws Exception {
     
-        // currentUser =
-        // accountBusiness.getUserById(accountDetails.getUserId());
-        currentUser = accountDetails.getUser();
+        user = accountBusiness
+                .getUserById(accountDetails.getUser().getUserId());
         if (user != null) {
             accountBusiness.updateUserInfo(user);
         }

@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import tms62.business.CourseBusiness;
+import tms62.dao.impl.CourseDAOImpl;
 import tms62.messages.Messages;
+import tms62.model.entity.Activities;
 import tms62.model.entity.Courses;
 import tms62.model.entity.Users;
 import tms62.model.entity.UsersCourses;
@@ -27,7 +29,18 @@ public class CourseAction extends ActionSupport {
     private UsersCourses        userCourse;
     private List<Users>         listUser;
     private Users               user;
+    private List<Activities>    listActivities;
     
+    public List<Activities> getListActivities() {
+    
+        return listActivities;
+    }
+    
+    public void setListActivities(List<Activities> listActivities) {
+    
+        this.listActivities = listActivities;
+    }
+
     public List<Users> getListUser() {
     
         return listUser;
@@ -103,14 +116,23 @@ public class CourseAction extends ActionSupport {
     }
     
     public String viewAllCourse() throws Exception {
-    
+
+        listActivities = new ArrayList<Activities>();
+        Activities activity = new Activities();
+        activity.setTargetType(CourseDAOImpl.NAME);
         user = courseBusiness.getUserById(accountDetails.getUser());
         listCourses = courseBusiness.getListCourseByAccount(user);
+        for (Courses course : listCourses) {
+            activity.setTargetId(course.getCourseId());
+            listActivities.addAll(courseBusiness.getListActivities(activity));
+        }
         return SUCCESS;
     }
     
     public String viewCourseDetails() {
     
+        Activities activity = new Activities();
+        activity.setTargetType(CourseDAOImpl.NAME);
         user = courseBusiness.getUserById(accountDetails.getUser());
         currentCourse = courseBusiness.getCourseById(currentCourse);
         listSubjectOfUser = courseBusiness.getListUserSubject(user,
@@ -122,6 +144,8 @@ public class CourseAction extends ActionSupport {
                 break;
             }
         }
+        activity.setTargetId(currentCourse.getCourseId());
+        listActivities = courseBusiness.getListActivities(activity);
         if (Helpers.isExist(currentCourse))
             return SUCCESS;
         else
