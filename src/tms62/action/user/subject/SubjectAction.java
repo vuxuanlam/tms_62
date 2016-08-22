@@ -5,6 +5,8 @@ import java.util.Map;
 
 import tms62.business.SubjectBusiness;
 import tms62.dao.impl.CourseDAOImpl;
+import tms62.dao.impl.SubjectDAOImpl;
+import tms62.model.entity.Activities;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Tasks;
 import tms62.model.entity.UsersCourses;
@@ -22,7 +24,18 @@ public class SubjectAction extends ActionSupport {
     private Subjects                 subject;
     private Map<String, List<Tasks>> listTaskOfUser;
     private UsersCourses             userCourse;
+    private List<Activities>         listActivities;
     
+    public List<Activities> getListActivities() {
+    
+        return listActivities;
+    }
+    
+    public void setListActivities(List<Activities> listActivities) {
+    
+        this.listActivities = listActivities;
+    }
+
     public UsersCourses getUserCourse() {
     
         return userCourse;
@@ -95,6 +108,8 @@ public class SubjectAction extends ActionSupport {
     public String viewSubjectDetails() {
     
         if (Helpers.isExist(userSubject)) {
+            Activities activity = new Activities();
+            activity.setTargetType(SubjectDAOImpl.NAME);
             userSubject = subjectBusiness.getUserSubjectById(userSubject);
             subject = userSubject.getCourseSubject().getSubject();
             listTaskOfUser = subjectBusiness.getTaskOfUser(userSubject);
@@ -106,6 +121,8 @@ public class SubjectAction extends ActionSupport {
                     break;
                 }
             }
+            activity.setTargetId(subject.getSubjectId());
+            listActivities = subjectBusiness.getListActivities(activity);
             return SUCCESS;
         }
         else {
