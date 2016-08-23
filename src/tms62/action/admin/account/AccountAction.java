@@ -132,4 +132,8 @@ public class AccountAction extends ActionSupport {
         }
         return SUCCESS;
     }
+    public String viewProfileAccount(){
+    	listAccounts = accountBusiness.getAllUsers();
+    	return SUCCESS;
+    }
 }
