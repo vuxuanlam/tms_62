@@ -38,5 +38,13 @@
         <put-list-attribute name="css">
         </put-list-attribute>
     </definition>
+    <definition name="Account.ViewProfileAccount" extends="Default.Web">
+        <put-attribute name="body"
+            value="/bodycontent/account/viewprofilebyadmin.jsp" />
+        <put-list-attribute name="js">
+        </put-list-attribute>
+        <put-list-attribute name="css">
+        </put-list-attribute>
+    </definition>
 
 </tiles-definitions>

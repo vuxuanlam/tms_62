@@ -28,6 +28,10 @@
             <result name="success">Account.DeleteAccount</result>
             <result name="error">HomePage</result>
         </action>
+        <action name="viewprofileaccount" class="AccountAdmin" method="viewProfileAccount">
+            <result name="success">Account.ViewProfileAccount</result>
+            <result name="error">HomePage</result>
+        </action>
     </package>
 
     <package name="accountuser" namespace="/accountuser" extends="default-web">
