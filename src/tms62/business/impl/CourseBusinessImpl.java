@@ -16,6 +16,7 @@ import tms62.dao.impl.CourseDAOImpl;
 import tms62.model.entity.Activities;
 import tms62.model.entity.Courses;
 import tms62.model.entity.CoursesSubjects;
+import tms62.model.entity.CoursesSubjectsTasks;
 import tms62.model.entity.Subjects;
 import tms62.model.entity.Users;
 import tms62.model.entity.UsersCourses;
@@ -24,7 +25,7 @@ import tms62.util.Helpers;
 import tms62.util.Logit2;
 
 public class CourseBusinessImpl implements CourseBusiness {
-
+    
     private CourseDAO           courseDAO;
     private UserCourseDAO       userCourseDAO;
     private UserDAO             userDAO;
@@ -32,81 +33,82 @@ public class CourseBusinessImpl implements CourseBusiness {
     private CourseSubjectDAO    courseSubjectDAO;
     private UserSubjectDAO      userSubjectDAO;
     private ActivityDAO         activityDAO;
-    private static final Logit2 log = Logit2.getInstance(CourseBusinessImpl.class);
-
+    private static final Logit2 log = Logit2
+            .getInstance(CourseBusinessImpl.class);
+            
     public ActivityDAO getActivityDAO() {
-
+        
         return activityDAO;
     }
-
+    
     public void setActivityDAO(ActivityDAO activityDAO) {
-
+        
         this.activityDAO = activityDAO;
     }
-
+    
     public UserDAO getUserDAO() {
-
+        
         return userDAO;
     }
-
+    
     public void setUserDAO(UserDAO userDAO) {
-
+        
         this.userDAO = userDAO;
     }
-
+    
     public CourseDAO getCourseDAO() {
-
+        
         return courseDAO;
     }
-
+    
     public void setCourseDAO(CourseDAO courseDAO) {
-
+        
         this.courseDAO = courseDAO;
     }
-
+    
     public UserCourseDAO getUserCourseDAO() {
-
+        
         return userCourseDAO;
     }
-
+    
     public SubjectDAO getSubjectDAO() {
-
+        
         return subjectDAO;
     }
-
+    
     public void setSubjectDAO(SubjectDAO subjectDAO) {
-
+        
         this.subjectDAO = subjectDAO;
     }
-
+    
     public void setUserCourseDAO(UserCourseDAO userCourseDAO) {
-
+        
         this.userCourseDAO = userCourseDAO;
     }
-
+    
     public CourseSubjectDAO getCourseSubjectDAO() {
-
+        
         return courseSubjectDAO;
     }
-
+    
     public void setCourseSubjectDAO(CourseSubjectDAO courseSubjectDAO) {
-
+        
         this.courseSubjectDAO = courseSubjectDAO;
     }
-
+    
     public UserSubjectDAO getUserSubjectDAO() {
-
+        
         return userSubjectDAO;
     }
-
+    
     public void setUserSubjectDAO(UserSubjectDAO userSubjectDAO) {
-
+        
         this.userSubjectDAO = userSubjectDAO;
     }
-
+    
     @Override
     public List<Courses> getListCourseByAccount(Users user) throws Exception {
-
+        
         List<Courses> listCourse = new ArrayList<Courses>();
         user = userDAO.findById(user.getUserId());
         try {
@@ -123,10 +125,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             return null;
         }
     }
-
+    
     @Override
     public List<Courses> getAllCourses() {
-
+        
         try {
             return courseDAO.listAll();
         }
@@ -135,10 +137,10 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         return null;
     }
-
+    
     @Override
     public Courses getCourseById(Courses course) {
-
+        
         try {
             return courseDAO.findById(course.getCourseId());
         }
@@ -147,10 +149,10 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         return null;
     }
-
+    
     @Override
     public List<Subjects> getSubjectNotOfCourse(Courses course) {
-
+        
         List<Subjects> listSubjects;
         List<Subjects> listSubjectOfCourse = new ArrayList<Subjects>();
         try {
@@ -172,10 +174,10 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         return null;
     }
-
+    
     @Override
     public void removeSubject(CoursesSubjects courseSubject) {
-
+        
         try {
             courseSubjectDAO.delete(courseSubject);
         }
@@ -183,10 +185,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             log.error(e);
         }
     }
-
+    
     @Override
     public CoursesSubjects getCourseSubjectById(CoursesSubjects courseSubject) {
-
+        
         try {
             return courseSubjectDAO
                     .findById(courseSubject.getCourseSubjectId());
@@ -196,10 +198,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             return null;
         }
     }
-
+    
     @Override
     public Subjects getSubjectById(Subjects subject) {
-
+        
         try {
             return subjectDAO.findById(subject.getSubjectId());
         }
@@ -208,10 +210,10 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         return null;
     }
-
+    
     @Override
     public void addSubject(Courses course, Subjects subject) {
-
+        
         UsersSubjects userSubject;
         CoursesSubjects courseSubject = new CoursesSubjects();
         courseSubject.setCourse(course);
@@ -220,7 +222,8 @@ public class CourseBusinessImpl implements CourseBusiness {
             courseSubjectDAO.save(courseSubject);
             for (UsersCourses userCourse : course.getListUsersCourses()) {
                 if (userCourse.getCourse().getStatus() == DatabaseValue.OPEN
-                        && userCourse.getUser().getRole() != DatabaseValue.SUPERVIOR) {
+                        && userCourse.getUser()
+                                .getRole() != DatabaseValue.SUPERVIOR) {
                     userSubject = new UsersSubjects();
                     userSubject.setUser(userCourse.getUser());
                     userSubject.setCourseSubject(courseSubject);
@@ -232,10 +235,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             log.error(e);
         }
     }
-
+    
     @Override
     public List<Users> getListUserNotOfCourse(Courses course) {
-
+        
         List<Users> listUserOfCourse = new ArrayList<Users>();
         List<Users> listUser;
         try {
@@ -255,10 +258,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             return null;
         }
     }
-
+    
     @Override
     public Users getUserById(Users user) {
-
+        
         try {
             return userDAO.findById(user.getUserId());
         }
@@ -267,10 +270,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             return null;
         }
     }
-
+    
     @Override
     public void addUserToCourse(Users user, Courses course) {
-
+        
         boolean check = false;
         UsersCourses userCourse = new UsersCourses();
         userCourse.setCourse(course);
@@ -286,17 +289,18 @@ public class CourseBusinessImpl implements CourseBusiness {
         try {
             userCourseDAO.save(userCourse);
             if (userCourse.getCourse().getStatus() == DatabaseValue.OPEN
-                    && userCourse.getUser().getRole() != DatabaseValue.SUPERVIOR)
+                    && userCourse.getUser()
+                            .getRole() != DatabaseValue.SUPERVIOR)
                 addSubjectForUser(userCourse);
         }
         catch (Exception e) {
             log.error(e);
         }
     }
-
+    
     @Override
     public void removeUserFromCourse(Users user, Courses course) {
-
+        
         try {
             for (UsersCourses userCourse : user.getListUsersCourses()) {
                 if (userCourse.getCourse().getCourseId() == course
@@ -319,10 +323,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             log.error(e);
         }
     }
-
+    
     @Override
     public void startCourse(Courses course) {
-
+        
         Boolean check;
         try {
             for (UsersCourses userCourse : course.getListUsersCourses()) {
@@ -346,9 +350,9 @@ public class CourseBusinessImpl implements CourseBusiness {
             log.error(e);
         }
     }
-
+    
     public void addSubjectForUser(UsersCourses userCourse) {
-
+        
         UsersSubjects userSubject;
         for (CoursesSubjects courseSubject : userCourse.getCourse()
                 .getListCoursesSubjects()) {
@@ -367,10 +371,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             }
         }
     }
-
+    
     @Override
     public void finishCourse(Courses course) {
-
+        
         try {
             course.setStatus(DatabaseValue.FINISH);
             for (CoursesSubjects courseSubject : course
@@ -387,10 +391,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             log.error(e);
         }
     }
-
+    
     @Override
     public Courses createCourse(Courses course, Subjects subject) {
-
+        
         try {
             List<CoursesSubjects> listCourseSubject = new ArrayList<CoursesSubjects>();
             CoursesSubjects courseSubject = new CoursesSubjects();
@@ -405,10 +409,10 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         return null;
     }
-
+    
     @Override
     public List<Subjects> getSubjects() {
-
+        
         try {
             return subjectDAO.listAll();
         }
@@ -417,10 +421,10 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         return null;
     }
-
+    
     @Override
     public List<UsersCourses> getUsersCoursesFromCourseId(Courses course) {
-
+        
         try {
             return course.getListUsersCourses();
         }
@@ -429,16 +433,17 @@ public class CourseBusinessImpl implements CourseBusiness {
             return null;
         }
     }
-
-    public void activeOtherCourseForUsers(Courses course) {
     
+    public void activeOtherCourseForUsers(Courses course) {
+        
         try {
             for (UsersCourses userCourse : course.getListUsersCourses()) {
                 if (userCourse.getUser().getRole() != DatabaseValue.SUPERVIOR) {
                     for (UsersCourses userCourseOfUser : userCourse.getUser()
                             .getListUsersCourses()) {
                         if (userCourseOfUser.getStatus() == DatabaseValue.CLOSE
-                                && userCourseOfUser.getCourse().getStatus() == DatabaseValue.OPEN) {
+                                && userCourseOfUser.getCourse()
+                                        .getStatus() == DatabaseValue.OPEN) {
                             userCourseOfUser.setStatus(DatabaseValue.OPEN);
                             userCourseDAO.update(userCourseOfUser);
                             break;
@@ -451,15 +456,15 @@ public class CourseBusinessImpl implements CourseBusiness {
             log.error(e);
         }
     }
-
+    
     @Override
     public List<UsersSubjects> getListUserSubject(Users user, Courses course) {
-
+        
         List<UsersSubjects> listUserSubject = new ArrayList<UsersSubjects>();
         try {
             for (UsersSubjects userSubject : user.getListUsersSubjects()) {
-                if (userSubject.getCourseSubject().getCourse().getCourseId() == course
-                        .getCourseId()) {
+                if (userSubject.getCourseSubject().getCourse()
+                        .getCourseId() == course.getCourseId()) {
                     listUserSubject.add(userSubject);
                 }
             }
@@ -469,9 +474,9 @@ public class CourseBusinessImpl implements CourseBusiness {
         }
         return listUserSubject;
     }
-
+    
     public void removeCourse(Courses course) {
-
+        
         try {
             courseDAO.delete(course);
         }
@@ -479,10 +484,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             log.error(e);
         }
     }
-
+    
     @Override
     public void updateCourse(Courses course) {
-
+        
         try {
             course.setUpdateAt(Helpers.getCurrentTime());
             courseDAO.update(course);
@@ -491,10 +496,10 @@ public class CourseBusinessImpl implements CourseBusiness {
             log.error(e);
         }
     }
-
+    
     @Override
     public void saveActivity(Users user, int targetId, String log) {
-
+        
         try {
             activityDAO.saveActivities(user, CourseDAOImpl.NAME, targetId, log);
         }
@@ -504,8 +509,9 @@ public class CourseBusinessImpl implements CourseBusiness {
     }
     
     @Override
-    public void saveActivity(Users user, String target, int targetId, String log) {
-    
+    public void saveActivity(Users user, String target, int targetId,
+            String log) {
+            
         try {
             activityDAO.saveActivities(user, target, targetId, log);
         }
@@ -516,7 +522,7 @@ public class CourseBusinessImpl implements CourseBusiness {
     
     @Override
     public List<Activities> getListActivities(Activities activity) {
-    
+        
         try {
             return activityDAO.getListActivities(activity);
         }
@@ -528,7 +534,7 @@ public class CourseBusinessImpl implements CourseBusiness {
     
     @Override
     public List<Activities> getListActivities(String targetType) {
-    
+        
         try {
             return activityDAO.getListActivities(targetType);
         }
@@ -536,5 +542,77 @@ public class CourseBusinessImpl implements CourseBusiness {
             log.error(e);
             return null;
         }
+    }
+    
+    @Override
+    public int getProgressOfCourse(Courses course) {
+        
+        int total;
+        int numSubjectFinished = 0;
+        try {
+            total = course.getListCoursesSubjects().size();
+            if (total != 0) {
+                for (CoursesSubjects courseSubject : course
+                        .getListCoursesSubjects()) {
+                    if (courseSubject.getStatus() == DatabaseValue.FINISH) {
+                        numSubjectFinished++;
+                    }
+                }
+                return (numSubjectFinished * 100) / total;
+            }
+        }
+        catch (Exception e) {
+            log.error(e);
+        }
+        return 0;
+    }
+    
+    @Override
+    public int getProgressOfUserCourse(UsersCourses userCourse) {
+        
+        int total;
+        int numbersubjectFinished = 0;
+        try {
+            total = userCourse.getCourse().getListCoursesSubjects().size();
+            if (total != 0) {
+                for (CoursesSubjects courseSubject : userCourse.getCourse()
+                        .getListCoursesSubjects()) {
+                    for (UsersSubjects userSubject : userCourse.getUser()
+                            .getListUsersSubjects()) {
+                        if (courseSubject.getCourseSubjectId() == userSubject
+                                .getCourseSubject().getCourseSubjectId()) {
+                            if (userSubject
+                                    .getStatus() == DatabaseValue.FINISH) {
+                                numbersubjectFinished++;
+                            }
+                        }
+                    }
+                }
+                return (numbersubjectFinished * 100) / total;
+            }
+        }
+        catch (Exception e) {
+            log.error(e);
+        }
+        return 0;
+    }
+    
+    public int getProgressOfUserSubject(UsersSubjects userSubject) {
+        
+        int total;
+        int numbertaskfinished = 0;
+        try {
+            total = userSubject.getCourseSubject().getSubject().getListTasks()
+                    .size();
+            if (total != 0) {
+                numbertaskfinished = userSubject.getListCourseSubjectTask()
+                        .size();
+                return (numbertaskfinished * 100) / total;
+            }
+        }
+        catch (Exception e) {
+            log.error(e);
+        }
+        return 0;
     }
 }

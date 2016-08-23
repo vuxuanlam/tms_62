@@ -19,6 +19,17 @@ public class Courses implements Serializable {
     private Date                  updateAt;
     private List<CoursesSubjects> listCoursesSubjects;
     private List<UsersCourses>    listUsersCourses;
+    private int                   progressOfCourse;
+    
+    public int getProgressOfCourse() {
+        
+        return progressOfCourse;
+    }
+    
+    public void setProgressOfCourse(int progressOfCourse) {
+        
+        this.progressOfCourse = progressOfCourse;
+    }
     
     public int getCourseId() {
         

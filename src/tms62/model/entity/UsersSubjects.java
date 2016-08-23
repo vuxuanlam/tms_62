@@ -13,7 +13,20 @@ public class UsersSubjects implements Serializable {
     private Users                      user;
     private CoursesSubjects            courseSubject;
     private List<CoursesSubjectsTasks> listCourseSubjectTask;
+    private int                        progressOfSubject;
     
+    
+    public int getProgressOfSubject() {
+        
+        return progressOfSubject;
+    }
+
+    
+    public void setProgressOfSubject(int progressOfSubject) {
+        
+        this.progressOfSubject = progressOfSubject;
+    }
+
     public int getUserCourseSubjectId() {
     
         return userCourseSubjectId;

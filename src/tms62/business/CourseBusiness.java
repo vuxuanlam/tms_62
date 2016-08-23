@@ -11,7 +11,7 @@ import tms62.model.entity.UsersCourses;
 import tms62.model.entity.UsersSubjects;
 
 public interface CourseBusiness {
-
+    
     public List<Courses> getAllCourses();
     
     public Courses getCourseById(Courses course);
@@ -44,9 +44,9 @@ public interface CourseBusiness {
     
     public List<UsersCourses> getUsersCoursesFromCourseId(Courses course)
             throws Exception;
-    
+            
     public List<Subjects> getSubjects();
-
+    
     public List<UsersSubjects> getListUserSubject(Users user, Courses course);
     
     public void removeCourse(Courses course);
@@ -55,9 +55,16 @@ public interface CourseBusiness {
     
     public void saveActivity(Users user, int targetId, String log);
     
-    public void saveActivity(Users user, String target, int targetId, String log);
-    
+    public void saveActivity(Users user, String target, int targetId,
+            String log);
+            
     public List<Activities> getListActivities(Activities activity);
     
     public List<Activities> getListActivities(String targetType);
+    
+    public int getProgressOfCourse(Courses course);
+    
+    public int getProgressOfUserCourse(UsersCourses userCourse);
+    
+    public int getProgressOfUserSubject(UsersSubjects userSubject);
 }

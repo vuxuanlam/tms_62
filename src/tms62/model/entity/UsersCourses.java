@@ -4,13 +4,25 @@ import java.io.Serializable;
 
 public class UsersCourses implements Serializable {
     
-    
     private static final long serialVersionUID = 1L;
     private int               userCourseId;
     private byte              status;
     private Courses           course;
     private Users             user;
+    private int               progressOfCourse;
     
+    
+    public int getProgressOfCourse() {
+        
+        return progressOfCourse;
+    }
+
+    
+    public void setProgressOfCourse(int progressOfCourse) {
+        
+        this.progressOfCourse = progressOfCourse;
+    }
+
     public int getUserCourseId() {
         
         return userCourseId;
